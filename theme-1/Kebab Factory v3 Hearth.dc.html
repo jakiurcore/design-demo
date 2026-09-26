@@ -593,14 +593,13 @@ class Component extends DCLogic {
     {id:'c3',cat:'combos',name:N('Wings Menu','Menú de alitas','Menú d’ales'),desc:N('8 crispy wings, fries, garlic dip and a drink.','8 alitas crujientes, patatas fritas, salsa de ajo y una bebida.','8 ales cruixents, patates fregides, salsa d’all i una beguda.'),price:10.5,img:'wings.png',pos:'50% 50%'},
     {id:'c4',cat:'combos',name:N('Family Pizza Menu','Menú pizza familiar','Menú pizza familiar'),desc:N('2 medium pizzas, 6 wings and a 1.5 L drink.','2 pizzas medianas, 6 alitas y un refresco de 1,5 L.','2 pizzes mitjanes, 6 ales i un refresc d’1,5 L.'),price:24.9,img:'pizza.png',pos:'50% 40%'}
   ];
-  static SLIDES = [{img:'burger-house.png',pos:'30% 50%',id:'b2'},{img:'combo.png',pos:'50% 60%',id:'c1'}];
+  static SLIDES = [{img:'burger-house.png',pos:'30% 50%',id:'b2'},{img:'tacos3.jpg',pos:'45% 40%',id:'t2'},{img:'combo.png',pos:'50% 60%',id:'c1'},{img:'tacos2.jpg',pos:'55% 45%',id:'t1'}];
   static Slider(p){ const e=React.createElement, ref=React.useRef(null), prev=React.useRef(-1);
     React.useEffect(()=>{ const root=ref.current; if(!root) return; const kids=[...root.children], cur=kids[p.idx], old=prev.current;
       kids.forEach((k,i)=>{ k.style.zIndex=i===p.idx?2:(i===old?1:0); k.style.visibility=(i===p.idx||i===old)?'visible':'hidden'; });
       if(old>=0&&old!==p.idx&&cur){ const O=['78% 50%','22% 78%','60% 20%','85% 85%','30% 30%','70% 60%'][p.idx%6];
         cur.animate([{clipPath:'circle(0% at '+O+')'},{clipPath:'circle(150% at '+O+')'}],{duration:1500,easing:'cubic-bezier(.77,0,.18,1)'});
-        const inn=cur.firstChild; inn&&inn.animate([{transform:'scale(1.28) rotate(1.2deg)',filter:'brightness(1.25) saturate(1.25)'},{transform:'none',filter:'none'}],{duration:2200,easing:'cubic-bezier(.2,.7,.2,1)'});
-        const ob=kids[old]&&kids[old].firstChild; ob&&ob.animate([{transform:'none',filter:'none'},{transform:'scale(1.08)',filter:'brightness(.55)'}],{duration:1500,easing:'ease-in'}); }
+        const ob=kids[old]&&kids[old].firstChild; ob&&ob.animate([{filter:'none'},{filter:'brightness(.6)'}],{duration:1400,easing:'ease-in'}); }
       prev.current=p.idx; },[p.idx]);
     return e('div',{ref,style:{position:'absolute',inset:0,isolation:'isolate'}}, p.slides.map((s,i)=>e('div',{key:i,style:{position:'absolute',inset:0,overflow:'hidden'}}, e('div',{style:{position:'absolute',inset:0}}, s.video? e('video',{src:s.video,autoPlay:true,muted:true,loop:true,playsInline:true,style:{width:'100%',height:'100%',objectFit:'cover'}}) : e('div',{style:{position:'absolute',inset:0,backgroundImage:'url(assets/food/'+s.img+')',backgroundSize:'cover',backgroundPosition:s.pos,animation:'kfkb'+(i%3)+' 16s ease-in-out '+(-i*3)+'s infinite alternate'}}))))); }
   static HERO = {pizza:{img:'pizza.png',pos:'62% 60%',alt:'Pizza with melting cheese'},durum:{img:'durum.png',pos:'45% 55%',alt:'Gratinated dürüm'},burger:{img:'burger-house.png',pos:'28% 50%',alt:'Cheeseburger with fries'}};
@@ -628,10 +627,19 @@ class Component extends DCLogic {
   state = (()=>{ const f=this.fresh(); try{ const s=JSON.parse(localStorage.getItem('kf4')||'null'); if(s&&s.v===1) return {...f,...s,drawer:false,ddOpen:false,confirm:null,now:Date.now()}; }catch(e){} return f; })();
 
   componentDidMount(){
-    this.seen=new WeakSet(); this.anims=new WeakMap(); this.pending=new Set();
-    this.onScroll=()=>{ if(this.raf) return; this.raf=requestAnimationFrame(()=>{ this.raf=0; this.flush(false); this.parallax(); }); };
+    this._revealed=new WeakSet();
+    this.onScroll=()=>{ if(this.raf) return; this.raf=requestAnimationFrame(()=>{ this.raf=0; this.parallax(); }); };
     window.addEventListener('scroll',this.onScroll,{passive:true}); window.addEventListener('resize',this.onScroll);
-    this.io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const a=this.anims.get(e.target); if(a) a.play(); this.pending.delete(e.target); this.io.unobserve(e.target); } }),{threshold:.1});
+    this.io=new IntersectionObserver(es=>es.forEach(e=>{
+      const el=e.target, d=+el.getAttribute('data-reveal')||0;
+      if(e.isIntersecting){
+        if(el._revAnim) el._revAnim.cancel();
+        el._revAnim=el.animate([{opacity:0,transform:'translateY(36px) scale(.94)'},{opacity:1,transform:'none'}],{duration:760,delay:d*70,easing:'cubic-bezier(.18,1.15,.4,1)',fill:'both'});
+      } else {
+        if(el._revAnim){ el._revAnim.cancel(); el._revAnim=null; }
+        el.style.opacity='0'; el.style.transform='translateY(36px) scale(.94)';
+      }
+    }),{threshold:.12});
     this.tick=setInterval(()=>this.setState({now:Date.now()}),15000);
     this.onStorage=e=>{ if(e.key==='kf4'&&e.newValue){ try{ const s=JSON.parse(e.newValue); this.setState({orders:s.orders,items:s.items,cats:s.cats,eta:s.eta}); }catch(_){} } };
     window.addEventListener('storage',this.onStorage);
@@ -643,7 +651,7 @@ class Component extends DCLogic {
     this.onOver=e=>{ const b=e.target.closest&&e.target.closest('button'); if(!b||b.dataset.noripple||(e.relatedTarget&&b.contains(e.relatedTarget))) return; const t=Date.now(); if(b._w&&t-b._w<1500) return; b._w=t; const cs=getComputedStyle(b); if(cs.position==='static') b.style.position='relative'; b.style.overflow='hidden'; const m=(cs.backgroundColor.match(/[\d.]+/g)||[0,0,0,0]).map(Number), al=m.length>3?m[3]:1, lum=(.299*m[0]+.587*m[1]+.114*m[2])/255, light=al<.2||lum>.72; const w=document.createElement('span'); w.style.cssText='position:absolute;top:-30%;bottom:-30%;left:0;width:90%;pointer-events:none;background:linear-gradient(100deg,transparent 0%,'+(light?'rgba(199,54,28,.10)':'rgba(255,255,255,.22)')+' 50%,transparent 100%);transform:translateX(-130%) skewX(-20deg)'; b.appendChild(w); w.animate([{transform:'translateX(-130%) skewX(-20deg)'},{transform:'translateX(230%) skewX(-20deg)'}],{duration:1500,easing:'cubic-bezier(.4,0,.2,1)'}).onfinish=()=>w.remove(); };
     document.addEventListener('pointerover',this.onOver);
   }
-  componentWillUnmount(){ clearInterval(this.tick); clearInterval(this.slideT); clearTimeout(this.safeT); window.removeEventListener('scroll',this.onScroll); window.removeEventListener('resize',this.onScroll); document.removeEventListener('pointerdown',this.onDown); document.removeEventListener('pointerover',this.onOver); this.io&&this.io.disconnect(); window.removeEventListener('storage',this.onStorage); }
+  componentWillUnmount(){ clearInterval(this.tick); clearInterval(this.slideT); window.removeEventListener('scroll',this.onScroll); window.removeEventListener('resize',this.onScroll); document.removeEventListener('pointerdown',this.onDown); document.removeEventListener('pointerover',this.onOver); this.io&&this.io.disconnect(); window.removeEventListener('storage',this.onStorage); }
   componentDidUpdate(){
     const s=this.state, ps=this._prev||{view:s.view,cat:s.cat,q:s.q,adminTab:s.adminTab,drawer:false,confirm:null};
     this._prev={view:s.view,cat:s.cat,q:s.q,adminTab:s.adminTab,drawer:s.drawer,confirm:s.confirm};
@@ -653,22 +661,17 @@ class Component extends DCLogic {
     if(!ps.confirm&&s.confirm){ requestAnimationFrame(()=>{ const c=document.querySelector('[data-conf]'); c&&c.animate([{opacity:0,transform:'translateY(30px) scale(.96)'},{opacity:1,transform:'none'}],{duration:520,easing:'cubic-bezier(.2,.8,.2,1)'}); const r=document.querySelector('[data-ring]'); if(r){ r.animate([{strokeDashoffset:326.7},{strokeDashoffset:r.getAttribute('stroke-dashoffset')}],{duration:1400,easing:'cubic-bezier(.3,.7,.2,1)'}); } }); }
   }
   restartSlides(){ clearInterval(this.slideT); this.slideT=setInterval(()=>{ if(this.state.view==='home'&&this.props.motion!==false) this.setState(st=>({heroIdx:((st.heroIdx||0)+1)%Component.SLIDES.length})); },5500); }
-  flush(all){ if(!this.pending) return; this.pending.forEach(el=>{ const r=el.getBoundingClientRect(); if(all||(r.top<innerHeight&&r.bottom>0)){ const a=this.anims.get(el); if(a){ if(all) a.finish(); else a.play(); } this.pending.delete(el); } }); }
   parallax(){
     if(this.props.motion===false) return;
     const hb=document.querySelector('[data-hero-bg]');
-    if(hb){ const y=Math.min(scrollY*0.35,160); hb.style.transform='translate3d(0,'+y+'px,0) scale('+(1+Math.min(scrollY/6000,.06))+')'; }
+    if(hb){ const y=Math.min(scrollY*0.18,60); hb.style.transform='translate3d(0,'+y+'px,0)'; }
   }
   reveal(){
     if(this.props.motion===false||!this.io) return;
     document.querySelectorAll('[data-reveal]').forEach(el=>{
-      if(this.seen.has(el)) return; this.seen.add(el);
-      const d=+el.getAttribute('data-reveal')||0;
-      const a=el.animate([{opacity:0,transform:'translateY(36px) scale(.94)'},{opacity:1,transform:'none'}],{duration:820,delay:d*90,easing:'cubic-bezier(.22,1.28,.44,1)',fill:'backwards'});
-      const r=el.getBoundingClientRect();
-      if(r.top<innerHeight&&r.bottom>0){ a.play(); } else { a.pause(); this.anims.set(el,a); this.pending.add(el); this.io.observe(el); }
+      if(this._revealed.has(el)) return; this._revealed.add(el);
+      this.io.observe(el);
     });
-    clearTimeout(this.safeT); this.safeT=setTimeout(()=>this.flush(true),2500);
   }
 
   fmt(n){ return (Math.round(n*100)/100).toFixed(2).replace('.',',')+' €'; }
