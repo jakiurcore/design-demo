@@ -75,7 +75,7 @@ input,textarea{font-family:inherit}
 <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
 <main style="overflow-x:clip">
   <section data-screen-label="Home" style="position:relative;overflow:hidden;background:#1c1714;color:#ffffff">
-    <div style="position:absolute;inset:0;z-index:0;isolation:isolate">{{ heroBg }}</div>
+    <div data-hero-bg="1" style="position:absolute;inset:0;z-index:0;isolation:isolate;will-change:transform">{{ heroBg }}</div>
     <div style="position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(20,16,13,.9) 0%,rgba(20,16,13,.68) 45%,rgba(20,16,13,.15) 100%)"></div>
     <div style="position:absolute;left:0;right:0;bottom:0;height:45%;z-index:1;pointer-events:none;background:linear-gradient(0deg,rgba(20,16,13,.85),rgba(20,16,13,0))"></div>
     <div style="z-index:2;position:relative;max-width:1240px;margin:0 auto;padding:clamp(48px,8vw,112px) clamp(18px,4vw,40px) clamp(24px,3.5vw,40px);min-height:min(86vh,780px);box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;gap:48px">
@@ -218,6 +218,31 @@ input,textarea{font-family:inherit}
         <h3 style="font-size:24px;margin:6px 0 0">{{ t.step3Title }}</h3>
         <p style="font-size:16px;line-height:1.55;color:#6b5e52;margin:0">{{ t.step3Desc }}</p>
       </div>
+    </div>
+  </section></div>
+
+  <div style="background:#ffffff"><section style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
+    <div data-reveal="0" style="text-align:center;max-width:640px;margin:0 auto 40px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;gap:10px;font:italic 500 18px/24px Fraunces,Georgia,serif;color:#a92b14"><span style="width:24px;height:2px;background:#c7361c"></span>{{ t.kickerReviews }}</span>
+      <h2 style="font-size:clamp(34px,4.4vw,54px);line-height:1.02;margin:8px 0 14px">{{ t.reviewsPre }}<em style="font-style:italic;color:#a92b14">{{ t.reviewsEm }}</em>{{ t.reviewsPost }}</h2>
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;color:#6b5e52;font-size:16px;font-weight:600">
+        <span style="display:flex;gap:2px;color:#f2a531"><kf-i n="starf" s="20"></kf-i><kf-i n="starf" s="20"></kf-i><kf-i n="starf" s="20"></kf-i><kf-i n="starf" s="20"></kf-i><kf-i n="starf" s="20"></kf-i></span>{{ t.trustRating }}
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px">
+      <sc-for list="{{ reviews }}" as="rv" hint-placeholder-count="5">
+        <article data-reveal="{{ rv.d }}" style="background:#ffffff;border:1px solid #e6dacb;border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:12px;transition:transform .3s,box-shadow .3s" style-hover="transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
+          <div style="display:flex;gap:2px;color:#f2a531">
+            <sc-for list="{{ rv.stars }}" as="st" hint-placeholder-count="5"><kf-i n="{{ st.icon }}" s="16"></kf-i></sc-for>
+          </div>
+          <p style="font-size:15px;line-height:1.55;color:#3a302a;margin:0;flex:1">“{{ rv.text }}”</p>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:8px;border-top:1px solid #f3eadc">
+            <strong style="font-size:14.5px">{{ rv.name }}</strong>
+            <span style="display:inline-flex;align-items:center;gap:5px;background:#e1efe6;color:#2e6b4c;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:8px"><kf-i n="checkc" s="12"></kf-i>{{ t.verifiedOrder }}</span>
+          </div>
+          <div style="font-size:12.5px;color:#6b5e52">{{ t.ordered }}: {{ rv.itemName }}</div>
+        </article>
+      </sc-for>
     </div>
   </section></div>
 
@@ -579,6 +604,13 @@ class Component extends DCLogic {
       prev.current=p.idx; },[p.idx]);
     return e('div',{ref,style:{position:'absolute',inset:0,isolation:'isolate'}}, p.slides.map((s,i)=>e('div',{key:i,style:{position:'absolute',inset:0,overflow:'hidden'}}, e('div',{style:{position:'absolute',inset:0}}, s.video? e('video',{src:s.video,autoPlay:true,muted:true,loop:true,playsInline:true,style:{width:'100%',height:'100%',objectFit:'cover'}}) : e('div',{style:{position:'absolute',inset:0,backgroundImage:'url(assets/food/'+s.img+')',backgroundSize:'cover',backgroundPosition:s.pos,animation:'kfkb'+(i%3)+' 16s ease-in-out '+(-i*3)+'s infinite alternate'}}))))); }
   static HERO = {pizza:{img:'pizza.png',pos:'62% 60%',alt:'Pizza with melting cheese'},durum:{img:'durum.png',pos:'45% 55%',alt:'Gratinated dürüm'},burger:{img:'burger-house.png',pos:'28% 50%',alt:'Cheeseburger with fries'}};
+  static REVIEWS = [
+    {name:'Marc Puig',stars:5,text:'El dürüm gratinat és espectacular. Ha arribat calent i en menys de 45 minuts.',itemId:'d1'},
+    {name:'Sara López',stars:4,text:'Muy buena cantidad y bien de precio. La pizza kebab está buenísima.',itemId:'p2'},
+    {name:'Ahmed R.',stars:5,text:'The fried tacos are incredible, best new addition to the menu. Delivery was fast too.',itemId:'t3'},
+    {name:'Nerea Gil',stars:5,text:'Las alitas del menú pican de verdad. ¡Repetiremos seguro!',itemId:'c3'},
+    {name:'Jordi Mas',stars:4,text:'La pizza margarida molt bona, massa fina. El repartidor molt amable.',itemId:'p1'}
+  ];
 
   fresh(){
     const now=Date.now(), m=60000;
@@ -597,13 +629,14 @@ class Component extends DCLogic {
 
   componentDidMount(){
     this.seen=new WeakSet(); this.anims=new WeakMap(); this.pending=new Set();
-    this.onScroll=()=>{ if(this.raf) return; this.raf=requestAnimationFrame(()=>{ this.raf=0; this.flush(false); }); };
+    this.onScroll=()=>{ if(this.raf) return; this.raf=requestAnimationFrame(()=>{ this.raf=0; this.flush(false); this.parallax(); }); };
     window.addEventListener('scroll',this.onScroll,{passive:true}); window.addEventListener('resize',this.onScroll);
     this.io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const a=this.anims.get(e.target); if(a) a.play(); this.pending.delete(e.target); this.io.unobserve(e.target); } }),{threshold:.1});
     this.tick=setInterval(()=>this.setState({now:Date.now()}),15000);
     this.onStorage=e=>{ if(e.key==='kf4'&&e.newValue){ try{ const s=JSON.parse(e.newValue); this.setState({orders:s.orders,items:s.items,cats:s.cats,eta:s.eta}); }catch(_){} } };
     window.addEventListener('storage',this.onStorage);
     setTimeout(()=>this.reveal(),30);
+    this.parallax();
     this.restartSlides();
     this.onDown=e=>{ const b=e.target.closest&&e.target.closest('button'); if(!b||b.dataset.noripple) return; const r=b.getBoundingClientRect(); if(getComputedStyle(b).position==='static') b.style.position='relative'; b.style.overflow='hidden'; const d=Math.max(r.width,r.height)*2.2, sp=document.createElement('span'); sp.style.cssText='position:absolute;pointer-events:none;border-radius:50%;background:rgba(255,255,255,.45);left:'+(e.clientX-r.left-d/2)+'px;top:'+(e.clientY-r.top-d/2)+'px;width:'+d+'px;height:'+d+'px'; b.appendChild(sp); const a=sp.animate([{transform:'scale(0)',opacity:1},{transform:'scale(1)',opacity:0}],{duration:650,easing:'cubic-bezier(.2,.7,.2,1)'}); a.onfinish=()=>sp.remove(); };
     document.addEventListener('pointerdown',this.onDown);
@@ -621,12 +654,17 @@ class Component extends DCLogic {
   }
   restartSlides(){ clearInterval(this.slideT); this.slideT=setInterval(()=>{ if(this.state.view==='home'&&this.props.motion!==false) this.setState(st=>({heroIdx:((st.heroIdx||0)+1)%Component.SLIDES.length})); },5500); }
   flush(all){ if(!this.pending) return; this.pending.forEach(el=>{ const r=el.getBoundingClientRect(); if(all||(r.top<innerHeight&&r.bottom>0)){ const a=this.anims.get(el); if(a){ if(all) a.finish(); else a.play(); } this.pending.delete(el); } }); }
+  parallax(){
+    if(this.props.motion===false) return;
+    const hb=document.querySelector('[data-hero-bg]');
+    if(hb){ const y=Math.min(scrollY*0.35,160); hb.style.transform='translate3d(0,'+y+'px,0) scale('+(1+Math.min(scrollY/6000,.06))+')'; }
+  }
   reveal(){
     if(this.props.motion===false||!this.io) return;
     document.querySelectorAll('[data-reveal]').forEach(el=>{
       if(this.seen.has(el)) return; this.seen.add(el);
       const d=+el.getAttribute('data-reveal')||0;
-      const a=el.animate([{opacity:0,transform:'translateY(26px)'},{opacity:1,transform:'none'}],{duration:760,delay:d*90,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});
+      const a=el.animate([{opacity:0,transform:'translateY(36px) scale(.94)'},{opacity:1,transform:'none'}],{duration:820,delay:d*90,easing:'cubic-bezier(.22,1.28,.44,1)',fill:'backwards'});
       const r=el.getBoundingClientRect();
       if(r.top<innerHeight&&r.bottom>0){ a.play(); } else { a.pause(); this.anims.set(el,a); this.pending.add(el); this.io.observe(el); }
     });
@@ -634,7 +672,7 @@ class Component extends DCLogic {
   }
 
   fmt(n){ return (Math.round(n*100)/100).toFixed(2).replace('.',',')+' €'; }
-  go(view,extra){ this.setState({view,ddOpen:false,drawer:false,...(extra||{})}); window.scrollTo({top:0,behavior:'instant'}); }
+  go(view,extra){ this.setState({view,ddOpen:false,drawer:false,...(extra||{})}); window.scrollTo({top:0,behavior:'instant'}); this.parallax(); }
   bump(){ const b=document.querySelector('[data-cartbtn]'); b&&b.animate([{transform:'scale(1)'},{transform:'scale(1.12)'},{transform:'scale(1)'}],{duration:380,easing:'ease-out'}); }
   add(id){ this.setState(s=>({cart:{...s.cart,[id]:(s.cart[id]||0)+1}})); this.bump(); }
   dec(id){ this.setState(s=>{ const c={...s.cart}; c[id]=(c[id]||0)-1; if(c[id]<=0) delete c[id]; return {cart:c}; }); }
@@ -714,6 +752,13 @@ class Component extends DCLogic {
       step2Desc:pick('Name, email, phone and address. No account and no online payment needed.','Nombre, email, teléfono y dirección. Sin cuenta y sin pago online.','Nom, correu, telèfon i adreça. Sense compte i sense pagament en línia.'),
       step3Title:pick('Pay at the door','Paga al recibir','Paga en rebre-ho'),
       step3Desc:pick('Your food arrives in about '+eta+' minutes. Pay cash, or by card with the rider’s card machine.','Tu pedido llega en unos '+eta+' minutos. Paga en efectivo, o con tarjeta con el datáfono del repartidor.','La teva comanda arriba en uns '+eta+' minuts. Paga en efectiu, o amb targeta amb el datàfon del repartidor.'),
+      kickerReviews:pick('Real reviews','Reseñas reales','Ressenyes reals'),
+      reviewsPre:pick('What the ','Lo que dicen los ','El que diuen els '),
+      reviewsEm:pick('neighbours','vecinos','veïns'),
+      reviewsPost:pick(' say','',''),
+      verifiedOrder:pick('Verified order','Pedido verificado','Comanda verificada'),
+      ordered:pick('Ordered','Pidió','Va demanar'),
+      trustRating:(()=>{ const rc=Component.REVIEWS, avg=(rc.reduce((a,r)=>a+r.stars,0)/rc.length).toFixed(1); return pick(avg+' out of 5 · '+rc.length+' verified reviews',avg.replace('.',',')+' de 5 · '+rc.length+' reseñas verificadas',avg.replace('.',',')+' de 5 · '+rc.length+' ressenyes verificades'); })(),
       kickerFind:pick('Find us','Encuéntranos','Troba’ns'),
       findTitle:'Kebab Factory Unit 3',
       findDesc:pick('Badalona, Barcelona. Delivery up to 5 km from the shop, or come and pick up.','Badalona, Barcelona. Entrega hasta 5 km del local, o pásate a recogerlo.','Badalona, Barcelona. Lliurament fins a 5 km del local, o passa a recollir-ho.'),
@@ -837,6 +882,7 @@ class Component extends DCLogic {
       cats:s.cats.map((c,i)=>({...this.vis({id:c.id,img:c.img,pos:c.pos,icon:c.icon}),name:L(c.name),isNew:!!c.isNew,count:plural(catCount(c.id)),d:String(i%3),go:()=>this.go('menu',{cat:c.id,q:''})})),
       popular:['d1','p2','c1','b1'].map(id=>s.items.find(i=>i.id===id)).filter(Boolean).map((it,i)=>this.itemVM(it,i)),
       combo:combo?{name:L(combo.name),desc:L(combo.desc),priceTxt:this.fmt(combo.price),btn:(s.cart[combo.id]?t.addAnother:t.addToOrder),add:()=>this.add(combo.id),all:()=>this.go('menu',{cat:'combos',q:''})}:{name:'',desc:'',priceTxt:'',btn:'',add:()=>{},all:()=>{}},
+      reviews:Component.REVIEWS.map((r,i)=>{ const it=s.items.find(x=>x.id===r.itemId); return {name:r.name,text:r.text,stars:Array.from({length:5},(_,k)=>({icon:k<r.stars?'starf':'star'})),itemName:it?L(it.name):'',d:String(i%5)}; }),
       q:s.q, onQ:e=>this.setState({q:e.target.value}), sections, noResults:!sections.length, noResultsMsg,
       dd:{...ddVis,label:curC?L(curC.name):t.allCategories,open:s.ddOpen,toggle:()=>this.setState(st=>({ddOpen:!st.ddOpen})),close:()=>this.setState({ddOpen:false}),opts:ddOpts},
       drawer:{open:s.drawer,close:()=>this.setState({drawer:false}),back:()=>this.setState({step:'cart'}),isEmpty:count===0,isCart:count>0&&!isCheckout,isCheckout,hasItems:count>0,
