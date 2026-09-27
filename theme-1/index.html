@@ -329,6 +329,26 @@ input,textarea{font-family:inherit}
     </div>
   </section></div>
 
+  <div style="background:#ffffff"><section style="max-width:840px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
+    <div data-reveal="0" style="text-align:center;margin-bottom:48px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;gap:10px;font:italic 500 18px/24px Fraunces,Georgia,serif;color:#c7361c"><span style="width:24px;height:2px;background:#c7361c"></span>{{ t.kickerFaq }}</span>
+      <h2 style="font-size:clamp(30px,3.6vw,44px);line-height:1.1;margin:8px 0 0">{{ t.faqPre }}<em style="font-style:italic;color:#c7361c">{{ t.faqEm }}</em></h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <sc-for list="{{ faq }}" as="f" hint-placeholder-count="6">
+        <div data-reveal="{{ f.d }}" style="background:#fbf6ee;border:1px solid #e6dacb;border-radius:10px;overflow:hidden">
+          <button onClick="{{ f.toggle }}" aria-expanded="{{ f.open }}" style="width:100%;border:0;background:transparent;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;font-size:17px;font-weight:600;color:#1f1a16;cursor:pointer">
+            {{ f.q }}
+            <kf-i n="chevd" s="18" style="flex:none;transition:transform .25s;transform:{{ f.rot }}"></kf-i>
+          </button>
+          <div style="max-height:{{ f.maxH }};overflow:hidden;transition:max-height .3s ease">
+            <p style="margin:0;padding:0 20px 20px;font-size:15.5px;line-height:1.6;color:#6b5e52">{{ f.a }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section></div>
+
   <div style="background:#f3eadc"><section style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(28px,5vw,72px)">
       <div data-reveal="0" style="flex:1 1 360px;min-width:0;display:flex;justify-content:center">
@@ -704,10 +724,18 @@ class Component extends DCLogic {
     {year:N('2023','2023','2023'), title:N('1,000 five-star reviews','Más de 1.000 reseñas de 5 estrellas','Més de 1.000 ressenyes de 5 estrelles'), text:N('Thanks to you, more arrive every week.','Gracias a vosotros, cada semana llegan más.','Gràcies a vosaltres, cada setmana n’arriben més.')},
     {year:N('Today','Hoy','Avui'), title:N('Still at the grill','Seguimos a la brasa','Seguim a la brasa'), text:N('Same neighborhood, same oven, the same passion as always.','Mismo barrio, mismo horno, la misma pasión de siempre.','Mateix barri, mateix forn, la mateixa passió de sempre.')}
   ];
+  static FAQ = [
+    {q:N('How far do you deliver?','¿Hasta dónde entregáis?','Fins on lliureu?'), a:N('We deliver within a 5 km radius of Badalona. Enter your address when ordering and we’ll confirm we can reach you.','Entregamos en un radio de 5 km desde Badalona. Introduce tu dirección al pedir y te confirmaremos si llegamos.','Lliurem en un radi de 5 km des de Badalona. Introdueix la teva adreça en fer la comanda i et confirmarem si hi arribem.')},
+    {q:N('How can I pay?','¿Cómo puedo pagar?','Com puc pagar?'), a:N('Cash or card to the rider, no need to pay online or create an account.','Efectivo o tarjeta al repartidor, sin necesidad de pagar online ni crear una cuenta.','Efectiu o targeta al repartidor, sense necessitat de pagar en línia ni crear un compte.')},
+    {q:N('Do you have allergen information?','¿Tenéis información sobre alérgenos?','Teniu informació sobre al·lèrgens?'), a:N('Yes, every dish shows its main allergens. If you have an allergy or intolerance, let us know when ordering and our team will confirm it for you.','Sí, cada plato indica los alérgenos principales que contiene. Si tienes una alergia o intolerancia, dínoslo al hacer el pedido y nuestro equipo te lo confirmará.','Sí, cada plat indica els al·lèrgens principals que conté. Si tens una al·lèrgia o intolerància, digues-ho en fer la comanda i el nostre equip t’ho confirmarà.')},
+    {q:N('Is there a minimum order?','¿Hay pedido mínimo?','Hi ha comanda mínima?'), a:N('No, order whatever you like, with no minimum spend.','No, puedes pedir lo que te apetezca, sin mínimo de compra.','No, pots demanar el que et vingui de gust, sense mínim de compra.')},
+    {q:N('How long does delivery take?','¿Cuánto tarda la entrega?','Quant triga el lliurament?'), a:N('About 45 minutes on average from when we confirm your order, depending on the area and time of day.','Sobre 45 minutos de media desde que confirmamos tu pedido, según la zona y el momento del día.','Al voltant de 45 minuts de mitjana des que confirmem la teva comanda, segons la zona i el moment del dia.')},
+    {q:N('Can I pick up my order myself?','¿Puedo recoger el pedido yo mismo?','Puc recollir la comanda jo mateix?'), a:N('Of course, just let us know when ordering and we’ll have it ready at the time you choose.','Claro, indícalo al hacer el pedido y lo tendremos listo en el horario que elijas.','És clar, indica-ho en fer la comanda i el tindrem a punt a l’hora que triïs.')}
+  ];
 
   fresh(){
     const now=Date.now(), m=60000;
-    return { v:1, view:this.props.startView||'home', lang:'es', cat:[], q:'', cart:{}, drawer:false, step:'cart',
+    return { v:1, view:this.props.startView||'home', lang:'es', cat:[], q:'', cart:{}, drawer:false, step:'cart', faqOpen:[0],
       form:{name:'',email:'',phone:'',address:'',pay:'cash'}, errs:{}, confirm:null, ddOpen:false,
       heroIdx:0, adminTab:'orders', adminCat:'durums', eta:45, seq:1046, newCat:'', np:{name:'',price:'',desc:''}, npErr:'', drafts:{},
       cats:Component.CATS.map(c=>({...c})), items:Component.ITEMS.map(i=>({...i})),
@@ -887,6 +915,9 @@ class Component extends DCLogic {
       verifiedOrder:pick('Verified order','Pedido verificado','Comanda verificada'),
       ordered:pick('Ordered','Pidió','Va demanar'),
       trustRating:(()=>{ const rc=Component.REVIEWS, avg=(rc.reduce((a,r)=>a+r.stars,0)/rc.length).toFixed(1); return pick(avg+' out of 5 · '+rc.length+' verified reviews',avg.replace('.',',')+' de 5 · '+rc.length+' reseñas verificadas',avg.replace('.',',')+' de 5 · '+rc.length+' ressenyes verificades'); })(),
+      kickerFaq:pick('Questions','Preguntas','Preguntes'),
+      faqPre:pick('Good to ','Lo que hay que ','El que cal '),
+      faqEm:pick('know','saber','saber'),
       kickerFind:pick('Find us','Encuéntranos','Troba’ns'),
       findTitle:'Kebab Factory',
       findDesc:pick('Badalona, Barcelona. Delivery up to 5 km from the shop, or come and pick up.','Badalona, Barcelona. Entrega hasta 5 km del local, o pásate a recogerlo.','Badalona, Barcelona. Lliurament fins a 5 km del local, o passa a recollir-ho.'),
@@ -1027,6 +1058,8 @@ class Component extends DCLogic {
         {value:'5',suffix:pick(' km',' km',' km'),label:t.statRadius,d:'2'},
         {value:'92',suffix:'%',label:t.statRepeat,d:'3'}
       ],
+      faq:Component.FAQ.map((f,i)=>{ const faqOpen=s.faqOpen||[], open=faqOpen.includes(i); return {q:L(f.q),a:L(f.a),open:String(open),maxH:open?'400px':'0px',rot:open?'rotate(180deg)':'rotate(0deg)',d:String(i%4),
+        toggle:()=>this.setState(st=>{ const cur=st.faqOpen||[]; const has=cur.includes(i); return {faqOpen:has?cur.filter(x=>x!==i):[...cur,i]}; })}; }),
       combo:combo?{name:L(combo.name),desc:L(combo.desc),priceTxt:this.fmt(combo.price),btn:(s.cart[combo.id]?t.addAnother:t.addToOrder),add:()=>this.add(combo.id),all:()=>this.go('menu',{cat:['combos'],q:''})}:{name:'',desc:'',priceTxt:'',btn:'',add:()=>{},all:()=>{}},
       reviews:Component.REVIEWS.map((r,i)=>{ const it=s.items.find(x=>x.id===r.itemId); return {name:r.name,text:r.text,stars:Array.from({length:5},(_,k)=>({icon:k<r.stars?'starf':'star'})),itemName:it?L(it.name):'',d:String(i%5)}; }),
       q:s.q, onQ:e=>this.setState({q:e.target.value}), sections, noResults:!sections.length, noResultsMsg,
