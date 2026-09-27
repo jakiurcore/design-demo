@@ -342,7 +342,7 @@ input,textarea{font-family:inherit}
 </sc-if>
 
 <sc-if value="{{ isSite }}" hint-placeholder-val="{{ true }}">
-  <footer style="background:#E63E00;color:#2E6B4C">
+  <footer style="background:#E63E00;color:#FFEEE3">
     <div style="max-width:1240px;margin:0 auto;padding:40px clamp(18px,4vw,40px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;font-size:15px">
       <span style="display:flex;align-items:center;gap:10px"><span style="width:36px;height:36px;border-radius:10px;background:#FF4D1C;color:#fff;display:grid;place-items:center;font:600 14px 'Space Grotesk',Georgia,sans-serif">KF</span><strong style="color:#fff;font-size:17px">Kebab Factory</strong></span>
       <span>{{ t.footerLine }}</span>
@@ -869,7 +869,7 @@ class Component extends DCLogic {
 
     return {
       isHome:view==='home', isMenu:view==='menu', isAdmin:view==='admin', isSite:view!=='admin', eta, t, langs,
-      showSwitch:P.showSwitcher!==false,
+      showSwitch:P.showSwitcher!==false&&!s.drawer&&!s.confirm,
       sw:{site:()=>this.go(s.view==='admin'?'home':s.view),admin:()=>this.go('admin'),siteBg:onS?'#FFF8F2':'transparent',siteC:onS?'#2C1D12':'#FFF8F2',adminBg:!onS?'#FFF8F2':'transparent',adminC:!onS?'#2C1D12':'#FFF8F2'},
       nav:{home:()=>this.go('home'),menu:()=>this.go('menu'),homeBg:view==='home'?'#FFEEE3':'transparent',menuBg:view==='menu'?'#FFEEE3':'transparent'},
       goCombos:()=>{ const el=document.getElementById('combos'); if(el) window.scrollTo({top:el.getBoundingClientRect().top+scrollY-90,behavior:'smooth'}); },

@@ -869,7 +869,7 @@ class Component extends DCLogic {
 
     return {
       isHome:view==='home', isMenu:view==='menu', isAdmin:view==='admin', isSite:view!=='admin', eta, t, langs,
-      showSwitch:P.showSwitcher!==false,
+      showSwitch:P.showSwitcher!==false&&!s.drawer&&!s.confirm,
       sw:{site:()=>this.go(s.view==='admin'?'home':s.view),admin:()=>this.go('admin'),siteBg:onS?'#fbf6ee':'transparent',siteC:onS?'#1f1a16':'#fbf6ee',adminBg:!onS?'#fbf6ee':'transparent',adminC:!onS?'#1f1a16':'#fbf6ee'},
       nav:{home:()=>this.go('home'),menu:()=>this.go('menu'),homeBg:view==='home'?'#f3eadc':'transparent',menuBg:view==='menu'?'#f3eadc':'transparent'},
       goCombos:()=>{ const el=document.getElementById('combos'); if(el) window.scrollTo({top:el.getBoundingClientRect().top+scrollY-90,behavior:'smooth'}); },
