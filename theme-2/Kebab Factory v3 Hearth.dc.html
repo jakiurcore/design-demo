@@ -188,6 +188,46 @@ input,textarea{font-family:inherit}
     </div>
   </section></div>
 
+  <div style="background:#FFF8F2"><section style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
+    <div data-reveal="0" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:32px">
+      <div style="max-width:640px">
+        <span style="display:inline-flex;align-items:center;gap:10px;font:italic 500 18px/24px 'Space Grotesk',Georgia,sans-serif;color:#2C1D12"><span style="width:24px;height:2px;background:#C6FF3D"></span>{{ t.kickerChef }}</span>
+        <h2 style="font-size:clamp(34px,4.4vw,54px);line-height:1.02;margin:8px 0 0">{{ t.chefPre }}<em style="font-style:italic;color:#FF4D1C">{{ t.chefEm }}</em>{{ t.chefPost }}</h2>
+        <p style="font-size:17px;color:#8A7160;margin:14px 0 0;max-width:520px">{{ t.chefSub }}</p>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button onClick="{{ chefPrevGo }}" aria-label="{{ t.chefPrev }}" style="border:2px solid #2C1D12;background:transparent;width:52px;height:52px;flex:none;border-radius:50%;display:grid;place-items:center;color:#2C1D12;transition:background .2s,color .2s" style-hover="background:#2C1D12;color:#FF4D1C"><kf-i n="chevl" s="20"></kf-i></button>
+        <button onClick="{{ chefNextGo }}" aria-label="{{ t.chefNext }}" style="border:2px solid #2C1D12;background:transparent;width:52px;height:52px;flex:none;border-radius:50%;display:grid;place-items:center;color:#2C1D12;transition:background .2s,color .2s" style-hover="background:#2C1D12;color:#FF4D1C"><kf-i n="chevr" s="20"></kf-i></button>
+      </div>
+    </div>
+    <div id="chefTrack" style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 16px">
+      <sc-for list="{{ chefPicks }}" as="it" hint-placeholder-count="4">
+        <article data-reveal="{{ it.d }}" data-wave="1" style="scroll-snap-align:start;flex:0 0 280px;background:#ffffff;border:1px solid #FCE0CC;border-radius:14px;padding:10px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
+          <div style="position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background-color:{{ it.tint }};background-image:{{ it.bg }};background-size:cover;background-position:{{ it.pos }};display:grid;place-items:center;color:#E63E00">
+            <sc-if value="{{ it.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#ffffff;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #FFEEE3"></span></sc-if>
+            <sc-if value="{{ it.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;left:12px;background:#ffffff;color:#2C1D12;font-size:12px;font-weight:700;padding:6px 11px;border-radius:10px">{{ it.badge }}</span></sc-if>
+          </div>
+          <div style="padding:16px 10px 8px;display:flex;flex-direction:column;gap:6px;flex:1">
+            <h3 style="font-size:20px;line-height:1.15;margin:0">{{ it.name }}</h3>
+            <p style="font-size:14px;line-height:1.5;color:#8A7160;margin:0;flex:1">{{ it.desc }}</p>
+            <sc-if value="{{ it.hasAlg }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-wrap:wrap;gap:6px">
+                <sc-for list="{{ it.alg }}" as="a" hint-placeholder-count="2">
+                  <span style="display:inline-flex;align-items:center;gap:4px;background:#FFEEE3;color:#8A7160;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px"><kf-i n="alert" s="11"></kf-i>{{ a.name }}</span>
+                </sc-for>
+              </div>
+            </sc-if>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px">
+              <strong style="font:600 20px/26px 'Space Grotesk',Georgia,sans-serif;color:#FF4D1C;font-variant-numeric:lining-nums tabular-nums">{{ it.priceTxt }}</strong>
+              <sc-if value="{{ it.notInCart }}" hint-placeholder-val="{{ true }}"><button onClick="{{ it.add }}" style="border:0;background:#FF4D1C;color:#fff;font-weight:700;font-size:14px;padding:10px 16px;border-radius:10px;display:flex;align-items:center;gap:6px" style-hover="background:#E63E00" style-active="background:#C6FF3D;color:#2C1D12;transform:scale(.96)"><kf-i n="plus" s="15" w="3"></kf-i>{{ t.add }}</button></sc-if>
+              <sc-if value="{{ it.inCart }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:4px;background:#FF4D1C;color:#2C1D12;border-radius:10px;padding:4px"><button onClick="{{ it.dec }}" aria-label="{{ t.removeOne }}" style="border:0;width:32px;height:32px;border-radius:10px;background:transparent;color:inherit;display:grid;place-items:center" style-hover="background:#E63E00"><kf-i n="minus" s="14" w="3"></kf-i></button><span style="min-width:20px;text-align:center;font-weight:700;font-size:14px">{{ it.qty }}</span><button onClick="{{ it.add }}" aria-label="{{ t.addOne }}" style="border:0;width:32px;height:32px;border-radius:10px;background:#FF4D1C;color:#fff;display:grid;place-items:center" style-hover="background:#FF4D1C"><kf-i n="plus" s="14" w="3"></kf-i></button></div></sc-if>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section></div>
+
   <div style="background:#C6FF3D"><section id="combos" style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
     <div data-reveal="0" style="background:#FFF3D6;color:#2C1D12;border-radius:18px;padding:clamp(28px,5vw,64px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(28px,5vw,64px);overflow:hidden;position:relative">
       <div style="position:absolute;width:420px;height:420px;right:-120px;top:-160px;border-radius:50%;background:#C6FF3D;opacity:.35"></div>
@@ -753,6 +793,13 @@ class Component extends DCLogic {
       popPre:pick('The ones people ','Los que la gente ','Els que la gent '),
       popEm:pick('come back','repite','repeteix'),
       popPost:pick(' for','',''),
+      kickerChef:pick("Chef's picks",'Selección del chef','Selecció del xef'),
+      chefPre:pick('Dishes worth ','Platos que ','Plats que '),
+      chefEm:pick('falling for','enamoran','enamoren'),
+      chefPost:pick('',' a la primera',' a la primera'),
+      chefSub:pick('Our personal favorites this season — the ones we’d order ourselves.','Nuestra selección personal de esta temporada, los que pedimos nosotros mismos.','La nostra selecció personal d’aquesta temporada, els que demanem nosaltres mateixos.'),
+      chefPrev:pick('Previous dish','Plato anterior','Plat anterior'),
+      chefNext:pick('Next dish','Plato siguiente','Plat següent'),
       add:pick('Add','Añadir','Afegeix'),
       removeOne:pick('Remove one','Quitar uno','Treu’n un'),
       addOne:pick('Add one','Añadir uno','Afegeix-ne un'),
@@ -895,6 +942,8 @@ class Component extends DCLogic {
       sw:{site:()=>this.go(s.view==='admin'?'home':s.view),admin:()=>this.go('admin'),siteBg:onS?'#FFF8F2':'transparent',siteC:onS?'#2C1D12':'#FFF8F2',adminBg:!onS?'#FFF8F2':'transparent',adminC:!onS?'#2C1D12':'#FFF8F2'},
       nav:{home:()=>this.go('home'),menu:()=>this.go('menu'),homeBg:view==='home'?'#FFEEE3':'transparent',menuBg:view==='menu'?'#FFEEE3':'transparent'},
       goCombos:()=>{ const el=document.getElementById('combos'); if(el) window.scrollTo({top:el.getBoundingClientRect().top+scrollY-90,behavior:'smooth'}); },
+      chefPrevGo:()=>{ const el=document.getElementById('chefTrack'); if(el) el.scrollBy({left:-300,behavior:'smooth'}); },
+      chefNextGo:()=>{ const el=document.getElementById('chefTrack'); if(el) el.scrollBy({left:300,behavior:'smooth'}); },
       cartCount:String(count), cartTotal:this.fmt(total), hasCart:count>0,
       openCart:()=>this.setState({drawer:true,step:'cart'}),
       openToday,
@@ -907,6 +956,7 @@ class Component extends DCLogic {
       marquee:[0,1].flatMap(()=>pick(['Dürüms','Pizzas','Burgers','Fried Tacos','Combo Menus','Cold Drinks'],['Dürüms','Pizzas','Hamburguesas','Tacos fritos','Menús combo','Bebidas frías'],['Dürüms','Pizzes','Hamburgueses','Tacos fregits','Menús combo','Begudes fredes'])),
       cats:s.cats.map((c,i)=>({...this.vis({id:c.id,img:c.img,pos:c.pos,icon:c.icon}),name:L(c.name),isNew:!!c.isNew,count:plural(catCount(c.id)),d:String(i%3),go:()=>this.go('menu',{cat:c.id,q:''})})),
       popular:['d1','p2','c1','b1'].map(id=>s.items.find(i=>i.id===id)).filter(Boolean).map((it,i)=>this.itemVM(it,i)),
+      chefPicks:['d4','p3','t2','c4'].map(id=>s.items.find(i=>i.id===id)).filter(Boolean).map((it,i)=>this.itemVM(it,i)),
       combo:combo?{name:L(combo.name),desc:L(combo.desc),priceTxt:this.fmt(combo.price),btn:(s.cart[combo.id]?t.addAnother:t.addToOrder),add:()=>this.add(combo.id),all:()=>this.go('menu',{cat:['combos'],q:''})}:{name:'',desc:'',priceTxt:'',btn:'',add:()=>{},all:()=>{}},
       reviews:Component.REVIEWS.map((r,i)=>{ const it=s.items.find(x=>x.id===r.itemId); return {name:r.name,text:r.text,stars:Array.from({length:5},(_,k)=>({icon:k<r.stars?'starf':'star'})),itemName:it?L(it.name):'',d:String(i%5)}; }),
       q:s.q, onQ:e=>this.setState({q:e.target.value}), sections, noResults:!sections.length, noResultsMsg,
