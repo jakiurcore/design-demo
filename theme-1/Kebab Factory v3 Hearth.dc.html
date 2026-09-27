@@ -167,6 +167,13 @@ input,textarea{font-family:inherit}
           <div style="padding:16px 10px 8px;display:flex;flex-direction:column;gap:6px;flex:1">
             <h3 style="font-size:21px;line-height:1.15;margin:0">{{ it.name }}</h3>
             <p style="font-size:14.5px;line-height:1.5;color:#6b5e52;margin:0;flex:1">{{ it.desc }}</p>
+            <sc-if value="{{ it.hasAlg }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-wrap:wrap;gap:6px">
+                <sc-for list="{{ it.alg }}" as="a" hint-placeholder-count="2">
+                  <span style="display:inline-flex;align-items:center;gap:4px;background:#f3eadc;color:#6b5e52;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px"><kf-i n="alert" s="11"></kf-i>{{ a.name }}</span>
+                </sc-for>
+              </div>
+            </sc-if>
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px">
               <strong style="font:600 22px/28px Fraunces,Georgia,serif;color:#c7361c;font-variant-numeric:lining-nums tabular-nums">{{ it.priceTxt }}</strong>
               <sc-if value="{{ it.notInCart }}" hint-placeholder-val="{{ true }}"><button onClick="{{ it.add }}" style="border:0;background:#c7361c;color:#fff;font-weight:700;font-size:15px;padding:11px 18px;border-radius:8px;display:flex;align-items:center;gap:6px" style-hover="background:#a92b14" style-active="background:#f2a531;color:#2a1a06;transform:scale(.96)"><kf-i n="plus" s="16" w="3"></kf-i>{{ t.add }}</button></sc-if>
@@ -176,6 +183,9 @@ input,textarea{font-family:inherit}
         </article>
       </sc-for>
     </div></div>
+    <div data-reveal="1" style="display:flex;justify-content:center;margin-top:40px">
+      <button onClick="{{ browseMenu }}" style="border:2px solid #fff;background:transparent;color:#fff;font-weight:700;font-size:16px;padding:14px 28px;border-radius:8px;display:flex;align-items:center;gap:10px" style-hover="background:#fff;color:#c7361c">{{ t.browseFullMenu }}<kf-i n="arrowr" s="18"></kf-i></button>
+    </div>
   </section></div>
 
   <div style="background:#f2a531"><section id="combos" style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
@@ -277,30 +287,23 @@ input,textarea{font-family:inherit}
       <p style="font-size:17px;color:#6b5e52;margin:12px 0 0">{{ t.menuSub }}</p>
     </div>
   </div>
-  <div style="position:sticky;top:72px;z-index:30;margin:28px 0 8px;padding:10px 0;background:#fbf6ee;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
-    <div style="position:relative">
-      <button onClick="{{ dd.toggle }}" aria-haspopup="listbox" style="border:0;background:#6B2414;color:#fbf6ee;display:flex;align-items:center;gap:12px;padding:7px 18px 7px 7px;border-radius:8px;font-weight:700;font-size:16px;min-width:250px" style-hover="background:#8E2F1A">
-        <span style="width:40px;height:40px;border-radius:8px;background-color:{{ dd.tint }};background-image:{{ dd.bg }};background-size:cover;background-position:{{ dd.pos }};display:grid;place-items:center;color:#a92b14"><sc-if value="{{ dd.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#ffffff;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #f3eadc"></span></sc-if></span>
-        <span style="flex:1;text-align:left">{{ dd.label }}</span>
-        <kf-i n="chevd" s="18"></kf-i>
-      </button>
-      <sc-if value="{{ dd.open }}" hint-placeholder-val="{{ false }}">
-        <div onClick="{{ dd.close }}" style="position:fixed;inset:0;z-index:1"></div>
-        <div role="listbox" style="position:absolute;z-index:2;top:calc(100% + 10px);left:0;width:min(88vw,340px);background:#ffffff;border-radius:10px;padding:8px;box-shadow:0 24px 48px -16px rgba(80,40,10,.28);display:flex;flex-direction:column;gap:2px">
-          <sc-for list="{{ dd.opts }}" as="o" hint-placeholder-count="7">
-            <button onClick="{{ o.pick }}" style="border:0;background:{{ o.bgc }};display:flex;align-items:center;gap:12px;padding:8px 14px 8px 8px;border-radius:8px;text-align:left;font-size:16px;font-weight:600;color:#1f1a16" style-hover="background:#f3eadc">
-              <span style="width:44px;height:44px;flex:none;border-radius:8px;background-color:{{ o.tint }};background-image:{{ o.bg }};background-size:cover;background-position:{{ o.pos }};display:grid;place-items:center;color:#a92b14"><sc-if value="{{ o.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#ffffff;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #f3eadc"></span></sc-if></span>
-              <span style="flex:1">{{ o.name }}</span>
-              <span style="font-size:13px;color:#6b5e52">{{ o.count }}</span>
-            </button>
-          </sc-for>
-        </div>
-      </sc-if>
+  <div style="position:sticky;top:72px;z-index:30;margin:28px 0 8px;padding:10px 0;background:#fbf6ee;display:flex;flex-direction:column;gap:12px">
+    <div style="display:flex;gap:10px;overflow-x:auto;padding:2px 2px 6px">
+      <sc-for list="{{ chips }}" as="c" hint-placeholder-count="7">
+        <button onClick="{{ c.toggle }}" aria-pressed="{{ c.on }}" style="border:0;flex:none;background:{{ c.pillBg }};color:{{ c.pillFg }};display:flex;align-items:center;gap:10px;padding:7px 16px 7px 7px;border-radius:999px;font-weight:700;font-size:14.5px;white-space:nowrap;transition:background .2s,color .2s">
+          <span style="width:32px;height:32px;flex:none;border-radius:50%;background-color:{{ c.tint }};background-image:{{ c.bg }};background-size:cover;background-position:{{ c.pos }};display:grid;place-items:center;color:#a92b14;overflow:hidden"><sc-if value="{{ c.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:60%;aspect-ratio:1;border-radius:50%;background:#ffffff"></span></sc-if></span>
+          {{ c.name }}
+          <span style="font-size:12px;opacity:.75">{{ c.count }}</span>
+        </button>
+      </sc-for>
     </div>
-    <label style="flex:1 1 240px;max-width:420px;display:flex;align-items:center;gap:10px;background:#ffffff;border-radius:8px;padding:0 18px;height:54px;color:#6b5e52">
-      <kf-i n="search" s="18"></kf-i>
-      <input value="{{ q }}" onChange="{{ onQ }}" placeholder="{{ t.searchPh }}" aria-label="{{ t.searchAria }}" style="border:0;background:transparent;outline:none;font-size:16px;flex:1;min-width:0;color:#1f1a16">
-    </label>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+      <label style="flex:1 1 240px;max-width:420px;display:flex;align-items:center;gap:10px;background:#ffffff;border-radius:8px;padding:0 18px;height:54px;color:#6b5e52">
+        <kf-i n="search" s="18"></kf-i>
+        <input value="{{ q }}" onChange="{{ onQ }}" placeholder="{{ t.searchPh }}" aria-label="{{ t.searchAria }}" style="border:0;background:transparent;outline:none;font-size:16px;flex:1;min-width:0;color:#1f1a16">
+      </label>
+      <span style="display:flex;align-items:flex-start;gap:8px;font-size:12.5px;line-height:1.4;color:#6b5e52;max-width:520px;flex:2 1 320px"><kf-i n="info" s="15" style="flex:none;margin-top:1px"></kf-i>{{ t.allergenNote }}</span>
+    </div>
   </div>
   <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="2">
     <section style="padding-top:36px">
@@ -319,6 +322,13 @@ input,textarea{font-family:inherit}
             <div style="padding:16px 10px 8px;display:flex;flex-direction:column;gap:6px;flex:1">
               <h3 style="font-size:20px;line-height:1.15;margin:0">{{ it.name }}</h3>
               <p style="font-size:14.5px;line-height:1.5;color:#6b5e52;margin:0;flex:1">{{ it.desc }}</p>
+              <sc-if value="{{ it.hasAlg }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <sc-for list="{{ it.alg }}" as="a" hint-placeholder-count="2">
+                    <span style="display:inline-flex;align-items:center;gap:4px;background:#f3eadc;color:#6b5e52;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px"><kf-i n="alert" s="11"></kf-i>{{ a.name }}</span>
+                  </sc-for>
+                </div>
+              </sc-if>
               <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px">
                 <strong style="font:600 22px/28px Fraunces,Georgia,serif;color:#c7361c;font-variant-numeric:lining-nums tabular-nums">{{ it.priceTxt }}</strong>
                 <sc-if value="{{ it.notInCart }}" hint-placeholder-val="{{ true }}"><button onClick="{{ it.add }}" style="border:0;background:#c7361c;color:#fff;font-weight:700;font-size:15px;padding:11px 18px;border-radius:8px;display:flex;align-items:center;gap:6px" style-hover="background:#a92b14" style-active="background:#f2a531;color:#2a1a06;transform:scale(.96)"><kf-i n="plus" s="16" w="3"></kf-i>{{ t.add }}</button></sc-if>
@@ -569,30 +579,35 @@ class Component extends DCLogic {
     {id:'combos',name:N('Special Combo Menus','Menús combo especiales','Menús combo especials'),img:'combo.png',pos:'50% 60%'}
   ];
   static ITEMS = [
-    {id:'d1',cat:'durums',name:N('Gratinated Dürüm','Dürüm gratinado','Dürüm gratinat'),desc:N('Rolled lavash baked under melted cheese and tomato sauce.','Pan lavash enrollado, gratinado con queso fundido y salsa de tomate.','Pa lavash enrotllat, gratinat amb formatge fos i salsa de tomàquet.'),price:7.9,img:'durum.png',pos:'50% 60%',badge:N('Best seller','El más pedido','El més demanat')},
-    {id:'d2',cat:'durums',name:N('Chicken Dürüm','Dürüm de pollo','Dürüm de pollastre'),desc:N('Grilled chicken, lettuce, tomato, onion and yogurt sauce.','Pollo a la brasa, lechuga, tomate, cebolla y salsa de yogur.','Pollastre a la brasa, enciam, tomàquet, ceba i salsa de iogurt.'),price:6.5,img:'durum.png',pos:'15% 70%'},
-    {id:'d3',cat:'durums',name:N('Veal Dürüm','Dürüm de ternera','Dürüm de vedella'),desc:N('Grilled veal kebab with fresh salad and garlic sauce.','Kebab de ternera a la brasa con ensalada fresca y salsa de ajo.','Kebab de vedella a la brasa amb amanida fresca i salsa d’all.'),price:6.9,img:'durum.png',pos:'85% 55%'},
-    {id:'d4',cat:'durums',name:N('Falafel Dürüm','Dürüm de falafel','Dürüm de falàfel'),desc:N('Homemade chickpea falafel, salad and tahini sauce.','Falafel casero de garbanzo, ensalada y salsa tahini.','Falàfel casolà de cigró, amanida i salsa tahina.'),price:6.0,img:'plates.png',pos:'48% 58%'},
-    {id:'p1',cat:'pizzas',name:N('Margherita','Margarita','Margarida'),desc:N('Tomato sauce, mozzarella, cherry tomatoes and basil.','Salsa de tomate, mozzarella, tomates cherry y albahaca.','Salsa de tomàquet, mozzarella, tomàquets cherry i alfàbrega.'),price:9.5,img:'pizza.png',pos:'50% 70%'},
-    {id:'p2',cat:'pizzas',name:N('Kebab Pizza','Pizza kebab','Pizza kebab'),desc:N('Tomato, mozzarella, kebab meat, red onion and yogurt sauce.','Tomate, mozzarella, carne de kebab, cebolla morada y salsa de yogur.','Tomàquet, mozzarella, carn de kebab, ceba morada i salsa de iogurt.'),price:11.5,img:'pizza.png',pos:'30% 85%',badge:N('House pizza','La pizza de la casa','La pizza de la casa')},
-    {id:'p3',cat:'pizzas',name:N('Barbecue Pizza','Pizza barbacoa','Pizza barbacoa'),desc:N('BBQ sauce, mozzarella, chicken, bacon and onion.','Salsa barbacoa, mozzarella, pollo, bacon y cebolla.','Salsa barbacoa, mozzarella, pollastre, bacó i ceba.'),price:11.0,img:'pizza.png',pos:'75% 25%'},
-    {id:'p4',cat:'pizzas',name:N('Four Cheese','Cuatro quesos','Quatre formatges'),desc:N('Mozzarella, gorgonzola, emmental and parmesan.','Mozzarella, gorgonzola, emmental y parmesano.','Mozzarella, gorgonzola, emmental i parmesà.'),price:10.5,img:'pizza.png',pos:'95% 95%'},
-    {id:'b1',cat:'burgers',name:N('Classic Cheeseburger','Cheeseburger clásica','Cheeseburger clàssica'),desc:N('180 g beef, cheddar, tomato, lettuce and pickles on brioche. With fries.','Carne de ternera de 180 g, cheddar fundido, tomate, lechuga y pepinillos en pan brioche. Con patatas.','Vedella de 180 g, cheddar fos, tomàquet, enciam i cogombrets en pa brioix. Amb patates.'),price:8.9,img:'burger-house.png',pos:'30% 55%'},
-    {id:'b2',cat:'burgers',name:N('Double Smash Burger','Doble smash burger','Doble smash burger'),desc:N('Two smashed beef patties, double cheddar, onion and house sauce.','Dos hamburguesas smash de ternera, doble cheddar, cebolla y salsa de la casa.','Dues hamburgueses smash de vedella, doble cheddar, ceba i salsa de la casa.'),price:10.9,img:'burger-house.png',pos:'22% 45%'},
-    {id:'b3',cat:'burgers',name:N('Crispy Chicken Burger','Burger de pollo crujiente','Burger de pollastre cruixent'),desc:N('Crispy fried chicken, lettuce and garlic mayo.','Pollo frito crujiente, lechuga y mayonesa de ajo.','Pollastre fregit cruixent, enciam i maionesa d’all.'),price:8.5,img:'combo.png',pos:'75% 65%'},
-    {id:'t1',cat:'tacos',name:N('Chicken Fried Taco','Taco frito de pollo','Taco fregit de pollastre'),desc:N('Toasted tortilla filled with chicken, fries and melted cheese sauce.','Tortilla tostada rellena de pollo, patatas fritas y salsa de queso fundido.','Tortilla torrada farcida de pollastre, patates fregides i salsa de formatge fos.'),price:7.5,badge:N('New','Nuevo','Nou'),img:'tacos2.jpg',pos:'68% 62%'},
-    {id:'t2',cat:'tacos',name:N('Kebab Fried Taco','Taco frito de kebab','Taco fregit de kebab'),desc:N('Kebab meat, fries, cheese sauce and your choice of sauce.','Carne de kebab, patatas fritas, salsa de queso y la salsa que prefieras.','Carn de kebab, patates fregides, salsa de formatge i la salsa que prefereixis.'),price:8.0,badge:N('New','Nuevo','Nou'),img:'tacos3.jpg',pos:'45% 55%'},
-    {id:'t3',cat:'tacos',name:N('Mixed XL Fried Taco','Taco XL mixto','Taco XL mixt'),desc:N('Chicken and kebab, double cheese sauce and fries. For big appetites.','Pollo y kebab, doble salsa de queso y patatas fritas. Para los días de mucha hambre.','Pollastre i kebab, doble salsa de formatge i patates fregides. Per als dies de molta gana.'),price:9.9,badge:N('New','Nuevo','Nou'),img:'tacos1.jpg',pos:'40% 78%'},
+    {id:'d1',cat:'durums',name:N('Gratinated Dürüm','Dürüm gratinado','Dürüm gratinat'),desc:N('Rolled lavash baked under melted cheese and tomato sauce.','Pan lavash enrollado, gratinado con queso fundido y salsa de tomate.','Pa lavash enrotllat, gratinat amb formatge fos i salsa de tomàquet.'),price:7.9,img:'durum.png',pos:'50% 60%',badge:N('Best seller','El más pedido','El més demanat'),alg:['gluten','dairy']},
+    {id:'d2',cat:'durums',name:N('Chicken Dürüm','Dürüm de pollo','Dürüm de pollastre'),desc:N('Grilled chicken, lettuce, tomato, onion and yogurt sauce.','Pollo a la brasa, lechuga, tomate, cebolla y salsa de yogur.','Pollastre a la brasa, enciam, tomàquet, ceba i salsa de iogurt.'),price:6.5,img:'durum.png',pos:'15% 70%',alg:['gluten','dairy']},
+    {id:'d3',cat:'durums',name:N('Veal Dürüm','Dürüm de ternera','Dürüm de vedella'),desc:N('Grilled veal kebab with fresh salad and garlic sauce.','Kebab de ternera a la brasa con ensalada fresca y salsa de ajo.','Kebab de vedella a la brasa amb amanida fresca i salsa d’all.'),price:6.9,img:'durum.png',pos:'85% 55%',alg:['gluten','egg']},
+    {id:'d4',cat:'durums',name:N('Falafel Dürüm','Dürüm de falafel','Dürüm de falàfel'),desc:N('Homemade chickpea falafel, salad and tahini sauce.','Falafel casero de garbanzo, ensalada y salsa tahini.','Falàfel casolà de cigró, amanida i salsa tahina.'),price:6.0,img:'plates.png',pos:'48% 58%',alg:['gluten','sesame']},
+    {id:'p1',cat:'pizzas',name:N('Margherita','Margarita','Margarida'),desc:N('Tomato sauce, mozzarella, cherry tomatoes and basil.','Salsa de tomate, mozzarella, tomates cherry y albahaca.','Salsa de tomàquet, mozzarella, tomàquets cherry i alfàbrega.'),price:9.5,img:'pizza.png',pos:'50% 70%',alg:['gluten','dairy']},
+    {id:'p2',cat:'pizzas',name:N('Kebab Pizza','Pizza kebab','Pizza kebab'),desc:N('Tomato, mozzarella, kebab meat, red onion and yogurt sauce.','Tomate, mozzarella, carne de kebab, cebolla morada y salsa de yogur.','Tomàquet, mozzarella, carn de kebab, ceba morada i salsa de iogurt.'),price:11.5,img:'pizza.png',pos:'30% 85%',badge:N('House pizza','La pizza de la casa','La pizza de la casa'),alg:['gluten','dairy']},
+    {id:'p3',cat:'pizzas',name:N('Barbecue Pizza','Pizza barbacoa','Pizza barbacoa'),desc:N('BBQ sauce, mozzarella, chicken, bacon and onion.','Salsa barbacoa, mozzarella, pollo, bacon y cebolla.','Salsa barbacoa, mozzarella, pollastre, bacó i ceba.'),price:11.0,img:'pizza.png',pos:'75% 25%',alg:['gluten','dairy']},
+    {id:'p4',cat:'pizzas',name:N('Four Cheese','Cuatro quesos','Quatre formatges'),desc:N('Mozzarella, gorgonzola, emmental and parmesan.','Mozzarella, gorgonzola, emmental y parmesano.','Mozzarella, gorgonzola, emmental i parmesà.'),price:10.5,img:'pizza.png',pos:'95% 95%',alg:['gluten','dairy']},
+    {id:'b1',cat:'burgers',name:N('Classic Cheeseburger','Cheeseburger clásica','Cheeseburger clàssica'),desc:N('180 g beef, cheddar, tomato, lettuce and pickles on brioche. With fries.','Carne de ternera de 180 g, cheddar fundido, tomate, lechuga y pepinillos en pan brioche. Con patatas.','Vedella de 180 g, cheddar fos, tomàquet, enciam i cogombrets en pa brioix. Amb patates.'),price:8.9,img:'burger-house.png',pos:'30% 55%',alg:['gluten','dairy','egg']},
+    {id:'b2',cat:'burgers',name:N('Double Smash Burger','Doble smash burger','Doble smash burger'),desc:N('Two smashed beef patties, double cheddar, onion and house sauce.','Dos hamburguesas smash de ternera, doble cheddar, cebolla y salsa de la casa.','Dues hamburgueses smash de vedella, doble cheddar, ceba i salsa de la casa.'),price:10.9,img:'burger-house.png',pos:'22% 45%',alg:['gluten','dairy']},
+    {id:'b3',cat:'burgers',name:N('Crispy Chicken Burger','Burger de pollo crujiente','Burger de pollastre cruixent'),desc:N('Crispy fried chicken, lettuce and garlic mayo.','Pollo frito crujiente, lechuga y mayonesa de ajo.','Pollastre fregit cruixent, enciam i maionesa d’all.'),price:8.5,img:'combo.png',pos:'75% 65%',alg:['gluten','egg']},
+    {id:'t1',cat:'tacos',name:N('Chicken Fried Taco','Taco frito de pollo','Taco fregit de pollastre'),desc:N('Toasted tortilla filled with chicken, fries and melted cheese sauce.','Tortilla tostada rellena de pollo, patatas fritas y salsa de queso fundido.','Tortilla torrada farcida de pollastre, patates fregides i salsa de formatge fos.'),price:7.5,badge:N('New','Nuevo','Nou'),img:'tacos2.jpg',pos:'68% 62%',alg:['gluten','dairy']},
+    {id:'t2',cat:'tacos',name:N('Kebab Fried Taco','Taco frito de kebab','Taco fregit de kebab'),desc:N('Kebab meat, fries, cheese sauce and your choice of sauce.','Carne de kebab, patatas fritas, salsa de queso y la salsa que prefieras.','Carn de kebab, patates fregides, salsa de formatge i la salsa que prefereixis.'),price:8.0,badge:N('New','Nuevo','Nou'),img:'tacos3.jpg',pos:'45% 55%',alg:['gluten','dairy']},
+    {id:'t3',cat:'tacos',name:N('Mixed XL Fried Taco','Taco XL mixto','Taco XL mixt'),desc:N('Chicken and kebab, double cheese sauce and fries. For big appetites.','Pollo y kebab, doble salsa de queso y patatas fritas. Para los días de mucha hambre.','Pollastre i kebab, doble salsa de formatge i patates fregides. Per als dies de molta gana.'),price:9.9,badge:N('New','Nuevo','Nou'),img:'tacos1.jpg',pos:'40% 78%',alg:['gluten','dairy']},
     {id:'k1',cat:'drinks',name:N('Coca-Cola','Coca-Cola','Coca-Cola'),desc:N('33 cl can, ice cold.','Lata de 33 cl, bien fría.','Llauna de 33 cl, ben freda.'),price:1.8,img:'drinks1.jpg',pos:'62% 45%'},
     {id:'k2',cat:'drinks',name:N('Coca-Cola Zero','Coca-Cola Zero','Coca-Cola Zero'),desc:N('33 cl can, ice cold.','Lata de 33 cl, bien fría.','Llauna de 33 cl, ben freda.'),price:1.8,img:'drinks2.jpg',pos:'30% 40%'},
     {id:'k3',cat:'drinks',name:N('Fanta Orange','Fanta naranja','Fanta taronja'),desc:N('33 cl can, ice cold.','Lata de 33 cl, bien fría.','Llauna de 33 cl, ben freda.'),price:1.8,img:'drinks1.jpg',pos:'88% 75%'},
     {id:'k4',cat:'drinks',name:N('Still Water','Agua mineral','Aigua mineral'),desc:N('50 cl bottle.','Botella de 50 cl.','Ampolla de 50 cl.'),price:1.2,img:'drinks2.jpg',pos:'75% 70%'},
-    {id:'k5',cat:'drinks',name:N('Ayran','Ayran','Ayran'),desc:N('Chilled, lightly salted yogurt drink.','Bebida de yogur fresca y ligeramente salada.','Beguda de iogurt fresca i lleugerament salada.'),price:2.0,img:'drinks1.jpg',pos:'35% 30%'},
-    {id:'c1',cat:'combos',name:N('Factory Combo','Combo Factory','Combo Factory'),desc:N('Burger, fries, 4 chicken nuggets and a drink. For the really hungry days.','Hamburguesa, patatas fritas, 4 nuggets de pollo y una bebida. Para los días de mucha hambre.','Hamburguesa, patates fregides, 4 nuggets de pollastre i una beguda. Per als dies de molta gana.'),price:12.9,img:'combo.png',pos:'45% 60%',badge:N('Most ordered','El más pedido','El més demanat')},
-    {id:'c2',cat:'combos',name:N('Dürüm Menu','Menú dürüm','Menú dürüm'),desc:N('Any dürüm with fries and a drink.','Cualquier dürüm con patatas fritas y una bebida.','Qualsevol dürüm amb patates fregides i una beguda.'),price:9.5,img:'durum.png',pos:'50% 50%'},
-    {id:'c3',cat:'combos',name:N('Wings Menu','Menú de alitas','Menú d’ales'),desc:N('8 crispy wings, fries, garlic dip and a drink.','8 alitas crujientes, patatas fritas, salsa de ajo y una bebida.','8 ales cruixents, patates fregides, salsa d’all i una beguda.'),price:10.5,img:'wings.png',pos:'50% 50%'},
-    {id:'c4',cat:'combos',name:N('Family Pizza Menu','Menú pizza familiar','Menú pizza familiar'),desc:N('2 medium pizzas, 6 wings and a 1.5 L drink.','2 pizzas medianas, 6 alitas y un refresco de 1,5 L.','2 pizzes mitjanes, 6 ales i un refresc d’1,5 L.'),price:24.9,img:'pizza.png',pos:'50% 40%'}
+    {id:'k5',cat:'drinks',name:N('Ayran','Ayran','Ayran'),desc:N('Chilled, lightly salted yogurt drink.','Bebida de yogur fresca y ligeramente salada.','Beguda de iogurt fresca i lleugerament salada.'),price:2.0,img:'drinks1.jpg',pos:'35% 30%',alg:['dairy']},
+    {id:'c1',cat:'combos',name:N('Factory Combo','Combo Factory','Combo Factory'),desc:N('Burger, fries, 4 chicken nuggets and a drink. For the really hungry days.','Hamburguesa, patatas fritas, 4 nuggets de pollo y una bebida. Para los días de mucha hambre.','Hamburguesa, patates fregides, 4 nuggets de pollastre i una beguda. Per als dies de molta gana.'),price:12.9,img:'combo.png',pos:'45% 60%',badge:N('Most ordered','El más pedido','El més demanat'),alg:['gluten','dairy','egg']},
+    {id:'c2',cat:'combos',name:N('Dürüm Menu','Menú dürüm','Menú dürüm'),desc:N('Any dürüm with fries and a drink.','Cualquier dürüm con patatas fritas y una bebida.','Qualsevol dürüm amb patates fregides i una beguda.'),price:9.5,img:'durum.png',pos:'50% 50%',alg:['gluten','dairy']},
+    {id:'c3',cat:'combos',name:N('Wings Menu','Menú de alitas','Menú d’ales'),desc:N('8 crispy wings, fries, garlic dip and a drink.','8 alitas crujientes, patatas fritas, salsa de ajo y una bebida.','8 ales cruixents, patates fregides, salsa d’all i una beguda.'),price:10.5,img:'wings.png',pos:'50% 50%',alg:['gluten','egg']},
+    {id:'c4',cat:'combos',name:N('Family Pizza Menu','Menú pizza familiar','Menú pizza familiar'),desc:N('2 medium pizzas, 6 wings and a 1.5 L drink.','2 pizzas medianas, 6 alitas y un refresco de 1,5 L.','2 pizzes mitjanes, 6 ales i un refresc d’1,5 L.'),price:24.9,img:'pizza.png',pos:'50% 40%',alg:['gluten','dairy']}
   ];
+  static ALLERGENS = {
+    gluten:N('Gluten','Gluten','Gluten'), dairy:N('Dairy','Lácteos','Làctics'), egg:N('Egg','Huevo','Ou'),
+    sesame:N('Sesame','Sésamo','Sèsam'), soy:N('Soy','Soja','Soja'), mustard:N('Mustard','Mostaza','Mostassa'),
+    nuts:N('Nuts','Frutos secos','Fruits secs'), sulphites:N('Sulphites','Sulfitos','Sulfits'), celery:N('Celery','Apio','Api')
+  };
   static SLIDES = [{img:'burger-house.png',pos:'30% 50%',id:'b2'},{img:'tacos3.jpg',pos:'45% 40%',id:'t2'},{img:'combo.png',pos:'50% 60%',id:'c1'},{img:'tacos2.jpg',pos:'55% 45%',id:'t1'}];
   static Slider(p){ const e=React.createElement, ref=React.useRef(null), prev=React.useRef(-1);
     React.useEffect(()=>{ const root=ref.current; if(!root) return; const kids=[...root.children], cur=kids[p.idx], old=prev.current;
@@ -613,7 +628,7 @@ class Component extends DCLogic {
 
   fresh(){
     const now=Date.now(), m=60000;
-    return { v:1, view:this.props.startView||'home', lang:'es', cat:'all', q:'', cart:{}, drawer:false, step:'cart',
+    return { v:1, view:this.props.startView||'home', lang:'es', cat:[], q:'', cart:{}, drawer:false, step:'cart',
       form:{name:'',email:'',phone:'',address:'',pay:'cash'}, errs:{}, confirm:null, ddOpen:false,
       heroIdx:0, adminTab:'orders', adminCat:'durums', eta:45, seq:1046, newCat:'', np:{name:'',price:'',desc:''}, npErr:'', drafts:{},
       cats:Component.CATS.map(c=>({...c})), items:Component.ITEMS.map(i=>({...i})),
@@ -624,7 +639,7 @@ class Component extends DCLogic {
         {id:'o1042',ref:'KF-1042',status:'delivered',at:now-80*m,done:now-41*m,eta:45,name:'Ahmed R.',email:'ahmed.r@gmail.com',phone:'+34 634 118 902',address:'Rambla de Sant Adrià 12, Sant Adrià de Besòs',pay:'cash',lines:[{qty:1,name:'Chicken Fried Taco'},{qty:1,name:'Ayran'}],total:9.5}
       ], now };
   }
-  state = (()=>{ const f=this.fresh(); try{ const s=JSON.parse(localStorage.getItem('kf4')||'null'); if(s&&s.v===1) return {...f,...s,drawer:false,ddOpen:false,confirm:null,now:Date.now()}; }catch(e){} return f; })();
+  state = (()=>{ const f=this.fresh(); try{ const s=JSON.parse(localStorage.getItem('kf4')||'null'); if(s&&s.v===1) return {...f,...s,cat:Array.isArray(s.cat)?s.cat:[],drawer:false,ddOpen:false,confirm:null,now:Date.now()}; }catch(e){} return f; })();
 
   componentDidMount(){
     this._revealed=new WeakSet();
@@ -681,7 +696,7 @@ class Component extends DCLogic {
   dec(id){ this.setState(s=>{ const c={...s.cart}; c[id]=(c[id]||0)-1; if(c[id]<=0) delete c[id]; return {cart:c}; }); }
   vis(o){ const c=o.cat?this.state.cats.find(x=>x.id===o.cat):null; const img=o.img; const icon=o.icon||(c&&c.icon)||(o.cat==='drinks'?'cup':o.cat==='tacos'?'flame':'utensils');
     return { bg:img?`url(assets/food/${img})`:'none', pos:o.pos||'50% 50%', noImg:!img, icon, tint:img?'#f3eadc':'#fdefd3' }; }
-  itemVM(it,i){ const q=this.state.cart[it.id]||0; return {...this.vis(it), id:it.id, name:this.L(it.name), desc:this.L(it.desc), priceTxt:this.fmt(it.price), badge:this.L(it.badge)||'', hasBadge:!!it.badge, qty:q, inCart:q>0, notInCart:q===0, d:String(i%4), add:()=>this.add(it.id), dec:()=>this.dec(it.id)}; }
+  itemVM(it,i){ const q=this.state.cart[it.id]||0; const alg=(it.alg||[]).map(code=>({code,name:this.L(Component.ALLERGENS[code])})); return {...this.vis(it), id:it.id, name:this.L(it.name), desc:this.L(it.desc), priceTxt:this.fmt(it.price), badge:this.L(it.badge)||'', hasBadge:!!it.badge, qty:q, inCart:q>0, notInCart:q===0, d:String(i%4), add:()=>this.add(it.id), dec:()=>this.dec(it.id), alg, hasAlg:alg.length>0}; }
   validate(f){ const e={};
     if(f.name.trim().length<2) e.name=this.pick('Please enter your name.','Introduce tu nombre.','Introdueix el teu nom.');
     if(!/^\S+@\S+\.\S+$/.test(f.email.trim())) e.email=this.pick('Please enter a valid email.','Introduce un email válido.','Introdueix un correu vàlid.');
@@ -776,6 +791,8 @@ class Component extends DCLogic {
       allCategories:pick('All categories','Todas las categorías','Totes les categories'),
       searchPh:pick('Search dürüm, pizza, tacos…','Busca dürüm, pizza, tacos…','Cerca dürüm, pizza, tacos…'),
       searchAria:pick('Search the menu','Buscar en el menú','Cerca al menú'),
+      browseFullMenu:pick('Browse the full menu','Ver el menú completo','Veure el menú complet'),
+      allergenNote:pick('Do you have a food allergy or intolerance? These are a guide only — please tell us when ordering and our team will confirm.','¿Tienes alguna alergia o intolerancia alimentaria? Esta información es orientativa — dínoslo al pedir y nuestro equipo te lo confirmará.','Tens alguna al·lèrgia o intolerància alimentària? Aquesta informació és orientativa — digues-ho en fer la comanda i el nostre equip t’ho confirmarà.'),
       viewOrder:pick('View order','Ver pedido','Veure comanda'),
       yourOrder:pick('Your order','Tu pedido','La teva comanda'),
       orderPlacedAria:pick('Order placed','Pedido realizado','Comanda feta'),
@@ -812,12 +829,17 @@ class Component extends DCLogic {
 
     const q=s.q.trim().toLowerCase();
     const match=i=>!q||(L(i.name)+' '+L(i.desc)).toLowerCase().includes(q);
-    const showCats=s.cat==='all'?s.cats:s.cats.filter(c=>c.id===s.cat);
+    const selCats=Array.isArray(s.cat)?s.cat:[];
+    const showCats=selCats.length?s.cats.filter(c=>selCats.includes(c.id)):s.cats;
     const sections=showCats.map(c=>{ const its=s.items.filter(i=>i.cat===c.id&&match(i)); return {name:L(c.name),isNew:!!c.isNew,count:plural(its.length),items:its.map((it,i)=>this.itemVM(it,i))}; }).filter(x=>x.items.length);
-    const curC=s.cats.find(c=>c.id===s.cat);
     const allVis={bg:'none',pos:'50% 50%',noImg:true,icon:'utensils',tint:'#fdefd3'};
-    const ddVis=curC?this.vis({id:curC.id,img:curC.img,pos:curC.pos,icon:curC.icon}):allVis;
-    const ddOpts=[{id:'all',name:{en:'All categories',es:'Todas las categorías',ca:'Totes les categories'}}].concat(s.cats).map(c=>{ const v=c.id==='all'?allVis:this.vis({id:c.id,img:c.img,pos:c.pos,icon:c.icon}); return {...v,name:L(c.name),count:c.id==='all'?String(s.items.length):String(catCount(c.id)),bgc:s.cat===c.id?'#f3eadc':'transparent',pick:()=>{ this.setState({cat:c.id,ddOpen:false}); window.scrollTo({top:0,behavior:'smooth'}); }}; });
+    const chips=[{id:'all',name:{en:'All categories',es:'Todas las categorías',ca:'Totes les categories'}}].concat(s.cats).map(c=>{
+      const on=c.id==='all'?selCats.length===0:selCats.includes(c.id);
+      const v=c.id==='all'?allVis:this.vis({id:c.id,img:c.img,pos:c.pos,icon:c.icon});
+      return {...v,name:L(c.name),count:c.id==='all'?String(s.items.length):String(catCount(c.id)),on:String(on),pillBg:on?'#6B2414':'#ffffff',pillFg:on?'#fbf6ee':'#1f1a16',
+        toggle:()=>{ this.setState(st=>{ const cur=Array.isArray(st.cat)?st.cat:[]; if(c.id==='all') return {cat:[]}; const has=cur.includes(c.id); return {cat:has?cur.filter(x=>x!==c.id):[...cur,c.id]}; }); window.scrollTo({top:0,behavior:'smooth'}); }
+      };
+    });
 
     const F=s.form, setF=(k)=>e=>{ const v=e.target.value; this.setState(st=>{ const errs={...st.errs}; delete errs[k]; return {form:{...st.form,[k]:v},errs}; }); };
     const fieldDefs=[['name',t.fName,'text','name','Laura Pérez'],['email',t.fEmail,'email','email','you@email.com'],['phone',t.fPhone,'tel','tel','+34 600 000 000'],['address',t.fAddress,'text','street-address',t.fAddressPh]];
@@ -880,14 +902,15 @@ class Component extends DCLogic {
       heroDots:SL.map((x,i)=>{ const it=s.items.find(q=>q.id===x.id); return {label:pick('Show ','Ver ','Mostra ')+(it?L(it.name):pick('slide ','diapositiva ','diapositiva ')+(i+1)),w:i===hi?'44px':'14px',bg:'rgba(255,255,255,.35)',anim:i===hi&&this.props.motion!==false?'kffill 5.5s linear forwards':'none',go:()=>{ this.setState({heroIdx:i}); this.restartSlides(); }}; }),
       heroCount:String(hi+1).padStart(2,'0')+' / '+String(SL.length).padStart(2,'0'),
       slide:{name:curIt?L(curIt.name):'',price:curIt?this.fmt(curIt.price):'',bg:'url(assets/food/'+curS.img+')',pos:curS.pos,add:()=>curIt&&this.add(curIt.id),addAria:pick('Add ','Añadir ','Afegeix ')+(curIt?L(curIt.name):'')},
-      goTacos:()=>this.go('menu',{cat:'tacos',q:''}),
+      goTacos:()=>this.go('menu',{cat:['tacos'],q:''}),
+      browseMenu:()=>this.go('menu',{cat:[],q:''}),
       marquee:[0,1].flatMap(()=>pick(['Dürüms','Pizzas','Burgers','Fried Tacos','Combo Menus','Cold Drinks'],['Dürüms','Pizzas','Hamburguesas','Tacos fritos','Menús combo','Bebidas frías'],['Dürüms','Pizzes','Hamburgueses','Tacos fregits','Menús combo','Begudes fredes'])),
       cats:s.cats.map((c,i)=>({...this.vis({id:c.id,img:c.img,pos:c.pos,icon:c.icon}),name:L(c.name),isNew:!!c.isNew,count:plural(catCount(c.id)),d:String(i%3),go:()=>this.go('menu',{cat:c.id,q:''})})),
       popular:['d1','p2','c1','b1'].map(id=>s.items.find(i=>i.id===id)).filter(Boolean).map((it,i)=>this.itemVM(it,i)),
-      combo:combo?{name:L(combo.name),desc:L(combo.desc),priceTxt:this.fmt(combo.price),btn:(s.cart[combo.id]?t.addAnother:t.addToOrder),add:()=>this.add(combo.id),all:()=>this.go('menu',{cat:'combos',q:''})}:{name:'',desc:'',priceTxt:'',btn:'',add:()=>{},all:()=>{}},
+      combo:combo?{name:L(combo.name),desc:L(combo.desc),priceTxt:this.fmt(combo.price),btn:(s.cart[combo.id]?t.addAnother:t.addToOrder),add:()=>this.add(combo.id),all:()=>this.go('menu',{cat:['combos'],q:''})}:{name:'',desc:'',priceTxt:'',btn:'',add:()=>{},all:()=>{}},
       reviews:Component.REVIEWS.map((r,i)=>{ const it=s.items.find(x=>x.id===r.itemId); return {name:r.name,text:r.text,stars:Array.from({length:5},(_,k)=>({icon:k<r.stars?'starf':'star'})),itemName:it?L(it.name):'',d:String(i%5)}; }),
       q:s.q, onQ:e=>this.setState({q:e.target.value}), sections, noResults:!sections.length, noResultsMsg,
-      dd:{...ddVis,label:curC?L(curC.name):t.allCategories,open:s.ddOpen,toggle:()=>this.setState(st=>({ddOpen:!st.ddOpen})),close:()=>this.setState({ddOpen:false}),opts:ddOpts},
+      chips,
       drawer:{open:s.drawer,close:()=>this.setState({drawer:false}),back:()=>this.setState({step:'cart'}),isEmpty:count===0,isCart:count>0&&!isCheckout,isCheckout,hasItems:count>0,
         title:isCheckout?t.deliveryDetails:t.yourOrder,primaryLabel:isCheckout?t.placeOrder:t.continueBtn,primary:()=>isCheckout?this.place():this.setState({step:'checkout'})},
       lines:cartLines.map(l=>({...this.vis(l.it),name:L(l.it.name),qty:l.qty,priceTxt:this.fmt(l.it.price*l.qty),inc:()=>this.add(l.it.id),dec:()=>this.dec(l.it.id)})),
