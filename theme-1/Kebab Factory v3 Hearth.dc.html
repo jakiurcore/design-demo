@@ -271,6 +271,21 @@ input,textarea{font-family:inherit}
     </div>
   </section></div>
 
+  <div style="background:#6B2414"><section style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,88px) clamp(18px,4vw,40px)">
+    <div data-reveal="0" style="text-align:center;max-width:640px;margin:0 auto 48px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;gap:10px;font:italic 500 18px/24px Fraunces,Georgia,serif;color:#f2a531"><span style="width:24px;height:2px;background:#f2a531"></span>{{ t.kickerStats }}</span>
+      <h2 style="font-size:clamp(30px,3.6vw,44px);line-height:1.1;margin:8px 0 0;color:#fbf6ee">{{ t.statsPre }}<em style="font-style:italic;color:#f2a531">{{ t.statsEm }}</em></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px;text-align:center">
+      <sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+        <div data-reveal="{{ st.d }}">
+          <div style="font:600 clamp(40px,5vw,58px)/1 Fraunces,Georgia,serif;color:#fff"><span data-count="{{ st.value }}">0</span>{{ st.suffix }}</div>
+          <p style="font-size:15px;color:#e6dacb;margin:10px 0 0">{{ st.label }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section></div>
+
   <div style="background:#ffffff"><section style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
     <div data-reveal="0" style="text-align:center;max-width:640px;margin:0 auto 40px">
       <span style="display:inline-flex;align-items:center;justify-content:center;gap:10px;font:italic 500 18px/24px Fraunces,Georgia,serif;color:#a92b14"><span style="width:24px;height:2px;background:#c7361c"></span>{{ t.kickerReviews }}</span>
@@ -714,9 +729,21 @@ class Component extends DCLogic {
       if(e.isIntersecting){
         if(el._revAnim) el._revAnim.cancel();
         el._revAnim=el.animate([{opacity:0,transform:'translateY(36px) scale(.94)'},{opacity:1,transform:'none'}],{duration:760,delay:d*70,easing:'cubic-bezier(.18,1.15,.4,1)',fill:'both'});
+        const countEl=el.hasAttribute('data-count')?el:el.querySelector('[data-count]');
+        const target=countEl&&countEl.getAttribute('data-count');
+        if(countEl&&target!=null){
+          const end=parseFloat(target), dur=1400, start=performance.now(), token=(countEl._countTok=(countEl._countTok||0)+1);
+          const locale=({es:'es-ES',ca:'ca-ES',en:'en-US'})[this.state.lang]||'es-ES';
+          const step=(now)=>{ if(countEl._countTok!==token) return; const p=Math.min(1,(now-start)/dur), eased=1-Math.pow(1-p,3);
+            countEl.textContent=Math.round(eased*end).toLocaleString(locale);
+            if(p<1) requestAnimationFrame(step); else countEl.textContent=end.toLocaleString(locale); };
+          requestAnimationFrame(step);
+        }
       } else {
         if(el._revAnim){ el._revAnim.cancel(); el._revAnim=null; }
         el.style.opacity='0'; el.style.transform='translateY(36px) scale(.94)';
+        const resetEl=el.hasAttribute('data-count')?el:el.querySelector('[data-count]');
+        if(resetEl){ resetEl._countTok=(resetEl._countTok||0)+1; resetEl.textContent='0'; }
       }
     }),{threshold:.12,rootMargin:'0px 0px -60px 0px'});
     this.tick=setInterval(()=>this.setState({now:Date.now()}),15000);
@@ -842,6 +869,13 @@ class Component extends DCLogic {
       step3Title:pick('Pay at the door','Paga al recibir','Paga en rebre-ho'),
       step3Desc:pick('Your food arrives in about '+eta+' minutes. Pay cash, or by card with the rider’s card machine.','Tu pedido llega en unos '+eta+' minutos. Paga en efectivo, o con tarjeta con el datáfono del repartidor.','La teva comanda arriba en uns '+eta+' minuts. Paga en efectiu, o amb targeta amb el datàfon del repartidor.'),
       kickerReviews:pick('Real reviews','Reseñas reales','Ressenyes reals'),
+      kickerStats:pick('By the numbers','En números','En xifres'),
+      statsPre:pick('Numbers that speak for ','Cifras que hablan por ','Xifres que parlen per '),
+      statsEm:pick('themselves','nosotros','nosaltres'),
+      statOrders:pick('Orders delivered','Pedidos entregados','Comandes lliurades'),
+      statDelivery:pick('Avg. delivery (min)','Entrega media (min)','Entrega mitjana (min)'),
+      statRadius:pick('Km delivery radius','Km de radio de entrega','Km de radi d’entrega'),
+      statRepeat:pick('Customers who come back','Clientes que repiten','Clients que repeteixen'),
       kickerStory:pick('Our story','Nuestra historia','La nostra història'),
       storyPre:pick('From one oven in Badalona ','De un horno en Badalona ','D’un forn a Badalona '),
       storyEm:pick('to your door','a tu puerta','a casa teva'),
@@ -987,6 +1021,12 @@ class Component extends DCLogic {
       popular:['d1','p2','c1','b1'].map(id=>s.items.find(i=>i.id===id)).filter(Boolean).map((it,i)=>this.itemVM(it,i)),
       chefPicks:['d4','p3','t2','c4'].map(id=>s.items.find(i=>i.id===id)).filter(Boolean).map((it,i)=>this.itemVM(it,i)),
       timeline:Component.TIMELINE.map((m,i)=>({year:L(m.year),title:L(m.title),text:L(m.text),d:String(i%4)})),
+      stats:[
+        {value:'50000',suffix:'+',label:t.statOrders,d:'0'},
+        {value:String(eta),suffix:pick(' min',' min',' min'),label:t.statDelivery,d:'1'},
+        {value:'5',suffix:pick(' km',' km',' km'),label:t.statRadius,d:'2'},
+        {value:'92',suffix:'%',label:t.statRepeat,d:'3'}
+      ],
       combo:combo?{name:L(combo.name),desc:L(combo.desc),priceTxt:this.fmt(combo.price),btn:(s.cart[combo.id]?t.addAnother:t.addToOrder),add:()=>this.add(combo.id),all:()=>this.go('menu',{cat:['combos'],q:''})}:{name:'',desc:'',priceTxt:'',btn:'',add:()=>{},all:()=>{}},
       reviews:Component.REVIEWS.map((r,i)=>{ const it=s.items.find(x=>x.id===r.itemId); return {name:r.name,text:r.text,stars:Array.from({length:5},(_,k)=>({icon:k<r.stars?'starf':'star'})),itemName:it?L(it.name):'',d:String(i%5)}; }),
       q:s.q, onQ:e=>this.setState({q:e.target.value}), sections, noResults:!sections.length, noResultsMsg,
