@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..800;1,14..32,400..800&amp;family=Space+Grotesk:wght@500..700&amp;display=swap">
 <script src="kf-icons.js"></script>
 <title>Kebab Factory · Dürüms, pizza &amp; burgers in Badalona</title>
-<meta name="description" content="Order dürüms, pizza, burgers and fried tacos straight from Kebab Factory Unit 3 in Badalona. Delivered in about 45 minutes, pay cash or card at the door.">
+<meta name="description" content="Order dürüms, pizza, burgers and fried tacos straight from Kebab Factory in Badalona. Delivered in about 45 minutes, pay cash or card at the door.">
 <style>
 html{scroll-behavior:smooth}
-body{margin:0;background:#0A0A0C;color:#F5F5F7;font-family:"Inter","Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:#1B0A06;color:#F5F5F7;font-family:"Inter","Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4{font-family:"Space Grotesk",system-ui,sans-serif;font-weight:600;letter-spacing:-0.015em;text-wrap:balance}
 p{text-wrap:pretty}
 a{color:#FF6A3D}a:hover{color:#FF6A3D}
@@ -25,9 +25,9 @@ input,textarea{font-family:inherit}
 [data-pop]{container-type:inline-size}
 @container (min-width:460px){[data-pop]>div{--kfcols:2}}
 @container (min-width:960px){[data-pop]>div{--kfcols:4}}
-@keyframes kfkb0{0%{transform:scale(1.04) translate(0,0)}100%{transform:scale(1.18) translate(-3%,-2%)}}
-@keyframes kfkb1{0%{transform:scale(1.16) translate(2%,1%)}100%{transform:scale(1.04) translate(-1%,0)}}
-@keyframes kfkb2{0%{transform:scale(1.06) translate(0,2%)}100%{transform:scale(1.2) translate(2%,-2%)}}
+@keyframes kfkb0{0%{transform:scale(1.03) translate(0,0)}100%{transform:scale(1.1) translate(-1.5%,-1%)}}
+@keyframes kfkb1{0%{transform:scale(1.09) translate(1%,.5%)}100%{transform:scale(1.03) translate(-.5%,0)}}
+@keyframes kfkb2{0%{transform:scale(1.04) translate(0,1%)}100%{transform:scale(1.11) translate(1%,-1%)}}
 @keyframes kffill{from{width:0}to{width:100%}}
 @keyframes kfkbx{0%{transform:scale(1.04) translate(0,0)}100%{transform:scale(1.16) translate(-2.5%,-1.5%)}}
 @keyframes kfspin{to{transform:rotate(360deg)}}
@@ -40,7 +40,7 @@ input,textarea{font-family:inherit}
 </style>
 </helmet>
 
-<div style="min-height:100vh;background:#0A0A0C">
+<div style="min-height:100vh;background:#1B0A06">
 
 <sc-if value="{{ isSite }}" hint-placeholder-val="{{ true }}">
   <header style="position:sticky;top:0;z-index:40;background:rgba(245,234,216,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)">
@@ -49,23 +49,23 @@ input,textarea{font-family:inherit}
         <span style="width:42px;height:42px;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center;font:600 16px 'Space Grotesk',system-ui,sans-serif;letter-spacing:-0.02em">KF</span>
         <span style="display:flex;flex-direction:column;line-height:1">
           <span style="font:600 19px 'Space Grotesk',system-ui,sans-serif;letter-spacing:-0.02em">Kebab Factory</span>
-          <span style="font-size:11px;font-weight:700;letter-spacing:.12em;color:#9A9AA5;margin-top:4px">UNIT 3 · BADALONA</span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.12em;color:#9A9AA5;margin-top:4px">BADALONA</span>
         </span>
       </button>
       <nav style="display:flex;gap:4px;margin-left:auto">
-        <button onClick="{{ nav.home }}" style="border:0;background:{{ nav.homeBg }};color:#F5F5F7;font-weight:600;font-size:15px;padding:10px 18px;border-radius:10px" style-hover="background:#1E1E26">{{ t.home }}</button>
-        <button onClick="{{ nav.menu }}" style="border:0;background:{{ nav.menuBg }};color:#F5F5F7;font-weight:600;font-size:15px;padding:10px 18px;border-radius:10px" style-hover="background:#1E1E26">{{ t.menuNav }}</button>
+        <button onClick="{{ nav.home }}" style="border:0;background:{{ nav.homeBg }};color:#F5F5F7;font-weight:600;font-size:15px;padding:10px 18px;border-radius:10px" style-hover="background:#2E160B">{{ t.home }}</button>
+        <button onClick="{{ nav.menu }}" style="border:0;background:{{ nav.menuBg }};color:#F5F5F7;font-weight:600;font-size:15px;padding:10px 18px;border-radius:10px" style-hover="background:#2E160B">{{ t.menuNav }}</button>
       </nav>
-      <div role="group" aria-label="Idioma / Language" style="display:flex;border:1.5px solid #2A2A32;border-radius:10px;padding:3px;gap:2px">
+      <div role="group" aria-label="Idioma / Language" style="display:flex;border:1.5px solid #3A1D10;border-radius:10px;padding:3px;gap:2px">
         <sc-for list="{{ langs }}" as="lg" hint-placeholder-count="3">
           <button onClick="{{ lg.go }}" aria-pressed="{{ lg.pressed }}" style="min-width:34px;height:30px;border:0;border-radius:8px;cursor:pointer;font-weight:700;font-size:12px;background:{{ lg.bg }};color:{{ lg.fg }}">{{ lg.code }}</button>
         </sc-for>
       </div>
-      <button data-cartbtn="1" onClick="{{ openCart }}" aria-label="{{ t.openOrderAria }}" style="border:0;background:#2A2A32;color:#F5F5F7;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 18px;border-radius:10px;font-weight:700;font-size:15px" style-hover="background:#34343D">
+      <button data-cartbtn="1" onClick="{{ openCart }}" aria-label="{{ t.openOrderAria }}" style="border:0;background:#3A1D10;color:#F5F5F7;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 18px;border-radius:10px;font-weight:700;font-size:15px" style-hover="background:#4A2716">
         <span>{{ cartTotal }}</span>
         <span style="position:relative;width:34px;height:34px;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center">
           <kf-i n="bag" s="17"></kf-i>
-          <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 5px;box-sizing:border-box;border-radius:10px;background:#0A0A0C;color:#F5F5F7;font-size:12px;font-weight:700;display:grid;place-items:center">{{ cartCount }}</span></sc-if>
+          <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 5px;box-sizing:border-box;border-radius:10px;background:#1B0A06;color:#F5F5F7;font-size:12px;font-weight:700;display:grid;place-items:center">{{ cartCount }}</span></sc-if>
         </span>
       </button>
     </div>
@@ -74,7 +74,7 @@ input,textarea{font-family:inherit}
 
 <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
 <main style="overflow-x:clip">
-  <section data-screen-label="Home" style="position:relative;overflow:hidden;background:#000000;color:#F5F5F7">
+  <section data-screen-label="Home" style="position:relative;overflow:hidden;background:#140700;color:#F5F5F7">
     <div data-hero-bg="1" style="position:absolute;inset:0;z-index:0;isolation:isolate;will-change:transform">{{ heroBg }}</div>
     <div style="position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(20,16,13,.9) 0%,rgba(20,16,13,.68) 45%,rgba(20,16,13,.15) 100%)"></div>
     <div style="position:absolute;left:0;right:0;bottom:0;height:45%;z-index:1;pointer-events:none;background:linear-gradient(0deg,rgba(20,16,13,.85),rgba(20,16,13,0))"></div>
@@ -84,13 +84,13 @@ input,textarea{font-family:inherit}
           <span style="display:inline-flex;align-items:center;gap:10px;background:rgba(22,48,31,.85);color:#6EE7B7;font-weight:600;font-size:15px;padding:9px 16px 9px 12px;border-radius:10px">
             <span style="width:9px;height:9px;border-radius:50%;background:#6EE7B7;animation:kfpulse 1.8s ease-out infinite"></span>{{ openToday }}
           </span>
-          <button onClick="{{ goTacos }}" style="border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#F5F5F7;font-weight:600;font-size:15px;padding:6px 14px 6px 6px;border-radius:10px;display:flex;align-items:center;gap:10px;transition:background .2s,color .2s" style-hover="background:#15151B;color:#F5F5F7" style-active="background:#C6FF3D;color:#0A0A0C;transform:scale(.96)"><span style="background:#C6FF3D;color:#0A0A0C;font-size:12px;font-weight:700;letter-spacing:.08em;padding:4px 9px;border-radius:10px">{{ t.newBadge }}</span>{{ t.newTacosBtn }}<kf-i n="arrowr" s="16"></kf-i></button>
+          <button onClick="{{ goTacos }}" style="border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#F5F5F7;font-weight:600;font-size:15px;padding:6px 14px 6px 6px;border-radius:10px;display:flex;align-items:center;gap:10px;transition:background .2s,color .2s" style-hover="background:#261208;color:#F5F5F7" style-active="background:#C6FF3D;color:#1B0A06;transform:scale(.96)"><span style="background:#C6FF3D;color:#1B0A06;font-size:12px;font-weight:700;letter-spacing:.08em;padding:4px 9px;border-radius:10px">{{ t.newBadge }}</span>{{ t.newTacosBtn }}<kf-i n="arrowr" s="16"></kf-i></button>
         </div>
         <h1 data-reveal="1" style="font-family:'Inter','Segoe UI',system-ui,sans-serif;font-weight:700;font-size:clamp(42px,6vw,80px);line-height:1.03;letter-spacing:-0.03em;margin:0;color:#F5F5F7">{{ t.heroPre }}<span style="color:#D9FF6B">{{ eta }}{{ t.heroUnit }}</span>.</h1>
         <p data-reveal="2" style="font-size:clamp(17px,1.5vw,19px);line-height:1.6;color:#C9C9D1;margin:0;max-width:500px">{{ t.heroLede }}</p>
         <div data-reveal="3" style="display:flex;flex-wrap:wrap;gap:12px">
-          <button onClick="{{ nav.menu }}" style="border:0;background:#FF4D1C;color:#F5F5F7;font-weight:700;font-size:17px;padding:7px 7px 7px 28px;border-radius:10px;display:flex;align-items:center;gap:18px;box-shadow:0 14px 32px -10px rgba(199,54,28,.75);transition:background .2s,color .2s,transform .22s,box-shadow .22s" style-hover="background:#E6420A;transform:translateY(-2px);box-shadow:0 20px 40px -12px rgba(199,54,28,.85)" style-active="background:#C6FF3D;color:#0A0A0C;transform:scale(.96)">{{ t.orderNow }}<span style="width:46px;height:46px;border-radius:10px;background:#15151B;color:#FF4D1C;display:grid;place-items:center"><kf-i n="arrowr" s="19" w="2.5"></kf-i></span></button>
-          <button onClick="{{ goCombos }}" style="border:1.5px solid rgba(255,255,255,.45);background:rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#F5F5F7;font-weight:700;font-size:17px;padding:0 28px;min-height:60px;border-radius:10px;transition:background .2s,color .2s,border-color .2s" style-hover="background:#15151B;color:#F5F5F7;border-color:#15151B" style-active="background:#C6FF3D;color:#0A0A0C;border-color:#C6FF3D;transform:scale(.96)">{{ t.seeCombos }}</button>
+          <button onClick="{{ nav.menu }}" style="border:0;background:#FF4D1C;color:#F5F5F7;font-weight:700;font-size:17px;padding:7px 7px 7px 28px;border-radius:10px;display:flex;align-items:center;gap:18px;box-shadow:0 14px 32px -10px rgba(199,54,28,.75);transition:background .2s,color .2s,transform .22s,box-shadow .22s" style-hover="background:#E6420A;transform:translateY(-2px);box-shadow:0 20px 40px -12px rgba(199,54,28,.85)" style-active="background:#C6FF3D;color:#1B0A06;transform:scale(.96)">{{ t.orderNow }}<span style="width:46px;height:46px;border-radius:10px;background:#261208;color:#FF4D1C;display:grid;place-items:center"><kf-i n="arrowr" s="19" w="2.5"></kf-i></span></button>
+          <button onClick="{{ goCombos }}" style="border:1.5px solid rgba(255,255,255,.45);background:rgba(255,255,255,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#F5F5F7;font-weight:700;font-size:17px;padding:0 28px;min-height:60px;border-radius:10px;transition:background .2s,color .2s,border-color .2s" style-hover="background:#261208;color:#F5F5F7;border-color:#261208" style-active="background:#C6FF3D;color:#1B0A06;border-color:#C6FF3D;transform:scale(.96)">{{ t.seeCombos }}</button>
         </div>
         <div data-reveal="4" style="display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:4px;font-size:15px;font-weight:600;color:#F5F5F7">
           <span style="display:flex;align-items:center;gap:8px"><kf-i n="clock" s="18" style="color:#D9FF6B"></kf-i>{{ t.aboutMin }}</span>
@@ -108,13 +108,13 @@ input,textarea{font-family:inherit}
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:14px;background:rgba(28,23,20,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.16);padding:8px 8px 8px 8px;border-radius:10px;color:#F5F5F7;max-width:100%">
-          <span style="width:56px;height:56px;flex:none;border-radius:10px;background-color:#1E1E26;background-image:{{ slide.bg }};background-size:cover;background-position:{{ slide.pos }};transition:background-image .6s"></span>
+          <span style="width:56px;height:56px;flex:none;border-radius:10px;background-color:#2E160B;background-image:{{ slide.bg }};background-size:cover;background-position:{{ slide.pos }};transition:background-image .6s"></span>
           <span style="display:flex;flex-direction:column;gap:2px;min-width:0;padding-right:6px">
             <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#D9FF6B">{{ t.onGrillNow }}</span>
             <strong style="font-size:17px;line-height:1.2">{{ slide.name }}</strong>
             <span style="font-size:15px;color:#C9C9D1">{{ slide.price }}</span>
           </span>
-          <button onClick="{{ slide.add }}" aria-label="{{ slide.addAria }}" style="border:0;width:48px;height:48px;flex:none;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center;transition:background .2s,color .2s" style-hover="background:#E6420A" style-active="background:#C6FF3D;color:#0A0A0C;transform:scale(.96)"><kf-i n="plus" s="20" w="3"></kf-i></button>
+          <button onClick="{{ slide.add }}" aria-label="{{ slide.addAria }}" style="border:0;width:48px;height:48px;flex:none;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center;transition:background .2s,color .2s" style-hover="background:#E6420A" style-active="background:#C6FF3D;color:#1B0A06;transform:scale(.96)"><kf-i n="plus" s="20" w="3"></kf-i></button>
         </div>
       </div>
     </div>
@@ -123,7 +123,7 @@ input,textarea{font-family:inherit}
   <div style="overflow:hidden;background:#C6FF3D">
     <div style="display:flex;width:max-content;animation:kfmarquee 18s linear infinite;padding:18px 0">
       <sc-for list="{{ marquee }}" as="m" hint-placeholder-count="12">
-        <span style="display:flex;align-items:center;gap:28px;padding-right:28px;color:#0A0A0C;font:700 clamp(22px,2.6vw,30px) 'Inter',system-ui,sans-serif;letter-spacing:-0.02em;white-space:nowrap">{{ m }}<span style="color:#FF4D1C;font-size:.7em">✦</span></span>
+        <span style="display:flex;align-items:center;gap:28px;padding-right:28px;color:#1B0A06;font:700 clamp(22px,2.6vw,30px) 'Inter',system-ui,sans-serif;letter-spacing:-0.02em;white-space:nowrap">{{ m }}<span style="color:#FF4D1C;font-size:.7em">✦</span></span>
       </sc-for>
     </div>
   </div>
@@ -134,19 +134,19 @@ input,textarea{font-family:inherit}
         <span style="display:inline-flex;align-items:center;gap:10px;font:italic 500 18px/24px 'Space Grotesk',system-ui,sans-serif;color:#FF6A3D"><span style="width:24px;height:2px;background:#FF4D1C"></span>{{ t.kickerMenu }}</span>
         <h2 style="font-size:clamp(34px,4.4vw,54px);line-height:1.02;margin:8px 0 0">{{ t.cravePre }}<em style="font-style:italic;color:#FF6A3D">{{ t.craveEm }}</em>{{ t.cravePost }}</h2>
       </div>
-      <button onClick="{{ nav.menu }}" style="border:0;background:transparent;color:#FF6A3D;font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;padding:8px 0" style-hover="color:#0A0A0C">{{ t.fullMenu }} <kf-i n="arrowr" s="18"></kf-i></button>
+      <button onClick="{{ nav.menu }}" style="border:0;background:transparent;color:#FF6A3D;font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;padding:8px 0" style-hover="color:#1B0A06">{{ t.fullMenu }} <kf-i n="arrowr" s="18"></kf-i></button>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px">
       <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
-        <button data-reveal="{{ c.d }}" onClick="{{ c.go }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:18px;background:#15151B;border:1px solid #2A2A32;padding:14px 20px 14px 14px;border-radius:10px;transition:transform .25s,background .25s,box-shadow .25s" style-hover="border-color:#4A4A55;transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
+        <button data-reveal="{{ c.d }}" onClick="{{ c.go }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:18px;background:#261208;border:1px solid #3A1D10;padding:14px 20px 14px 14px;border-radius:10px;transition:transform .25s,background .25s,box-shadow .25s" style-hover="border-color:#4A4A55;transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
           <span style="width:88px;height:88px;flex:none;border-radius:10px;background-color:{{ c.tint }};background-image:{{ c.bg }};background-size:cover;background-position:{{ c.pos }};display:grid;place-items:center;color:#FF6A3D">
-            <sc-if value="{{ c.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#15151B;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #1E1E26"></span></sc-if>
+            <sc-if value="{{ c.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#261208;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #2E160B"></span></sc-if>
           </span>
           <span style="display:flex;flex-direction:column;gap:4px;min-width:0;flex:1">
-            <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font:600 21px 'Space Grotesk',system-ui,sans-serif;letter-spacing:-0.02em">{{ c.name }}</span><sc-if value="{{ c.isNew }}" hint-placeholder-val="{{ false }}"><span style="background:#C6FF3D;color:#0A0A0C;font-size:11px;font-weight:700;letter-spacing:.08em;padding:3px 8px;border-radius:10px">{{ t.newBadge }}</span></sc-if></span>
+            <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font:600 21px 'Space Grotesk',system-ui,sans-serif;letter-spacing:-0.02em">{{ c.name }}</span><sc-if value="{{ c.isNew }}" hint-placeholder-val="{{ false }}"><span style="background:#C6FF3D;color:#1B0A06;font-size:11px;font-weight:700;letter-spacing:.08em;padding:3px 8px;border-radius:10px">{{ t.newBadge }}</span></sc-if></span>
             <span style="font-size:14px;color:#9A9AA5">{{ c.count }}</span>
           </span>
-          <span style="width:40px;height:40px;flex:none;border-radius:10px;border:2px solid #2A2A32;display:grid;place-items:center"><kf-i n="arrowr" s="17"></kf-i></span>
+          <span style="width:40px;height:40px;flex:none;border-radius:10px;border:2px solid #3A1D10;display:grid;place-items:center"><kf-i n="arrowr" s="17"></kf-i></span>
         </button>
       </sc-for>
     </div>
@@ -159,18 +159,18 @@ input,textarea{font-family:inherit}
     </div>
     <div data-pop="1"><div style="display:grid;grid-template-columns:repeat(var(--kfcols,1),minmax(0,1fr));gap:18px">
       <sc-for list="{{ popular }}" as="it" hint-placeholder-count="4">
-        <article data-reveal="{{ it.d }}" style="background:#15151B;border:1px solid #2A2A32;border-radius:14px;padding:10px;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s" style-hover="transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
+        <article data-reveal="{{ it.d }}" style="background:#261208;border:1px solid #3A1D10;border-radius:14px;padding:10px;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s" style-hover="transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
           <div style="position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background-color:{{ it.tint }};background-image:{{ it.bg }};background-size:cover;background-position:{{ it.pos }};display:grid;place-items:center;color:#FF6A3D">
-            <sc-if value="{{ it.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#15151B;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #1E1E26"></span></sc-if>
-            <sc-if value="{{ it.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;left:12px;background:#15151B;color:#F5F5F7;font-size:12px;font-weight:700;padding:6px 11px;border-radius:10px">{{ it.badge }}</span></sc-if>
+            <sc-if value="{{ it.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#261208;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #2E160B"></span></sc-if>
+            <sc-if value="{{ it.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;left:12px;background:#261208;color:#F5F5F7;font-size:12px;font-weight:700;padding:6px 11px;border-radius:10px">{{ it.badge }}</span></sc-if>
           </div>
           <div style="padding:16px 10px 8px;display:flex;flex-direction:column;gap:6px;flex:1">
             <h3 style="font-size:21px;line-height:1.15;margin:0">{{ it.name }}</h3>
             <p style="font-size:14.5px;line-height:1.5;color:#9A9AA5;margin:0;flex:1">{{ it.desc }}</p>
             <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px">
               <strong style="font:600 22px/28px 'Space Grotesk',system-ui,sans-serif;color:#FF4D1C;font-variant-numeric:lining-nums tabular-nums">{{ it.priceTxt }}</strong>
-              <sc-if value="{{ it.notInCart }}" hint-placeholder-val="{{ true }}"><button onClick="{{ it.add }}" style="border:0;background:#FF4D1C;color:#F5F5F7;font-weight:700;font-size:15px;padding:11px 18px;border-radius:10px;display:flex;align-items:center;gap:6px" style-hover="background:#E6420A" style-active="background:#C6FF3D;color:#0A0A0C;transform:scale(.96)"><kf-i n="plus" s="16" w="3"></kf-i>{{ t.add }}</button></sc-if>
-              <sc-if value="{{ it.inCart }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:4px;background:#2A2A32;color:#F5F5F7;border-radius:10px;padding:4px"><button onClick="{{ it.dec }}" aria-label="{{ t.removeOne }}" style="border:0;width:36px;height:36px;border-radius:10px;background:transparent;color:inherit;display:grid;place-items:center" style-hover="background:#34343D"><kf-i n="minus" s="16" w="3"></kf-i></button><span style="min-width:22px;text-align:center;font-weight:700">{{ it.qty }}</span><button onClick="{{ it.add }}" aria-label="{{ t.addOne }}" style="border:0;width:36px;height:36px;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center" style-hover="background:#FF4D1C"><kf-i n="plus" s="16" w="3"></kf-i></button></div></sc-if>
+              <sc-if value="{{ it.notInCart }}" hint-placeholder-val="{{ true }}"><button onClick="{{ it.add }}" style="border:0;background:#FF4D1C;color:#F5F5F7;font-weight:700;font-size:15px;padding:11px 18px;border-radius:10px;display:flex;align-items:center;gap:6px" style-hover="background:#E6420A" style-active="background:#C6FF3D;color:#1B0A06;transform:scale(.96)"><kf-i n="plus" s="16" w="3"></kf-i>{{ t.add }}</button></sc-if>
+              <sc-if value="{{ it.inCart }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:4px;background:#3A1D10;color:#F5F5F7;border-radius:10px;padding:4px"><button onClick="{{ it.dec }}" aria-label="{{ t.removeOne }}" style="border:0;width:36px;height:36px;border-radius:10px;background:transparent;color:inherit;display:grid;place-items:center" style-hover="background:#4A2716"><kf-i n="minus" s="16" w="3"></kf-i></button><span style="min-width:22px;text-align:center;font-weight:700">{{ it.qty }}</span><button onClick="{{ it.add }}" aria-label="{{ t.addOne }}" style="border:0;width:36px;height:36px;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center" style-hover="background:#FF4D1C"><kf-i n="plus" s="16" w="3"></kf-i></button></div></sc-if>
             </div>
           </div>
         </article>
@@ -187,7 +187,7 @@ input,textarea{font-family:inherit}
         <p style="font-size:18px;line-height:28px;margin:0;color:#9A9AA5;max-width:440px">{{ combo.desc }}</p>
         <div style="display:flex;align-items:center;flex-wrap:wrap;gap:18px;margin-top:4px">
           <span style="font:600 44px 'Space Grotesk',system-ui,sans-serif;letter-spacing:-0.02em;color:#FF4D1C;font-variant-numeric:lining-nums tabular-nums">{{ combo.priceTxt }}</span>
-          <button onClick="{{ combo.add }}" style="border:0;background:#C6FF3D;color:#0A0A0C;font-weight:600;font-size:16px;padding:15px 24px;border-radius:10px;display:flex;align-items:center;gap:8px;transition:background .12s" style-hover="background:#A8D82F" style-active="background:#C6FF3D;color:#0A0A0C;transform:scale(.97)"><kf-i n="plus" s="17" w="3"></kf-i>{{ combo.btn }}</button>
+          <button onClick="{{ combo.add }}" style="border:0;background:#C6FF3D;color:#1B0A06;font-weight:600;font-size:16px;padding:15px 24px;border-radius:10px;display:flex;align-items:center;gap:8px;transition:background .12s" style-hover="background:#A8D82F" style-active="background:#C6FF3D;color:#1B0A06;transform:scale(.97)"><kf-i n="plus" s="17" w="3"></kf-i>{{ combo.btn }}</button>
           <button onClick="{{ combo.all }}" style="border:0;background:transparent;color:#FF4D1C;font-weight:600;font-size:16px;display:flex;align-items:center;gap:8px;padding:8px 0" style-hover="color:#FF6A3D">{{ t.allCombos }} <kf-i n="arrowr" s="17"></kf-i></button>
         </div>
       </div>
@@ -214,14 +214,14 @@ input,textarea{font-family:inherit}
         <p style="font-size:16px;line-height:1.55;color:#9A9AA5;margin:0">{{ t.step2Desc }}</p>
       </div>
       <div data-reveal="3" style="display:flex;flex-direction:column;gap:14px">
-        <span style="width:72px;height:72px;border-radius:10px;background:#2A2A32;color:#F5F5F7;display:grid;place-items:center;font:600 30px 'Space Grotesk',system-ui,sans-serif">3</span>
+        <span style="width:72px;height:72px;border-radius:10px;background:#3A1D10;color:#F5F5F7;display:grid;place-items:center;font:600 30px 'Space Grotesk',system-ui,sans-serif">3</span>
         <h3 style="font-size:24px;margin:6px 0 0">{{ t.step3Title }}</h3>
         <p style="font-size:16px;line-height:1.55;color:#9A9AA5;margin:0">{{ t.step3Desc }}</p>
       </div>
     </div>
   </section></div>
 
-  <div style="background:#15151B"><section style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
+  <div style="background:#261208"><section style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
     <div data-reveal="0" style="text-align:center;max-width:640px;margin:0 auto 40px">
       <span style="display:inline-flex;align-items:center;justify-content:center;gap:10px;font:italic 500 18px/24px 'Space Grotesk',system-ui,sans-serif;color:#FF6A3D"><span style="width:24px;height:2px;background:#FF4D1C"></span>{{ t.kickerReviews }}</span>
       <h2 style="font-size:clamp(34px,4.4vw,54px);line-height:1.02;margin:8px 0 14px">{{ t.reviewsPre }}<em style="font-style:italic;color:#FF6A3D">{{ t.reviewsEm }}</em>{{ t.reviewsPost }}</h2>
@@ -231,12 +231,12 @@ input,textarea{font-family:inherit}
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px">
       <sc-for list="{{ reviews }}" as="rv" hint-placeholder-count="5">
-        <article data-reveal="{{ rv.d }}" style="background:#15151B;border:1px solid #2A2A32;border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px;transition:transform .3s,box-shadow .3s" style-hover="transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
+        <article data-reveal="{{ rv.d }}" style="background:#261208;border:1px solid #3A1D10;border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px;transition:transform .3s,box-shadow .3s" style-hover="transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
           <div style="display:flex;gap:2px;color:#C6FF3D">
             <sc-for list="{{ rv.stars }}" as="st" hint-placeholder-count="5"><kf-i n="{{ st.icon }}" s="16"></kf-i></sc-for>
           </div>
           <p style="font-size:15px;line-height:1.55;color:#C9C9D1;margin:0;flex:1">“{{ rv.text }}”</p>
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:8px;border-top:1px solid #1E1E26">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:8px;border-top:1px solid #2E160B">
             <strong style="font-size:14.5px">{{ rv.name }}</strong>
             <span style="display:inline-flex;align-items:center;gap:5px;background:#0F2A20;color:#34D399;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:10px"><kf-i n="checkc" s="12"></kf-i>{{ t.verifiedOrder }}</span>
           </div>
@@ -246,7 +246,7 @@ input,textarea{font-family:inherit}
     </div>
   </section></div>
 
-  <div style="background:#1E1E26"><section style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
+  <div style="background:#2E160B"><section style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(28px,5vw,72px)">
       <div data-reveal="0" style="flex:1 1 360px;min-width:0;display:flex;justify-content:center">
         <div style="width:min(100%,460px);aspect-ratio:1.1;background:url(assets/food/plates.png) 50% 50%/cover;border-radius:10px;filter:saturate(.92) contrast(.96) brightness(1.03)"></div>
@@ -255,13 +255,13 @@ input,textarea{font-family:inherit}
         <span style="display:inline-flex;align-items:center;gap:10px;font:italic 500 18px/24px 'Space Grotesk',system-ui,sans-serif;color:#FF4D1C"><span style="width:24px;height:2px;background:#C6FF3D"></span>{{ t.kickerFind }}</span>
         <h2 style="font-size:clamp(34px,4.4vw,54px);line-height:1.02;margin:0">{{ t.findTitle }}</h2>
         <p style="font-size:17px;line-height:1.55;color:#9A9AA5;margin:0">{{ t.findDesc }}</p>
-        <div style="display:grid;grid-template-columns:auto auto;justify-content:start;gap:10px 32px;font-size:16px;background:#15151B;padding:20px 26px;border-radius:14px">
+        <div style="display:grid;grid-template-columns:auto auto;justify-content:start;gap:10px 32px;font-size:16px;background:#261208;padding:20px 26px;border-radius:14px">
           <span style="color:#9A9AA5">{{ t.daysA }}</span><strong>12:30 – 23:30</strong>
           <span style="color:#9A9AA5">{{ t.daysB }}</span><strong>12:30 – 00:00</strong>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:12px">
-          <a href="https://share.google/cDz841LntebrXmXCi" target="_blank" rel="noopener" style="text-decoration:none;background:#2A2A32;color:#F5F5F7;font-weight:700;font-size:16px;padding:15px 24px;border-radius:10px;display:flex;align-items:center;gap:8px" style-hover="background:#34343D;color:#F5F5F7"><kf-i n="pin" s="18"></kf-i>{{ t.openMaps }}</a>
-          <button onClick="{{ nav.menu }}" style="border:2px solid #2A2A32;background:transparent;color:#F5F5F7;font-weight:700;font-size:16px;padding:13px 22px;border-radius:10px" style-hover="background:#2A2A32;color:#F5F5F7">{{ t.orderNow }}</button>
+          <a href="https://share.google/cDz841LntebrXmXCi" target="_blank" rel="noopener" style="text-decoration:none;background:#3A1D10;color:#F5F5F7;font-weight:700;font-size:16px;padding:15px 24px;border-radius:10px;display:flex;align-items:center;gap:8px" style-hover="background:#4A2716;color:#F5F5F7"><kf-i n="pin" s="18"></kf-i>{{ t.openMaps }}</a>
+          <button onClick="{{ nav.menu }}" style="border:2px solid #3A1D10;background:transparent;color:#F5F5F7;font-weight:700;font-size:16px;padding:13px 22px;border-radius:10px" style-hover="background:#3A1D10;color:#F5F5F7">{{ t.orderNow }}</button>
         </div>
       </div>
     </div>
@@ -277,19 +277,19 @@ input,textarea{font-family:inherit}
       <p style="font-size:17px;color:#9A9AA5;margin:12px 0 0">{{ t.menuSub }}</p>
     </div>
   </div>
-  <div style="position:sticky;top:72px;z-index:30;margin:28px 0 8px;padding:10px 0;background:#0A0A0C;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+  <div style="position:sticky;top:72px;z-index:30;margin:28px 0 8px;padding:10px 0;background:#1B0A06;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
     <div style="position:relative">
-      <button onClick="{{ dd.toggle }}" aria-haspopup="listbox" style="border:0;background:#2A2A32;color:#F5F5F7;display:flex;align-items:center;gap:12px;padding:7px 18px 7px 7px;border-radius:10px;font-weight:700;font-size:16px;min-width:250px" style-hover="background:#34343D">
-        <span style="width:40px;height:40px;border-radius:10px;background-color:{{ dd.tint }};background-image:{{ dd.bg }};background-size:cover;background-position:{{ dd.pos }};display:grid;place-items:center;color:#FF6A3D"><sc-if value="{{ dd.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#15151B;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #1E1E26"></span></sc-if></span>
+      <button onClick="{{ dd.toggle }}" aria-haspopup="listbox" style="border:0;background:#3A1D10;color:#F5F5F7;display:flex;align-items:center;gap:12px;padding:7px 18px 7px 7px;border-radius:10px;font-weight:700;font-size:16px;min-width:250px" style-hover="background:#4A2716">
+        <span style="width:40px;height:40px;border-radius:10px;background-color:{{ dd.tint }};background-image:{{ dd.bg }};background-size:cover;background-position:{{ dd.pos }};display:grid;place-items:center;color:#FF6A3D"><sc-if value="{{ dd.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#261208;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #2E160B"></span></sc-if></span>
         <span style="flex:1;text-align:left">{{ dd.label }}</span>
         <kf-i n="chevd" s="18"></kf-i>
       </button>
       <sc-if value="{{ dd.open }}" hint-placeholder-val="{{ false }}">
         <div onClick="{{ dd.close }}" style="position:fixed;inset:0;z-index:1"></div>
-        <div role="listbox" style="position:absolute;z-index:2;top:calc(100% + 10px);left:0;width:min(88vw,340px);background:#15151B;border-radius:14px;padding:8px;box-shadow:0 24px 48px -16px rgba(80,40,10,.28);display:flex;flex-direction:column;gap:2px">
+        <div role="listbox" style="position:absolute;z-index:2;top:calc(100% + 10px);left:0;width:min(88vw,340px);background:#261208;border-radius:14px;padding:8px;box-shadow:0 24px 48px -16px rgba(80,40,10,.28);display:flex;flex-direction:column;gap:2px">
           <sc-for list="{{ dd.opts }}" as="o" hint-placeholder-count="7">
-            <button onClick="{{ o.pick }}" style="border:0;background:{{ o.bgc }};display:flex;align-items:center;gap:12px;padding:8px 14px 8px 8px;border-radius:10px;text-align:left;font-size:16px;font-weight:600;color:#F5F5F7" style-hover="background:#1E1E26">
-              <span style="width:44px;height:44px;flex:none;border-radius:10px;background-color:{{ o.tint }};background-image:{{ o.bg }};background-size:cover;background-position:{{ o.pos }};display:grid;place-items:center;color:#FF6A3D"><sc-if value="{{ o.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#15151B;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #1E1E26"></span></sc-if></span>
+            <button onClick="{{ o.pick }}" style="border:0;background:{{ o.bgc }};display:flex;align-items:center;gap:12px;padding:8px 14px 8px 8px;border-radius:10px;text-align:left;font-size:16px;font-weight:600;color:#F5F5F7" style-hover="background:#2E160B">
+              <span style="width:44px;height:44px;flex:none;border-radius:10px;background-color:{{ o.tint }};background-image:{{ o.bg }};background-size:cover;background-position:{{ o.pos }};display:grid;place-items:center;color:#FF6A3D"><sc-if value="{{ o.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#261208;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #2E160B"></span></sc-if></span>
               <span style="flex:1">{{ o.name }}</span>
               <span style="font-size:13px;color:#9A9AA5">{{ o.count }}</span>
             </button>
@@ -297,7 +297,7 @@ input,textarea{font-family:inherit}
         </div>
       </sc-if>
     </div>
-    <label style="flex:1 1 240px;max-width:420px;display:flex;align-items:center;gap:10px;background:#15151B;border-radius:10px;padding:0 18px;height:54px;color:#9A9AA5">
+    <label style="flex:1 1 240px;max-width:420px;display:flex;align-items:center;gap:10px;background:#261208;border-radius:10px;padding:0 18px;height:54px;color:#9A9AA5">
       <kf-i n="search" s="18"></kf-i>
       <input value="{{ q }}" onChange="{{ onQ }}" placeholder="{{ t.searchPh }}" aria-label="{{ t.searchAria }}" style="border:0;background:transparent;outline:none;font-size:16px;flex:1;min-width:0;color:#F5F5F7">
     </label>
@@ -306,23 +306,23 @@ input,textarea{font-family:inherit}
     <section style="padding-top:36px">
       <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:18px">
         <h2 style="font-size:clamp(28px,3vw,36px);margin:0">{{ sec.name }}</h2>
-        <sc-if value="{{ sec.isNew }}" hint-placeholder-val="{{ false }}"><span style="background:#C6FF3D;color:#0A0A0C;font-size:12px;font-weight:700;letter-spacing:.08em;padding:4px 9px;border-radius:10px">{{ t.newBadge }}</span></sc-if>
+        <sc-if value="{{ sec.isNew }}" hint-placeholder-val="{{ false }}"><span style="background:#C6FF3D;color:#1B0A06;font-size:12px;font-weight:700;letter-spacing:.08em;padding:4px 9px;border-radius:10px">{{ t.newBadge }}</span></sc-if>
         <span style="font-size:15px;color:#9A9AA5">{{ sec.count }}</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:18px">
         <sc-for list="{{ sec.items }}" as="it" hint-placeholder-count="3">
-          <article data-reveal="{{ it.d }}" style="background:#15151B;border:1px solid #2A2A32;border-radius:14px;padding:10px;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s" style-hover="transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
+          <article data-reveal="{{ it.d }}" style="background:#261208;border:1px solid #3A1D10;border-radius:14px;padding:10px;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s" style-hover="transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
             <div style="position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background-color:{{ it.tint }};background-image:{{ it.bg }};background-size:cover;background-position:{{ it.pos }};display:grid;place-items:center;color:#FF6A3D">
-              <sc-if value="{{ it.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#15151B;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #1E1E26"></span></sc-if>
-              <sc-if value="{{ it.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;left:12px;background:#15151B;color:#F5F5F7;font-size:12px;font-weight:700;padding:6px 11px;border-radius:10px">{{ it.badge }}</span></sc-if>
+              <sc-if value="{{ it.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#261208;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #2E160B"></span></sc-if>
+              <sc-if value="{{ it.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:12px;left:12px;background:#261208;color:#F5F5F7;font-size:12px;font-weight:700;padding:6px 11px;border-radius:10px">{{ it.badge }}</span></sc-if>
             </div>
             <div style="padding:16px 10px 8px;display:flex;flex-direction:column;gap:6px;flex:1">
               <h3 style="font-size:20px;line-height:1.15;margin:0">{{ it.name }}</h3>
               <p style="font-size:14.5px;line-height:1.5;color:#9A9AA5;margin:0;flex:1">{{ it.desc }}</p>
               <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px">
                 <strong style="font:600 22px/28px 'Space Grotesk',system-ui,sans-serif;color:#FF4D1C;font-variant-numeric:lining-nums tabular-nums">{{ it.priceTxt }}</strong>
-                <sc-if value="{{ it.notInCart }}" hint-placeholder-val="{{ true }}"><button onClick="{{ it.add }}" style="border:0;background:#FF4D1C;color:#F5F5F7;font-weight:700;font-size:15px;padding:11px 18px;border-radius:10px;display:flex;align-items:center;gap:6px" style-hover="background:#E6420A" style-active="background:#C6FF3D;color:#0A0A0C;transform:scale(.96)"><kf-i n="plus" s="16" w="3"></kf-i>{{ t.add }}</button></sc-if>
-                <sc-if value="{{ it.inCart }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:4px;background:#2A2A32;color:#F5F5F7;border-radius:10px;padding:4px"><button onClick="{{ it.dec }}" aria-label="{{ t.removeOne }}" style="border:0;width:36px;height:36px;border-radius:10px;background:transparent;color:inherit;display:grid;place-items:center" style-hover="background:#34343D"><kf-i n="minus" s="16" w="3"></kf-i></button><span style="min-width:22px;text-align:center;font-weight:700">{{ it.qty }}</span><button onClick="{{ it.add }}" aria-label="{{ t.addOne }}" style="border:0;width:36px;height:36px;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center" style-hover="background:#FF4D1C"><kf-i n="plus" s="16" w="3"></kf-i></button></div></sc-if>
+                <sc-if value="{{ it.notInCart }}" hint-placeholder-val="{{ true }}"><button onClick="{{ it.add }}" style="border:0;background:#FF4D1C;color:#F5F5F7;font-weight:700;font-size:15px;padding:11px 18px;border-radius:10px;display:flex;align-items:center;gap:6px" style-hover="background:#E6420A" style-active="background:#C6FF3D;color:#1B0A06;transform:scale(.96)"><kf-i n="plus" s="16" w="3"></kf-i>{{ t.add }}</button></sc-if>
+                <sc-if value="{{ it.inCart }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:4px;background:#3A1D10;color:#F5F5F7;border-radius:10px;padding:4px"><button onClick="{{ it.dec }}" aria-label="{{ t.removeOne }}" style="border:0;width:36px;height:36px;border-radius:10px;background:transparent;color:inherit;display:grid;place-items:center" style-hover="background:#4A2716"><kf-i n="minus" s="16" w="3"></kf-i></button><span style="min-width:22px;text-align:center;font-weight:700">{{ it.qty }}</span><button onClick="{{ it.add }}" aria-label="{{ t.addOne }}" style="border:0;width:36px;height:36px;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center" style-hover="background:#FF4D1C"><kf-i n="plus" s="16" w="3"></kf-i></button></div></sc-if>
               </div>
             </div>
           </article>
@@ -335,16 +335,16 @@ input,textarea{font-family:inherit}
   </sc-if>
   <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
     <button onClick="{{ openCart }}" style="position:fixed;z-index:35;left:50%;bottom:24px;transform:translateX(-50%);border:0;background:#FF4D1C;color:#F5F5F7;font-weight:700;font-size:17px;padding:16px 26px;border-radius:10px;display:flex;align-items:center;gap:14px;box-shadow:0 14px 34px rgba(199,54,28,.4)" style-hover="background:#E6420A">
-      <span style="background:#15151B;color:#FF6A3D;min-width:26px;height:26px;border-radius:10px;display:grid;place-items:center;font-size:14px;font-weight:700">{{ cartCount }}</span>{{ t.viewOrder }} · {{ cartTotal }}
+      <span style="background:#261208;color:#FF6A3D;min-width:26px;height:26px;border-radius:10px;display:grid;place-items:center;font-size:14px;font-weight:700">{{ cartCount }}</span>{{ t.viewOrder }} · {{ cartTotal }}
     </button>
   </sc-if>
 </main>
 </sc-if>
 
 <sc-if value="{{ isSite }}" hint-placeholder-val="{{ true }}">
-  <footer style="background:#000000;color:#34D399">
+  <footer style="background:#140700;color:#34D399">
     <div style="max-width:1240px;margin:0 auto;padding:40px clamp(18px,4vw,40px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;font-size:15px">
-      <span style="display:flex;align-items:center;gap:10px"><span style="width:36px;height:36px;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center;font:600 14px 'Space Grotesk',system-ui,sans-serif">KF</span><strong style="color:#F5F5F7;font-size:17px">Kebab Factory Unit 3</strong></span>
+      <span style="display:flex;align-items:center;gap:10px"><span style="width:36px;height:36px;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center;font:600 14px 'Space Grotesk',system-ui,sans-serif">KF</span><strong style="color:#F5F5F7;font-size:17px">Kebab Factory</strong></span>
       <span>{{ t.footerLine }}</span>
       <span>© 2026</span>
     </div>
@@ -353,16 +353,16 @@ input,textarea{font-family:inherit}
 
 <sc-if value="{{ drawer.open }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ drawer.close }}" style="position:fixed;inset:0;z-index:60;background:rgba(32,30,29,.42)"></div>
-  <aside data-drawer="1" role="dialog" aria-label="{{ t.yourOrder }}" style="position:fixed;z-index:61;top:0;right:0;bottom:0;width:min(100%,460px);background:#0A0A0C;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(0,0,0,.18)">
+  <aside data-drawer="1" role="dialog" aria-label="{{ t.yourOrder }}" style="position:fixed;z-index:61;top:0;right:0;bottom:0;width:min(100%,460px);background:#1B0A06;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(0,0,0,.18)">
     <div style="display:flex;align-items:center;gap:12px;padding:22px 24px 14px">
-      <sc-if value="{{ drawer.isCheckout }}" hint-placeholder-val="{{ false }}"><button onClick="{{ drawer.back }}" aria-label="{{ t.backToOrder }}" style="border:0;width:40px;height:40px;border-radius:10px;background:#1E1E26;display:grid;place-items:center;color:#F5F5F7" style-hover="background:#2A2A32"><kf-i n="chevl" s="18"></kf-i></button></sc-if>
+      <sc-if value="{{ drawer.isCheckout }}" hint-placeholder-val="{{ false }}"><button onClick="{{ drawer.back }}" aria-label="{{ t.backToOrder }}" style="border:0;width:40px;height:40px;border-radius:10px;background:#2E160B;display:grid;place-items:center;color:#F5F5F7" style-hover="background:#3A1D10"><kf-i n="chevl" s="18"></kf-i></button></sc-if>
       <h2 style="font-size:28px;margin:0;flex:1">{{ drawer.title }}</h2>
-      <button onClick="{{ drawer.close }}" aria-label="{{ t.close }}" style="border:0;width:40px;height:40px;border-radius:10px;background:#1E1E26;display:grid;place-items:center;color:#F5F5F7" style-hover="background:#2A2A32"><kf-i n="x" s="18"></kf-i></button>
+      <button onClick="{{ drawer.close }}" aria-label="{{ t.close }}" style="border:0;width:40px;height:40px;border-radius:10px;background:#2E160B;display:grid;place-items:center;color:#F5F5F7" style-hover="background:#3A1D10"><kf-i n="x" s="18"></kf-i></button>
     </div>
     <div style="flex:1;overflow:auto;padding:4px 24px 24px">
       <sc-if value="{{ drawer.isEmpty }}" hint-placeholder-val="{{ false }}">
         <div style="padding:60px 0;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;color:#9A9AA5">
-          <span style="width:84px;height:84px;border-radius:10px;background:#1E1E26;display:grid;place-items:center;color:#FF6A3D"><kf-i n="bag" s="34"></kf-i></span>
+          <span style="width:84px;height:84px;border-radius:10px;background:#2E160B;display:grid;place-items:center;color:#FF6A3D"><kf-i n="bag" s="34"></kf-i></span>
           <p style="margin:0;font-size:17px">{{ t.emptyOrder }}</p>
           <button onClick="{{ nav.menu }}" style="border:0;background:#FF4D1C;color:#F5F5F7;font-weight:700;font-size:16px;padding:13px 22px;border-radius:10px" style-hover="background:#E6420A">{{ t.browseMenu }}</button>
         </div>
@@ -370,13 +370,13 @@ input,textarea{font-family:inherit}
       <sc-if value="{{ drawer.isCart }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex;flex-direction:column;gap:10px">
           <sc-for list="{{ lines }}" as="l" hint-placeholder-count="2">
-            <div style="display:flex;align-items:center;gap:14px;background:#15151B;padding:10px 12px 10px 10px;border-radius:14px">
-              <span style="width:56px;height:56px;flex:none;border-radius:10px;background-color:{{ l.tint }};background-image:{{ l.bg }};background-size:cover;background-position:{{ l.pos }};display:grid;place-items:center;color:#FF6A3D"><sc-if value="{{ l.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#15151B;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #1E1E26"></span></sc-if></span>
+            <div style="display:flex;align-items:center;gap:14px;background:#261208;padding:10px 12px 10px 10px;border-radius:14px">
+              <span style="width:56px;height:56px;flex:none;border-radius:10px;background-color:{{ l.tint }};background-image:{{ l.bg }};background-size:cover;background-position:{{ l.pos }};display:grid;place-items:center;color:#FF6A3D"><sc-if value="{{ l.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#261208;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #2E160B"></span></sc-if></span>
               <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><strong style="font-size:16px">{{ l.name }}</strong><span style="font-size:14px;color:#9A9AA5">{{ l.priceTxt }}</span></span>
-              <div style="display:flex;align-items:center;gap:2px;background:#1E1E26;border-radius:10px;padding:3px">
-                <button onClick="{{ l.dec }}" aria-label="{{ t.removeOne }}" style="border:0;width:32px;height:32px;border-radius:10px;background:transparent;display:grid;place-items:center;color:#F5F5F7" style-hover="background:#2A2A32"><kf-i n="minus" s="15" w="3"></kf-i></button>
+              <div style="display:flex;align-items:center;gap:2px;background:#2E160B;border-radius:10px;padding:3px">
+                <button onClick="{{ l.dec }}" aria-label="{{ t.removeOne }}" style="border:0;width:32px;height:32px;border-radius:10px;background:transparent;display:grid;place-items:center;color:#F5F5F7" style-hover="background:#3A1D10"><kf-i n="minus" s="15" w="3"></kf-i></button>
                 <span style="min-width:20px;text-align:center;font-weight:700">{{ l.qty }}</span>
-                <button onClick="{{ l.inc }}" aria-label="{{ t.addOne }}" style="border:0;width:32px;height:32px;border-radius:10px;background:#2A2A32;color:#F5F5F7;display:grid;place-items:center" style-hover="background:#34343D"><kf-i n="plus" s="15" w="3"></kf-i></button>
+                <button onClick="{{ l.inc }}" aria-label="{{ t.addOne }}" style="border:0;width:32px;height:32px;border-radius:10px;background:#3A1D10;color:#F5F5F7;display:grid;place-items:center" style-hover="background:#4A2716"><kf-i n="plus" s="15" w="3"></kf-i></button>
               </div>
             </div>
           </sc-for>
@@ -387,7 +387,7 @@ input,textarea{font-family:inherit}
           <sc-for list="{{ fields }}" as="f" hint-placeholder-count="4">
             <label style="display:flex;flex-direction:column;gap:7px">
               <span style="font-size:14px;font-weight:700">{{ f.label }}</span>
-              <input value="{{ f.value }}" onChange="{{ f.onChange }}" type="{{ f.type }}" autocomplete="{{ f.ac }}" placeholder="{{ f.ph }}" style="border:1.5px solid {{ f.border }};background:#15151B;border-radius:10px;padding:13px 16px;font-size:16px;color:#F5F5F7;outline:none" style-focus="border-color:#2A2A32;box-shadow:0 0 0 2px #0A0A0C,0 0 0 4px #2A2A32">
+              <input value="{{ f.value }}" onChange="{{ f.onChange }}" type="{{ f.type }}" autocomplete="{{ f.ac }}" placeholder="{{ f.ph }}" style="border:1.5px solid {{ f.border }};background:#261208;border-radius:10px;padding:13px 16px;font-size:16px;color:#F5F5F7;outline:none" style-focus="border-color:#3A1D10;box-shadow:0 0 0 2px #1B0A06,0 0 0 4px #3A1D10">
               <sc-if value="{{ f.hasErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:13.5px;font-weight:600;color:#FF5C5C">{{ f.err }}</span></sc-if>
             </label>
           </sc-for>
@@ -395,7 +395,7 @@ input,textarea{font-family:inherit}
             <span style="font-size:14px;font-weight:700">{{ t.payTitle }}</span>
             <sc-for list="{{ pays }}" as="p" hint-placeholder-count="2">
               <button onClick="{{ p.pick }}" role="radio" aria-checked="{{ p.on }}" style="border:2px solid {{ p.border }};background:{{ p.bgc }};border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:14px;text-align:left;color:#F5F5F7" style-hover="border-color:#FF4D1C">
-                <span style="width:42px;height:42px;flex:none;border-radius:10px;background:#1E1E26;display:grid;place-items:center;color:#FF6A3D"><kf-i n="{{ p.icon }}" s="20"></kf-i></span>
+                <span style="width:42px;height:42px;flex:none;border-radius:10px;background:#2E160B;display:grid;place-items:center;color:#FF6A3D"><kf-i n="{{ p.icon }}" s="20"></kf-i></span>
                 <span style="flex:1;display:flex;flex-direction:column;gap:2px"><strong style="font-size:16px">{{ p.name }}</strong><span style="font-size:13.5px;color:#9A9AA5">{{ p.note }}</span></span>
                 <span style="width:22px;height:22px;flex:none;border-radius:10px;border:2px solid {{ p.dotBorder }};display:grid;place-items:center"><span style="width:11px;height:11px;border-radius:50%;background:{{ p.dot }}"></span></span>
               </button>
@@ -408,7 +408,7 @@ input,textarea{font-family:inherit}
       <div style="padding:18px 24px 24px;border-top:1.5px solid rgba(32,30,29,.1);display:flex;flex-direction:column;gap:14px">
         <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:16px;color:#9A9AA5">{{ t.total }}</span><strong style="font:600 28px 'Space Grotesk',system-ui,sans-serif">{{ cartTotal }}</strong></div>
         <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#34D399;font-weight:600"><kf-i n="clock" s="16"></kf-i><span>{{ t.deliveredIn }}</span></div>
-        <button onClick="{{ drawer.primary }}" style="border:0;background:#FF4D1C;color:#F5F5F7;font-weight:700;font-size:17px;padding:17px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:10px" style-hover="background:#E6420A" style-active="background:#C6FF3D;color:#0A0A0C;transform:scale(.98)">{{ drawer.primaryLabel }}<kf-i n="arrowr" s="18"></kf-i></button>
+        <button onClick="{{ drawer.primary }}" style="border:0;background:#FF4D1C;color:#F5F5F7;font-weight:700;font-size:17px;padding:17px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:10px" style-hover="background:#E6420A" style-active="background:#C6FF3D;color:#1B0A06;transform:scale(.98)">{{ drawer.primaryLabel }}<kf-i n="arrowr" s="18"></kf-i></button>
       </div>
     </sc-if>
   </aside>
@@ -416,7 +416,7 @@ input,textarea{font-family:inherit}
 
 <sc-if value="{{ conf.show }}" hint-placeholder-val="{{ false }}">
   <div style="position:fixed;inset:0;z-index:70;background:rgba(32,30,29,.5);display:grid;place-items:center;padding:18px;overflow:auto">
-    <div data-conf="1" role="dialog" aria-label="{{ t.orderPlacedAria }}" style="width:min(100%,480px);background:#0A0A0C;border-radius:14px;padding:36px clamp(22px,5vw,40px) 30px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;box-shadow:0 24px 48px -16px rgba(80,40,10,.28)">
+    <div data-conf="1" role="dialog" aria-label="{{ t.orderPlacedAria }}" style="width:min(100%,480px);background:#1B0A06;border-radius:14px;padding:36px clamp(22px,5vw,40px) 30px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;box-shadow:0 24px 48px -16px rgba(80,40,10,.28)">
       <div style="position:relative;width:170px;height:170px">
         <svg viewBox="0 0 120 120" width="170" height="170" style="transform:rotate(-90deg)" aria-hidden="true">
           <circle cx="60" cy="60" r="52" fill="none" stroke="#0F2A20" stroke-width="10"></circle>
@@ -429,28 +429,28 @@ input,textarea{font-family:inherit}
       </div>
       <h2 style="font-size:32px;line-height:1.08;margin:6px 0 0">{{ conf.thanksMsg }}</h2>
       <p style="font-size:17px;line-height:1.5;color:#9A9AA5;margin:0">{{ conf.etaPre }}<strong>{{ conf.ref }}</strong>{{ conf.etaMid }}<strong>{{ conf.etaMinutes }}</strong></p>
-      <div style="width:100%;background:#15151B;border-radius:14px;padding:16px 20px;display:flex;flex-direction:column;gap:10px;text-align:left;font-size:15px;margin-top:6px">
+      <div style="width:100%;background:#261208;border-radius:14px;padding:16px 20px;display:flex;flex-direction:column;gap:10px;text-align:left;font-size:15px;margin-top:6px">
         <div style="display:flex;gap:10px;align-items:flex-start"><kf-i n="pin" s="18" style="color:#FF4D1C;margin-top:1px"></kf-i><span>{{ conf.address }}</span></div>
         <div style="display:flex;gap:10px;align-items:flex-start"><kf-i n="{{ conf.payIcon }}" s="18" style="color:#FF4D1C;margin-top:1px"></kf-i><span>{{ conf.payTxt }} <strong>{{ conf.total }}</strong></span></div>
       </div>
       <p style="font-size:13.5px;color:#9A9AA5;margin:0">{{ conf.sentMsg }}</p>
-      <button onClick="{{ conf.close }}" style="border:0;background:#2A2A32;color:#F5F5F7;font-weight:700;font-size:16px;padding:15px 28px;border-radius:10px;margin-top:6px" style-hover="background:#34343D">{{ t.backToMenu }}</button>
+      <button onClick="{{ conf.close }}" style="border:0;background:#3A1D10;color:#F5F5F7;font-weight:700;font-size:16px;padding:15px 28px;border-radius:10px;margin-top:6px" style-hover="background:#4A2716">{{ t.backToMenu }}</button>
     </div>
   </div>
 </sc-if>
 
 <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
-<div data-screen-label="Admin" style="min-height:100vh;background:#0A0A0C">
-  <header style="background:#000000;color:#F5F5F7">
+<div data-screen-label="Admin" style="min-height:100vh;background:#1B0A06">
+  <header style="background:#140700;color:#F5F5F7">
     <div style="max-width:1400px;margin:0 auto;padding:14px clamp(16px,3vw,32px);display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px">
       <span style="display:flex;align-items:center;gap:10px"><span style="width:38px;height:38px;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center;font:600 14px 'Space Grotesk',system-ui,sans-serif">KF</span><span style="display:flex;flex-direction:column;line-height:1.1"><strong style="font-size:16px;color:#F5F5F7">Kebab Factory</strong><span style="font-size:12px;color:#9A9AA5">Kitchen</span></span></span>
-      <nav style="display:flex;gap:4px;background:#1E1E26;padding:4px;border-radius:10px">
+      <nav style="display:flex;gap:4px;background:#2E160B;padding:4px;border-radius:10px">
         <button onClick="{{ adm.toOrders }}" style="border:0;background:{{ adm.ordersBg }};color:{{ adm.ordersC }};font-weight:700;font-size:15px;padding:9px 18px;border-radius:10px;display:flex;align-items:center;gap:8px">Orders<sc-if value="{{ adm.hasNew }}" hint-placeholder-val="{{ false }}"><span style="background:#FF4D1C;color:#F5F5F7;font-size:12px;min-width:20px;height:20px;border-radius:10px;display:grid;place-items:center;padding:0 5px;box-sizing:border-box">{{ adm.newCount }}</span></sc-if></button>
         <button onClick="{{ adm.toMenu }}" style="border:0;background:{{ adm.menuBg }};color:{{ adm.menuC }};font-weight:700;font-size:15px;padding:9px 18px;border-radius:10px">Menu &amp; prices</button>
       </nav>
       <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
         <span style="font-size:14px;color:#9A9AA5">Delivery time shown to customers</span>
-        <div style="display:flex;align-items:center;gap:2px;background:#1E1E26;border-radius:10px;padding:4px">
+        <div style="display:flex;align-items:center;gap:2px;background:#2E160B;border-radius:10px;padding:4px">
           <button onClick="{{ adm.etaDec }}" aria-label="Shorter" style="border:0;width:34px;height:34px;border-radius:10px;background:transparent;color:#F5F5F7;display:grid;place-items:center" style-hover="background:#34D399"><kf-i n="minus" s="16" w="3"></kf-i></button>
           <strong style="min-width:64px;text-align:center;color:#F5F5F7;font-size:16px">{{ eta }} min</strong>
           <button onClick="{{ adm.etaInc }}" aria-label="Longer" style="border:0;width:34px;height:34px;border-radius:10px;background:transparent;color:#F5F5F7;display:grid;place-items:center" style-hover="background:#34D399"><kf-i n="plus" s="16" w="3"></kf-i></button>
@@ -462,15 +462,15 @@ input,textarea{font-family:inherit}
   <sc-if value="{{ adm.isOrders }}" hint-placeholder-val="{{ true }}">
     <main style="max-width:1400px;margin:0 auto;padding:24px clamp(16px,3vw,32px) 100px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px;align-items:start">
       <sc-for list="{{ cols }}" as="col" hint-placeholder-count="3">
-        <section style="background:#1E1E26;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:12px">
+        <section style="background:#2E160B;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:12px">
           <div style="display:flex;align-items:center;gap:10px;padding:6px 8px 2px">
             <span style="width:12px;height:12px;border-radius:50%;background:{{ col.dot }}"></span>
             <h2 style="font-size:21px;margin:0;flex:1">{{ col.title }}</h2>
-            <span style="background:#0A0A0C;font-weight:700;font-size:14px;min-width:30px;height:30px;border-radius:10px;display:grid;place-items:center;padding:0 8px;box-sizing:border-box">{{ col.count }}</span>
+            <span style="background:#1B0A06;font-weight:700;font-size:14px;min-width:30px;height:30px;border-radius:10px;display:grid;place-items:center;padding:0 8px;box-sizing:border-box">{{ col.count }}</span>
           </div>
           <sc-if value="{{ col.empty }}" hint-placeholder-val="{{ false }}"><div style="padding:26px 12px;text-align:center;color:#9A9AA5;font-size:15px">{{ col.emptyTxt }}</div></sc-if>
           <sc-for list="{{ col.orders }}" as="o" hint-placeholder-count="2">
-            <article style="background:#15151B;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;animation:{{ o.anim }}">
+            <article style="background:#261208;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;animation:{{ o.anim }}">
               <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
                 <strong style="font:600 20px 'Space Grotesk',system-ui,sans-serif;letter-spacing:-0.02em">{{ o.ref }}</strong>
                 <span style="font-size:13.5px;color:#9A9AA5">{{ o.ago }}</span>
@@ -481,13 +481,13 @@ input,textarea{font-family:inherit}
                   <div style="display:flex;gap:10px;font-size:15.5px"><strong style="min-width:26px;color:#FF4D1C">{{ ln.qty }}×</strong><span>{{ ln.name }}</span></div>
                 </sc-for>
               </div>
-              <div style="background:#0A0A0C;border-radius:10px;padding:11px 14px;display:flex;flex-direction:column;gap:5px;font-size:14px;color:#C9C9D1">
+              <div style="background:#1B0A06;border-radius:10px;padding:11px 14px;display:flex;flex-direction:column;gap:5px;font-size:14px;color:#C9C9D1">
                 <div style="display:flex;gap:8px;align-items:center"><kf-i n="user" s="15"></kf-i><strong>{{ o.name }}</strong><span style="color:#9A9AA5">{{ o.phone }}</span></div>
                 <div style="display:flex;gap:8px;align-items:flex-start"><kf-i n="pin" s="15" style="margin-top:2px"></kf-i><span>{{ o.address }}</span></div>
               </div>
               <div style="display:flex;align-items:center;gap:12px">
                 <span style="display:flex;flex-direction:column;line-height:1.15"><strong style="font-size:18px">{{ o.total }}</strong><span style="font-size:12.5px;color:{{ o.dueC }};font-weight:600">{{ o.due }}</span></span>
-                <sc-if value="{{ o.hasAction }}" hint-placeholder-val="{{ true }}"><button onClick="{{ o.action }}" style="margin-left:auto;border:0;background:{{ o.btnBg }};color:#F5F5F7;font-weight:700;font-size:15px;padding:12px 18px;border-radius:10px;display:flex;align-items:center;gap:8px" style-hover="filter:brightness(.9)" style-active="background:#C6FF3D;color:#0A0A0C;transform:scale(.97)"><kf-i n="{{ o.btnIcon }}" s="17"></kf-i>{{ o.btnLabel }}</button></sc-if>
+                <sc-if value="{{ o.hasAction }}" hint-placeholder-val="{{ true }}"><button onClick="{{ o.action }}" style="margin-left:auto;border:0;background:{{ o.btnBg }};color:#F5F5F7;font-weight:700;font-size:15px;padding:12px 18px;border-radius:10px;display:flex;align-items:center;gap:8px" style-hover="filter:brightness(.9)" style-active="background:#C6FF3D;color:#1B0A06;transform:scale(.97)"><kf-i n="{{ o.btnIcon }}" s="17"></kf-i>{{ o.btnLabel }}</button></sc-if>
                 <sc-if value="{{ o.isDone }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;display:flex;align-items:center;gap:6px;color:#34D399;font-weight:700;font-size:14px"><kf-i n="checkc" s="18"></kf-i>Delivered</span></sc-if>
               </div>
             </article>
@@ -499,7 +499,7 @@ input,textarea{font-family:inherit}
 
   <sc-if value="{{ adm.isMenu }}" hint-placeholder-val="{{ false }}">
     <main style="max-width:1400px;margin:0 auto;padding:24px clamp(16px,3vw,32px) 100px;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start">
-      <section style="flex:1 1 280px;max-width:340px;background:#15151B;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px">
+      <section style="flex:1 1 280px;max-width:340px;background:#261208;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px">
         <h2 style="font-size:21px;margin:4px 8px 10px">Categories</h2>
         <sc-for list="{{ acats }}" as="c" hint-placeholder-count="6">
           <div style="display:flex;align-items:center;gap:4px;background:{{ c.bgc }};border-radius:10px;padding:4px">
@@ -510,24 +510,24 @@ input,textarea{font-family:inherit}
           </div>
         </sc-for>
         <div style="display:flex;gap:6px;margin-top:10px">
-          <input value="{{ newCat }}" onChange="{{ onNewCat }}" placeholder="New category" aria-label="New category name" style="flex:1;min-width:0;border:2px solid rgba(32,30,29,.14);background:#0A0A0C;border-radius:10px;padding:11px 16px;font-size:15px;outline:none" style-focus="border-color:#FF4D1C">
+          <input value="{{ newCat }}" onChange="{{ onNewCat }}" placeholder="New category" aria-label="New category name" style="flex:1;min-width:0;border:2px solid rgba(32,30,29,.14);background:#1B0A06;border-radius:10px;padding:11px 16px;font-size:15px;outline:none" style-focus="border-color:#FF4D1C">
           <button onClick="{{ addCat }}" aria-label="Add category" style="border:0;width:46px;height:46px;flex:none;border-radius:10px;background:#FF4D1C;color:#F5F5F7;display:grid;place-items:center" style-hover="background:#E6420A"><kf-i n="plus" s="18" w="3"></kf-i></button>
         </div>
       </section>
-      <section style="flex:3 1 560px;min-width:0;background:#15151B;border-radius:14px;padding:clamp(16px,2.4vw,26px);display:flex;flex-direction:column;gap:10px">
+      <section style="flex:3 1 560px;min-width:0;background:#261208;border-radius:14px;padding:clamp(16px,2.4vw,26px);display:flex;flex-direction:column;gap:10px">
         <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:6px">
           <h2 style="font-size:26px;margin:0">{{ curCat }}</h2>
           <span style="font-size:14px;color:#9A9AA5">{{ curCount }}</span>
           <span style="margin-left:auto;font-size:13px;color:#9A9AA5">Changes go live on the website instantly</span>
         </div>
         <sc-for list="{{ rows }}" as="r" hint-placeholder-count="4">
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;background:#0A0A0C;border-radius:14px;padding:10px 12px 10px 10px">
-            <span style="width:52px;height:52px;flex:none;border-radius:10px;background-color:{{ r.tint }};background-image:{{ r.bg }};background-size:cover;background-position:{{ r.pos }};display:grid;place-items:center;color:#FF6A3D"><sc-if value="{{ r.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#15151B;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #1E1E26"></span></sc-if></span>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;background:#1B0A06;border-radius:14px;padding:10px 12px 10px 10px">
+            <span style="width:52px;height:52px;flex:none;border-radius:10px;background-color:{{ r.tint }};background-image:{{ r.bg }};background-size:cover;background-position:{{ r.pos }};display:grid;place-items:center;color:#FF6A3D"><sc-if value="{{ r.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:58%;aspect-ratio:1;border-radius:50%;background:#261208;box-shadow:0 8px 24px -8px rgba(80,40,10,.18),inset 0 0 0 3px #2E160B"></span></sc-if></span>
             <div style="flex:1 1 260px;min-width:0;display:flex;flex-direction:column;gap:4px">
-              <input value="{{ r.name }}" onChange="{{ r.onName }}" aria-label="Product name" style="border:0;background:transparent;font-weight:700;font-size:16px;padding:4px 8px;border-radius:14px;outline:none;color:#F5F5F7" style-focus="background:#15151B">
-              <input value="{{ r.desc }}" onChange="{{ r.onDesc }}" aria-label="Description" style="border:0;background:transparent;font-size:14px;color:#9A9AA5;padding:4px 8px;border-radius:14px;outline:none" style-focus="background:#15151B">
+              <input value="{{ r.name }}" onChange="{{ r.onName }}" aria-label="Product name" style="border:0;background:transparent;font-weight:700;font-size:16px;padding:4px 8px;border-radius:14px;outline:none;color:#F5F5F7" style-focus="background:#261208">
+              <input value="{{ r.desc }}" onChange="{{ r.onDesc }}" aria-label="Description" style="border:0;background:transparent;font-size:14px;color:#9A9AA5;padding:4px 8px;border-radius:14px;outline:none" style-focus="background:#261208">
             </div>
-            <label style="display:flex;align-items:center;gap:6px;background:#15151B;border-radius:10px;padding:0 14px;height:44px;border:2px solid rgba(32,30,29,.1)">
+            <label style="display:flex;align-items:center;gap:6px;background:#261208;border-radius:10px;padding:0 14px;height:44px;border:2px solid rgba(32,30,29,.1)">
               <input value="{{ r.price }}" onChange="{{ r.onPrice }}" onBlur="{{ r.onPriceBlur }}" inputmode="decimal" aria-label="Price in euros" style="width:58px;border:0;background:transparent;font-weight:700;font-size:16px;text-align:right;outline:none;color:#F5F5F7"><span style="font-weight:700;color:#9A9AA5">€</span>
             </label>
             <button onClick="{{ r.del }}" aria-label="Delete product" title="Delete product" style="border:0;width:40px;height:40px;border-radius:10px;background:transparent;color:#FF5C5C;display:grid;place-items:center" style-hover="background:rgba(163,59,18,.12)"><kf-i n="trash" s="17"></kf-i></button>
@@ -536,9 +536,9 @@ input,textarea{font-family:inherit}
         <sc-if value="{{ noRows }}" hint-placeholder-val="{{ false }}"><div style="padding:22px;text-align:center;color:#9A9AA5">No products in this category yet.</div></sc-if>
         <div style="margin-top:10px;border:2px dashed rgba(32,30,29,.18);border-radius:14px;padding:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
           <strong style="width:100%;font-size:15px;padding-left:6px">Add a product to {{ curCat }}</strong>
-          <input value="{{ np.name }}" onChange="{{ np.onName }}" placeholder="Name" aria-label="New product name" style="flex:1 1 180px;min-width:0;border:2px solid rgba(32,30,29,.14);background:#0A0A0C;border-radius:10px;padding:11px 16px;font-size:15px;outline:none" style-focus="border-color:#FF4D1C">
-          <input value="{{ np.desc }}" onChange="{{ np.onDesc }}" placeholder="Short description" aria-label="New product description" style="flex:2 1 220px;min-width:0;border:2px solid rgba(32,30,29,.14);background:#0A0A0C;border-radius:10px;padding:11px 16px;font-size:15px;outline:none" style-focus="border-color:#FF4D1C">
-          <input value="{{ np.price }}" onChange="{{ np.onPrice }}" placeholder="0,00 €" inputmode="decimal" aria-label="New product price" style="flex:0 1 100px;min-width:0;border:2px solid rgba(32,30,29,.14);background:#0A0A0C;border-radius:10px;padding:11px 16px;font-size:15px;outline:none" style-focus="border-color:#FF4D1C">
+          <input value="{{ np.name }}" onChange="{{ np.onName }}" placeholder="Name" aria-label="New product name" style="flex:1 1 180px;min-width:0;border:2px solid rgba(32,30,29,.14);background:#1B0A06;border-radius:10px;padding:11px 16px;font-size:15px;outline:none" style-focus="border-color:#FF4D1C">
+          <input value="{{ np.desc }}" onChange="{{ np.onDesc }}" placeholder="Short description" aria-label="New product description" style="flex:2 1 220px;min-width:0;border:2px solid rgba(32,30,29,.14);background:#1B0A06;border-radius:10px;padding:11px 16px;font-size:15px;outline:none" style-focus="border-color:#FF4D1C">
+          <input value="{{ np.price }}" onChange="{{ np.onPrice }}" placeholder="0,00 €" inputmode="decimal" aria-label="New product price" style="flex:0 1 100px;min-width:0;border:2px solid rgba(32,30,29,.14);background:#1B0A06;border-radius:10px;padding:11px 16px;font-size:15px;outline:none" style-focus="border-color:#FF4D1C">
           <button onClick="{{ np.add }}" style="border:0;background:#FF4D1C;color:#F5F5F7;font-weight:700;font-size:15px;padding:12px 20px;border-radius:10px;display:flex;align-items:center;gap:6px" style-hover="background:#E6420A"><kf-i n="plus" s="16" w="3"></kf-i>Add product</button>
           <sc-if value="{{ np.hasErr }}" hint-placeholder-val="{{ false }}"><span style="width:100%;font-size:13.5px;font-weight:600;color:#FF5C5C;padding-left:6px">{{ np.err }}</span></sc-if>
         </div>
@@ -549,7 +549,7 @@ input,textarea{font-family:inherit}
 </sc-if>
 
 <sc-if value="{{ showSwitch }}" hint-placeholder-val="{{ true }}">
-  <div style="position:fixed;z-index:80;right:16px;bottom:16px;display:flex;align-items:center;gap:4px;background:#2A2A32;padding:4px;border-radius:10px;box-shadow:0 24px 48px -16px rgba(80,40,10,.28);font-size:13px">
+  <div style="position:fixed;z-index:80;right:16px;bottom:16px;display:flex;align-items:center;gap:4px;background:#3A1D10;padding:4px;border-radius:10px;box-shadow:0 24px 48px -16px rgba(80,40,10,.28);font-size:13px">
     <span style="color:#9A9AA5;padding:0 8px 0 10px;font-weight:600">Prototype</span>
     <button onClick="{{ sw.site }}" style="border:0;background:{{ sw.siteBg }};color:{{ sw.siteC }};font-weight:700;font-size:13px;padding:8px 14px;border-radius:10px">Website</button>
     <button onClick="{{ sw.admin }}" style="border:0;background:{{ sw.adminBg }};color:{{ sw.adminC }};font-weight:700;font-size:13px;padding:8px 14px;border-radius:10px">Admin</button>
@@ -601,7 +601,7 @@ class Component extends DCLogic {
         cur.animate([{clipPath:'circle(0% at '+O+')'},{clipPath:'circle(150% at '+O+')'}],{duration:900,easing:'cubic-bezier(.65,0,.35,1)'});
         const ob=kids[old]&&kids[old].firstChild; ob&&ob.animate([{filter:'none'},{filter:'brightness(.6)'}],{duration:800,easing:'ease-in'}); }
       prev.current=p.idx; },[p.idx]);
-    return e('div',{ref,style:{position:'absolute',inset:0,isolation:'isolate'}}, p.slides.map((s,i)=>e('div',{key:i,style:{position:'absolute',inset:0,overflow:'hidden'}}, e('div',{style:{position:'absolute',inset:0}}, s.video? e('video',{src:s.video,autoPlay:true,muted:true,loop:true,playsInline:true,style:{width:'100%',height:'100%',objectFit:'cover'}}) : e('div',{style:{position:'absolute',inset:0,backgroundImage:'url(assets/food/'+s.img+')',backgroundSize:'cover',backgroundPosition:s.pos,animation:'kfkb'+(i%3)+' 16s ease-in-out '+(-i*3)+'s infinite alternate'}}))))); }
+    return e('div',{ref,style:{position:'absolute',inset:0,isolation:'isolate'}}, p.slides.map((s,i)=>e('div',{key:i,style:{position:'absolute',inset:0,overflow:'hidden'}}, e('div',{style:{position:'absolute',inset:0}}, s.video? e('video',{src:s.video,autoPlay:true,muted:true,loop:true,playsInline:true,style:{width:'100%',height:'100%',objectFit:'cover'}}) : e('div',{style:{position:'absolute',inset:0,backgroundImage:'url(assets/food/'+s.img+')',backgroundSize:'cover',backgroundPosition:s.pos,willChange:'transform',animation:'kfkb'+(i%3)+' 18s ease-in-out '+(-i*3)+'s infinite alternate'}}))))); }
   static HERO = {pizza:{img:'pizza.png',pos:'62% 60%',alt:'Pizza with melting cheese'},durum:{img:'durum.png',pos:'45% 55%',alt:'Gratinated dürüm'},burger:{img:'burger-house.png',pos:'28% 50%',alt:'Cheeseburger with fries'}};
   static REVIEWS = [
     {name:'Marc Puig',stars:5,text:'El dürüm gratinat és espectacular. Ha arribat calent i en menys de 45 minuts.',itemId:'d1'},
@@ -639,7 +639,7 @@ class Component extends DCLogic {
         if(el._revAnim){ el._revAnim.cancel(); el._revAnim=null; }
         el.style.opacity='0'; el.style.transform='translateY(22px) scale(.97)';
       }
-    }),{threshold:.12});
+    }),{threshold:.12,rootMargin:'0px 0px -60px 0px'});
     this.tick=setInterval(()=>this.setState({now:Date.now()}),15000);
     this.onStorage=e=>{ if(e.key==='kf4'&&e.newValue){ try{ const s=JSON.parse(e.newValue); this.setState({orders:s.orders,items:s.items,cats:s.cats,eta:s.eta}); }catch(_){} } };
     window.addEventListener('storage',this.onStorage);
@@ -680,7 +680,7 @@ class Component extends DCLogic {
   add(id){ this.setState(s=>({cart:{...s.cart,[id]:(s.cart[id]||0)+1}})); this.bump(); }
   dec(id){ this.setState(s=>{ const c={...s.cart}; c[id]=(c[id]||0)-1; if(c[id]<=0) delete c[id]; return {cart:c}; }); }
   vis(o){ const c=o.cat?this.state.cats.find(x=>x.id===o.cat):null; const img=o.img; const icon=o.icon||(c&&c.icon)||(o.cat==='drinks'?'cup':o.cat==='tacos'?'flame':'utensils');
-    return { bg:img?`url(assets/food/${img})`:'none', pos:o.pos||'50% 50%', noImg:!img, icon, tint:img?'#1E1E26':'#2A2408' }; }
+    return { bg:img?`url(assets/food/${img})`:'none', pos:o.pos||'50% 50%', noImg:!img, icon, tint:img?'#2E160B':'#2A2408' }; }
   itemVM(it,i){ const q=this.state.cart[it.id]||0; return {...this.vis(it), id:it.id, name:this.L(it.name), desc:this.L(it.desc), priceTxt:this.fmt(it.price), badge:this.L(it.badge)||'', hasBadge:!!it.badge, qty:q, inCart:q>0, notInCart:q===0, d:String(i%4), add:()=>this.add(it.id), dec:()=>this.dec(it.id)}; }
   validate(f){ const e={};
     if(f.name.trim().length<2) e.name=this.pick('Please enter your name.','Introduce tu nombre.','Introdueix el teu nom.');
@@ -763,7 +763,7 @@ class Component extends DCLogic {
       ordered:pick('Ordered','Pidió','Va demanar'),
       trustRating:(()=>{ const rc=Component.REVIEWS, avg=(rc.reduce((a,r)=>a+r.stars,0)/rc.length).toFixed(1); return pick(avg+' out of 5 · '+rc.length+' verified reviews',avg.replace('.',',')+' de 5 · '+rc.length+' reseñas verificadas',avg.replace('.',',')+' de 5 · '+rc.length+' ressenyes verificades'); })(),
       kickerFind:pick('Find us','Encuéntranos','Troba’ns'),
-      findTitle:'Kebab Factory Unit 3',
+      findTitle:'Kebab Factory',
       findDesc:pick('Badalona, Barcelona. Delivery up to 5 km from the shop, or come and pick up.','Badalona, Barcelona. Entrega hasta 5 km del local, o pásate a recogerlo.','Badalona, Barcelona. Lliurament fins a 5 km del local, o passa a recollir-ho.'),
       daysA:pick('Sunday – Thursday','Domingo – Jueves','Diumenge – Dijous'),
       daysB:pick('Friday – Saturday','Viernes – Sábado','Divendres – Dissabte'),
@@ -817,12 +817,12 @@ class Component extends DCLogic {
     const curC=s.cats.find(c=>c.id===s.cat);
     const allVis={bg:'none',pos:'50% 50%',noImg:true,icon:'utensils',tint:'#2A2408'};
     const ddVis=curC?this.vis({id:curC.id,img:curC.img,pos:curC.pos,icon:curC.icon}):allVis;
-    const ddOpts=[{id:'all',name:{en:'All categories',es:'Todas las categorías',ca:'Totes les categories'}}].concat(s.cats).map(c=>{ const v=c.id==='all'?allVis:this.vis({id:c.id,img:c.img,pos:c.pos,icon:c.icon}); return {...v,name:L(c.name),count:c.id==='all'?String(s.items.length):String(catCount(c.id)),bgc:s.cat===c.id?'#1E1E26':'transparent',pick:()=>{ this.setState({cat:c.id,ddOpen:false}); window.scrollTo({top:0,behavior:'smooth'}); }}; });
+    const ddOpts=[{id:'all',name:{en:'All categories',es:'Todas las categorías',ca:'Totes les categories'}}].concat(s.cats).map(c=>{ const v=c.id==='all'?allVis:this.vis({id:c.id,img:c.img,pos:c.pos,icon:c.icon}); return {...v,name:L(c.name),count:c.id==='all'?String(s.items.length):String(catCount(c.id)),bgc:s.cat===c.id?'#2E160B':'transparent',pick:()=>{ this.setState({cat:c.id,ddOpen:false}); window.scrollTo({top:0,behavior:'smooth'}); }}; });
 
     const F=s.form, setF=(k)=>e=>{ const v=e.target.value; this.setState(st=>{ const errs={...st.errs}; delete errs[k]; return {form:{...st.form,[k]:v},errs}; }); };
     const fieldDefs=[['name',t.fName,'text','name','Laura Pérez'],['email',t.fEmail,'email','email','you@email.com'],['phone',t.fPhone,'tel','tel','+34 600 000 000'],['address',t.fAddress,'text','street-address',t.fAddressPh]];
     const fields=fieldDefs.map(([k,label,type,ac,ph])=>({label,type,ac,ph,value:F[k],onChange:setF(k),err:s.errs[k]||'',hasErr:!!s.errs[k],border:s.errs[k]?'#FF3B3B':'#4A4A55'}));
-    const pays=[['cash',t.payCash,t.payCashNote,'cash'],['card',t.payCard,t.payCardNote,'card']].map(([id,name,note,icon])=>{ const on=F.pay===id; return {name,note,icon,on:String(on),border:on?'#FF4D1C':'rgba(32,30,29,.12)',bgc:on?'#331409':'#15151B',dot:on?'#FF4D1C':'transparent',dotBorder:on?'#FF4D1C':'rgba(32,30,29,.3)',pick:()=>this.setState(st=>({form:{...st.form,pay:id}}))}; });
+    const pays=[['cash',t.payCash,t.payCashNote,'cash'],['card',t.payCard,t.payCardNote,'card']].map(([id,name,note,icon])=>{ const on=F.pay===id; return {name,note,icon,on:String(on),border:on?'#FF4D1C':'rgba(32,30,29,.12)',bgc:on?'#331409':'#261208',dot:on?'#FF4D1C':'transparent',dotBorder:on?'#FF4D1C':'rgba(32,30,29,.3)',pick:()=>this.setState(st=>({form:{...st.form,pay:id}}))}; });
     const isCheckout=s.step==='checkout'&&count>0;
 
     const co=s.confirm&&s.orders.find(o=>o.id===s.confirm);
@@ -856,7 +856,7 @@ class Component extends DCLogic {
       onPrice:e=>{ const v=e.target.value; this.setState(st=>({drafts:{...st.drafts,[it.id]:v}})); },
       onPriceBlur:()=>this.setState(st=>{ const d={...st.drafts}; const n=this.parsePrice(d[it.id]); delete d[it.id]; return {drafts:d,items:n==null?st.items:st.items.map(i=>i.id===it.id?{...i,price:n}:i)}; }),
       del:()=>{ if(window.confirm('Delete “'+this.EN(it.name)+'”?')) this.setState(st=>({items:st.items.filter(i=>i.id!==it.id)})); }})):[];
-    const acats=s.cats.map(c=>{ const on=acat&&c.id===acat.id, cName=this.EN(c.name); return {name:cName,count:String(catCount(c.id)),bgc:on?'#2A2A32':'transparent',color:'#F5F5F7',
+    const acats=s.cats.map(c=>{ const on=acat&&c.id===acat.id, cName=this.EN(c.name); return {name:cName,count:String(catCount(c.id)),bgc:on?'#3A1D10':'transparent',color:'#F5F5F7',
       select:()=>this.setState({adminCat:c.id,npErr:''}),
       del:()=>{ const n=catCount(c.id); if(window.confirm(n?`Delete “${cName}” and its ${n} products?`:`Delete “${cName}”?`)) this.setState(st=>{ const cats=st.cats.filter(x=>x.id!==c.id); return {cats,items:st.items.filter(i=>i.cat!==c.id),adminCat:st.adminCat===c.id?(cats[0]&&cats[0].id):st.adminCat,cat:st.cat===c.id?'all':st.cat}; }); }}; });
 
@@ -865,13 +865,13 @@ class Component extends DCLogic {
     const SL=Component.SLIDES.map((x,i)=>({...x,video:vids[i]||''})), hi=(s.heroIdx||0)%SL.length, curS=SL[hi], curIt=s.items.find(i=>i.id===curS.id);
 
     const langDefs=[['es','ES'],['ca','CA'],['en','EN']];
-    const langs=langDefs.map(([id,code])=>{ const on=lang===id; return {code,pressed:String(on),bg:on?'#2A2A32':'transparent',fg:'#F5F5F7',go:()=>this.setLang(id)}; });
+    const langs=langDefs.map(([id,code])=>{ const on=lang===id; return {code,pressed:String(on),bg:on?'#3A1D10':'transparent',fg:'#F5F5F7',go:()=>this.setLang(id)}; });
 
     return {
       isHome:view==='home', isMenu:view==='menu', isAdmin:view==='admin', isSite:view!=='admin', eta, t, langs,
       showSwitch:P.showSwitcher!==false,
-      sw:{site:()=>this.go(s.view==='admin'?'home':s.view),admin:()=>this.go('admin'),siteBg:onS?'#0A0A0C':'transparent',siteC:'#F5F5F7',adminBg:!onS?'#0A0A0C':'transparent',adminC:'#F5F5F7'},
-      nav:{home:()=>this.go('home'),menu:()=>this.go('menu'),homeBg:view==='home'?'#1E1E26':'transparent',menuBg:view==='menu'?'#1E1E26':'transparent'},
+      sw:{site:()=>this.go(s.view==='admin'?'home':s.view),admin:()=>this.go('admin'),siteBg:onS?'#1B0A06':'transparent',siteC:'#F5F5F7',adminBg:!onS?'#1B0A06':'transparent',adminC:'#F5F5F7'},
+      nav:{home:()=>this.go('home'),menu:()=>this.go('menu'),homeBg:view==='home'?'#2E160B':'transparent',menuBg:view==='menu'?'#2E160B':'transparent'},
       goCombos:()=>{ const el=document.getElementById('combos'); if(el) window.scrollTo({top:el.getBoundingClientRect().top+scrollY-90,behavior:'smooth'}); },
       cartCount:String(count), cartTotal:this.fmt(total), hasCart:count>0,
       openCart:()=>this.setState({drawer:true,step:'cart'}),
@@ -893,7 +893,7 @@ class Component extends DCLogic {
       lines:cartLines.map(l=>({...this.vis(l.it),name:L(l.it.name),qty:l.qty,priceTxt:this.fmt(l.it.price*l.qty),inc:()=>this.add(l.it.id),dec:()=>this.dec(l.it.id)})),
       fields, pays, conf,
       adm:{isOrders:s.adminTab==='orders',isMenu:s.adminTab==='menu',toOrders:()=>this.setState({adminTab:'orders'}),toMenu:()=>this.setState({adminTab:'menu'}),
-        ordersBg:s.adminTab==='orders'?'#0A0A0C':'transparent',ordersC:s.adminTab==='orders'?'#F5F5F7':'#9A9AA5',menuBg:s.adminTab==='menu'?'#0A0A0C':'transparent',menuC:s.adminTab==='menu'?'#F5F5F7':'#9A9AA5',
+        ordersBg:s.adminTab==='orders'?'#1B0A06':'transparent',ordersC:s.adminTab==='orders'?'#F5F5F7':'#9A9AA5',menuBg:s.adminTab==='menu'?'#1B0A06':'transparent',menuC:s.adminTab==='menu'?'#F5F5F7':'#9A9AA5',
         hasNew:newCount>0,newCount:String(newCount),etaDec:()=>this.setState(st=>({eta:Math.max(15,st.eta-5)})),etaInc:()=>this.setState(st=>({eta:Math.min(120,st.eta+5)}))},
       cols, acats, rows, noRows:!rows.length, curCat:acat?this.EN(acat.name):'No categories', curCount:acat?plural(catCount(acat.id)):'',
       newCat:s.newCat, onNewCat:e=>this.setState({newCat:e.target.value}),
