@@ -353,13 +353,19 @@ input,textarea{font-family:inherit}
 
 <sc-if value="{{ isMenu }}" hint-placeholder-val="{{ false }}">
 <main data-screen-label="Menu" style="max-width:1240px;margin:0 auto;padding:clamp(24px,4vw,48px) clamp(18px,4vw,40px) 120px">
-  <div data-reveal="0" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px">
-    <div>
-      <h1 style="font-size:clamp(44px,6vw,76px);line-height:1;margin:0;letter-spacing:-0.02em">{{ t.menuPre }}<em style="font-style:normal;color:#FF4D1C">{{ t.menuEm }}</em></h1>
-      <p style="font-size:17px;color:#8A7160;margin:12px 0 0">{{ t.menuSub }}</p>
+  <div style="position:relative">
+    <div aria-hidden="true" style="position:absolute;inset:-30px -20px auto -20px;height:420px;overflow:hidden;pointer-events:none;z-index:0;color:#FF4D1C">
+      <svg style="position:absolute;top:4%;left:1%;width:clamp(70px,9vw,120px);height:auto;opacity:.12;animation:kfsway 9s ease-in-out infinite" viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M50 30c18 0 28 20 28 42 0 20-13 36-28 36s-28-16-28-36c0-22 10-42 28-42Z"/><path d="M50 34c12 0 20 16 20 38 0 16-9 30-20 30"/><path d="M50 38c7 0 12 14 12 34 0 13-5 26-12 26"/><path d="M42 30c-3-8-2-16 2-22M58 30c3-8 2-16-2-22M50 30V16"/></svg>
+      <svg style="position:absolute;top:2%;right:2%;width:clamp(60px,8vw,100px);height:auto;opacity:.1;animation:kfbob 10s ease-in-out infinite;animation-delay:.6s" viewBox="0 0 100 110" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M50 28c-16 6-24 22-24 40 0 18 11 32 24 32s24-14 24-32c0-18-8-34-24-40Z"/><path d="M50 28v72M38 34c-4 14-4 46 2 62M62 34c4 14 4 46-2 62"/><path d="M50 28c0-8 3-14 8-18M50 28c0-8-3-14-8-18"/></svg>
+      <svg style="position:absolute;bottom:2%;right:14%;width:clamp(60px,8vw,96px);height:auto;opacity:.1;animation:kfsway 11s ease-in-out infinite;animation-delay:1.4s" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M70 15c8 0 14 6 14 14 0 30-30 55-55 55-9 0-16-6-16-14 0-22 25-45 45-53a20 20 0 0 1 12-2Z"/><path d="M62 12c2-5 6-8 10-9"/></svg>
     </div>
-  </div>
-  <div style="position:sticky;top:72px;z-index:30;margin:28px 0 8px;padding:10px 0;background:#FFF8F2;display:flex;flex-direction:column;gap:12px">
+    <div data-reveal="0" style="position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px">
+      <div>
+        <h1 style="font-size:clamp(44px,6vw,76px);line-height:1;margin:0;letter-spacing:-0.02em">{{ t.menuPre }}<em style="font-style:normal;color:#FF4D1C">{{ t.menuEm }}</em></h1>
+        <p style="font-size:17px;color:#8A7160;margin:12px 0 0">{{ t.menuSub }}</p>
+      </div>
+    </div>
+    <div style="position:sticky;top:72px;z-index:30;margin:28px 0 8px;padding:10px 0;background:#FFF8F2;display:flex;flex-direction:column;gap:12px">
     <div style="display:flex;gap:10px;overflow-x:auto;padding:2px 2px 6px">
       <sc-for list="{{ chips }}" as="c" hint-placeholder-count="7">
         <button onClick="{{ c.toggle }}" aria-pressed="{{ c.on }}" style="border:0;cursor:pointer;flex:none;background:{{ c.pillBg }};color:{{ c.pillFg }};display:flex;align-items:center;gap:10px;padding:7px 16px 7px 7px;border-radius:999px;font-weight:700;font-size:14.5px;white-space:nowrap;transition:background .2s,color .2s" style-hover="background:{{ c.pillBgHover }}">
@@ -376,6 +382,7 @@ input,textarea{font-family:inherit}
       </label>
       <span style="display:flex;align-items:flex-start;gap:8px;font-size:12.5px;line-height:1.4;color:#8A7160;max-width:520px;flex:2 1 320px"><kf-i n="info" s="15" style="flex:none;margin-top:1px"></kf-i>{{ t.allergenNote }}</span>
     </div>
+  </div>
   </div>
   <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="2">
     <section style="padding-top:36px">
