@@ -56,6 +56,10 @@ calendar:'<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v
 package:'<path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>',
 power:'<path d="M12 2v10"/><path d="M18.4 6.6a9 9 0 1 1-12.77.04"/>',
 cup:'<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v2M10 2v2M14 2v2"/>',
+wrap:'<path d="M4 8c0-2.5 2.5-4.5 8-4.5s8 2 8 4.5-2.2 12.5-8 12.5S4 10.5 4 8Z"/><path d="M6 9.2c2.3 1 9.7 1 12 0"/><path d="M6.6 13.4c2.2 1 9.6 1 10.8 0"/>',
+pizza:'<path d="M12 3 4 19q8 3 16 0Z"/><circle cx="10" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="14" cy="14.5" r="1" fill="currentColor" stroke="none"/>',
+burger:'<path d="M3.5 9.2A8.5 5 0 0 1 20.5 9.2Z"/><path d="M4 13h16"/><path d="M4 16.5h16"/><path d="M4 19h16a1 1 0 0 0 1-1 2 2 0 0 0-2-2H5a2 2 0 0 0-2 2 1 1 0 0 0 1 1Z"/>',
+taco:'<path d="M2 12a10 6.5 0 0 1 20 0c0 3.3-4.5 9-10 9S2 15.3 2 12Z"/><path d="M6 12.3c2-2 10-2 12 0"/><path d="M8 9.3c.4-2 .9-3 1.8-4M12 8.3c.3-2 .5-3 .9-4M16 9.3c-.3-2-.6-3-1-4"/>',
 arrowr:'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
 trash:'<path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
 store:'<path d="M3 9h18l-1.5-5h-15Z"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/>'
