@@ -129,7 +129,15 @@ input,textarea{font-family:inherit}
     </div>
   </div>
 
-  <div style="background:#FFE4D6"><section style="max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
+  <div style="background:#FFE4D6;position:relative;overflow:hidden">
+    <div aria-hidden="true" style="position:sticky;top:0;height:0;overflow:visible;z-index:0;pointer-events:none">
+      <img src="assets/veg/onion.jpg" alt="" style="position:absolute;top:14vh;left:2%;width:clamp(84px,8vw,130px);height:clamp(84px,8vw,130px);object-fit:cover;border-radius:50%;opacity:.4;box-shadow:0 18px 36px -14px rgba(80,40,10,.35);transform:rotate(-6deg);animation:kfsway 9s ease-in-out infinite">
+      <img src="assets/veg/tomato.jpg" alt="" style="position:absolute;top:8vh;right:3%;width:clamp(80px,7.5vw,120px);height:clamp(80px,7.5vw,120px);object-fit:cover;object-position:58% 42%;border-radius:50%;opacity:.4;box-shadow:0 18px 36px -14px rgba(80,40,10,.35);transform:rotate(8deg);animation:kfbob 10s ease-in-out infinite;animation-delay:.6s">
+      <img src="assets/veg/capsicum.jpg" alt="" style="position:absolute;top:52vh;left:3%;width:clamp(90px,9vw,140px);height:clamp(90px,9vw,140px);object-fit:cover;object-position:22% 52%;border-radius:50%;opacity:.35;box-shadow:0 18px 36px -14px rgba(80,40,10,.35);transform:rotate(-10deg);animation:kfsway 11s ease-in-out infinite;animation-delay:1.4s">
+      <img src="assets/veg/chili.jpg" alt="" style="position:absolute;top:64vh;right:4%;width:clamp(110px,10vw,160px);height:clamp(60px,5.5vw,88px);object-fit:cover;border-radius:999px;opacity:.4;box-shadow:0 14px 32px -14px rgba(80,40,10,.32);transform:rotate(20deg);animation:kfbob 8.5s ease-in-out infinite;animation-delay:2s">
+      <img src="assets/veg/garlic.jpg" alt="" style="position:absolute;top:36vh;left:47%;width:clamp(56px,5.5vw,84px);height:clamp(56px,5.5vw,84px);object-fit:cover;object-position:35% 50%;border-radius:50%;opacity:.28;box-shadow:0 12px 28px -12px rgba(80,40,10,.3);transform:rotate(-4deg);animation:kfsway 12s ease-in-out infinite;animation-delay:.9s">
+    </div>
+    <section style="position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
     <div data-reveal="0" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:32px">
       <div>
         <span style="display:inline-flex;align-items:center;gap:10px;font:500 18px/24px 'Inter','Segoe UI',system-ui,sans-serif;color:#E63E00">{{ t.kickerMenu }}</span>
@@ -139,7 +147,7 @@ input,textarea{font-family:inherit}
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px">
       <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
-        <button data-reveal="{{ c.d }}" onClick="{{ c.go }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:18px;background:#FFF8F2;border:1px solid #FCE0CC;padding:14px 20px 14px 14px;border-radius:10px;transition:transform .18s,background .18s,box-shadow .18s,border-color .18s" style-hover="background:#FFEEE3;border-color:#FF4D1C;transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
+        <button data-reveal="{{ c.d }}" onClick="{{ c.go }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:18px;background:#FFF8F2;border:1px solid #FCE0CC;padding:14px 20px 14px 14px;border-radius:10px;transition:background .35s cubic-bezier(.22,1,.36,1),transform .3s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .35s ease" style-hover="background:#FFD3AC;border-color:#FF4D1C;transform:translateY(-4px) scale(1.015);box-shadow:0 16px 34px -12px rgba(230,62,0,.38)">
           <span style="width:64px;height:64px;flex:none;border-radius:50%;background:#ffffff;display:grid;place-items:center;color:#E63E00;box-shadow:0 2px 8px -2px rgba(80,40,10,.18)">
             <kf-i n="{{ c.icon }}" s="30"></kf-i>
           </span>
@@ -151,16 +159,8 @@ input,textarea{font-family:inherit}
         </button>
       </sc-for>
     </div>
-  </section></div>
+  </section>
 
-  <div style="background:#FFF8F2;position:relative;overflow:hidden">
-    <div aria-hidden="true" style="position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;color:#FF4D1C">
-      <svg style="position:absolute;top:6%;left:2%;width:clamp(70px,9vw,120px);height:auto;opacity:.12;animation:kfsway 9s ease-in-out infinite" viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M50 30c18 0 28 20 28 42 0 20-13 36-28 36s-28-16-28-36c0-22 10-42 28-42Z"/><path d="M50 34c12 0 20 16 20 38 0 16-9 30-20 30"/><path d="M50 38c7 0 12 14 12 34 0 13-5 26-12 26"/><path d="M42 30c-3-8-2-16 2-22M58 30c3-8 2-16-2-22M50 30V16"/></svg>
-      <svg style="position:absolute;top:10%;right:3%;width:clamp(60px,8vw,100px);height:auto;opacity:.1;animation:kfbob 10s ease-in-out infinite;animation-delay:.6s" viewBox="0 0 100 110" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M50 28c-16 6-24 22-24 40 0 18 11 32 24 32s24-14 24-32c0-18-8-34-24-40Z"/><path d="M50 28v72M38 34c-4 14-4 46 2 62M62 34c4 14 4 46-2 62"/><path d="M50 28c0-8 3-14 8-18M50 28c0-8-3-14-8-18"/></svg>
-      <svg style="position:absolute;bottom:10%;left:4%;width:clamp(80px,10vw,130px);height:auto;opacity:.1;animation:kfsway 11s ease-in-out infinite;animation-delay:1.4s" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M70 15c8 0 14 6 14 14 0 30-30 55-55 55-9 0-16-6-16-14 0-22 25-45 45-53a20 20 0 0 1 12-2Z"/><path d="M62 12c2-5 6-8 10-9"/></svg>
-      <svg style="position:absolute;bottom:6%;right:4%;width:clamp(60px,8vw,96px);height:auto;opacity:.12;animation:kfbob 8.5s ease-in-out infinite;animation-delay:2s" viewBox="0 0 90 130" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M45 120V20"/><path d="M45 100c-14-4-22-14-22-14s10-8 22-6M45 100c14-4 22-14 22-14s-10-8-22-6"/><path d="M45 76c-12-3-19-12-19-12s9-7 19-5M45 76c12-3 19-12 19-12s-9-7-19-5"/><path d="M45 52c-10-3-16-10-16-10s7-6 16-4M45 52c10-3 16-10 16-10s-7-6-16-4"/></svg>
-      <svg style="position:absolute;top:42%;left:46%;width:clamp(50px,6vw,80px);height:auto;opacity:.07;animation:kfsway 12s ease-in-out infinite;animation-delay:.9s" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M70 15c8 0 14 6 14 14 0 30-30 55-55 55-9 0-16-6-16-14 0-22 25-45 45-53a20 20 0 0 1 12-2Z"/><path d="M62 12c2-5 6-8 10-9"/></svg>
-    </div>
     <section style="position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px)">
       <div data-reveal="0" style="max-width:640px;margin-bottom:28px">
         <span style="display:inline-flex;align-items:center;gap:10px;font:500 18px/24px 'Inter','Segoe UI',system-ui,sans-serif;color:#E63E00">{{ t.kickerFullMenu }}</span>
