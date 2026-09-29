@@ -37,6 +37,8 @@ input,textarea{font-family:inherit}
 @keyframes kfmorph{0%,100%{border-radius:58% 42% 50% 50%/48% 55% 45% 52%}50%{border-radius:44% 56% 42% 58%/58% 42% 58% 42%}}
 @keyframes kfpulse{0%{box-shadow:0 0 0 0 rgba(46,107,76,.55)}100%{box-shadow:0 0 0 10px rgba(46,107,76,0)}}
 @keyframes kfnew{0%,100%{box-shadow:0 0 0 0 rgba(255,77,28,.45)}50%{box-shadow:0 0 0 6px rgba(255,77,28,0)}}
+button[data-chip="on"]:hover{background:#E63E00!important;transform:translateY(-2px);box-shadow:0 6px 16px -6px rgba(80,40,10,.28)}
+button[data-chip="off"]:hover{background:#FFDCC0!important;transform:translateY(-2px);box-shadow:0 6px 16px -6px rgba(80,40,10,.22)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </helmet>
@@ -139,7 +141,7 @@ input,textarea{font-family:inherit}
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px">
       <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
-        <button data-reveal="{{ c.d }}" onClick="{{ c.go }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:18px;background:#FFF8F2;border:1px solid #FCE0CC;padding:14px 20px 14px 14px;border-radius:10px;transition:transform .18s,background .18s,box-shadow .18s,border-color .18s" style-hover="background:#FFEEE3;border-color:#FF4D1C;transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(80,40,10,.18)">
+        <button data-reveal="{{ c.d }}" onClick="{{ c.go }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:18px;background:#FFF8F2;border:1px solid #FCE0CC;padding:14px 20px 14px 14px;border-radius:10px;transition:transform .25s ease,background .3s ease,box-shadow .3s ease,border-color .3s ease" style-hover="background:#FFDCC0;border-color:#FF4D1C;transform:translateY(-3px);box-shadow:0 12px 28px -8px rgba(80,40,10,.24)">
           <span style="width:64px;height:64px;flex:none;border-radius:50%;background:#ffffff;display:grid;place-items:center;color:#E63E00;box-shadow:0 2px 8px -2px rgba(80,40,10,.18)">
             <kf-i n="{{ c.icon }}" s="30"></kf-i>
           </span>
@@ -169,7 +171,7 @@ input,textarea{font-family:inherit}
       </div>
       <div data-reveal="1" style="display:flex;gap:10px;overflow-x:auto;padding:2px 2px 24px">
         <sc-for list="{{ homeChips }}" as="c" hint-placeholder-count="7">
-          <button onClick="{{ c.toggle }}" aria-pressed="{{ c.on }}" style="border:0;cursor:pointer;flex:none;background:{{ c.pillBg }};color:{{ c.pillFg }};display:flex;align-items:center;gap:10px;padding:7px 16px 7px 7px;border-radius:999px;font-weight:700;font-size:14.5px;white-space:nowrap;transition:background .2s,color .2s" style-hover="background:{{ c.pillBgHover }}">
+          <button onClick="{{ c.toggle }}" aria-pressed="{{ c.on }}" data-chip="{{ c.sel }}" style="border:0;cursor:pointer;flex:none;background:{{ c.pillBg }};color:{{ c.pillFg }};display:flex;align-items:center;gap:10px;padding:7px 16px 7px 7px;border-radius:999px;font-weight:700;font-size:14.5px;white-space:nowrap;transition:background .3s ease,transform .22s ease,box-shadow .3s ease">
             <span style="width:32px;height:32px;flex:none;border-radius:50%;background:#ffffff;display:grid;place-items:center;color:#E63E00"><kf-i n="{{ c.icon }}" s="16"></kf-i></span>
             {{ c.name }}
             <span style="font-size:12px;opacity:.75">{{ c.count }}</span>
@@ -368,7 +370,7 @@ input,textarea{font-family:inherit}
     <div style="position:sticky;top:72px;z-index:30;margin:28px 0 8px;padding:10px 0;background:#FFF8F2;display:flex;flex-direction:column;gap:12px">
     <div style="display:flex;gap:10px;overflow-x:auto;padding:2px 2px 6px">
       <sc-for list="{{ chips }}" as="c" hint-placeholder-count="7">
-        <button onClick="{{ c.toggle }}" aria-pressed="{{ c.on }}" style="border:0;cursor:pointer;flex:none;background:{{ c.pillBg }};color:{{ c.pillFg }};display:flex;align-items:center;gap:10px;padding:7px 16px 7px 7px;border-radius:999px;font-weight:700;font-size:14.5px;white-space:nowrap;transition:background .2s,color .2s" style-hover="background:{{ c.pillBgHover }}">
+        <button onClick="{{ c.toggle }}" aria-pressed="{{ c.on }}" data-chip="{{ c.sel }}" style="border:0;cursor:pointer;flex:none;background:{{ c.pillBg }};color:{{ c.pillFg }};display:flex;align-items:center;gap:10px;padding:7px 16px 7px 7px;border-radius:999px;font-weight:700;font-size:14.5px;white-space:nowrap;transition:background .3s ease,transform .22s ease,box-shadow .3s ease">
           <span style="width:32px;height:32px;flex:none;border-radius:50%;background:#ffffff;display:grid;place-items:center;color:#E63E00"><kf-i n="{{ c.icon }}" s="16"></kf-i></span>
           {{ c.name }}
           <span style="font-size:12px;opacity:.75">{{ c.count }}</span>
@@ -957,7 +959,7 @@ class Component extends DCLogic {
     const chips=[{id:'all',name:{en:'All categories',es:'Todas las categorías',ca:'Totes les categories'}}].concat(s.cats).map(c=>{
       const on=c.id==='all'?selCats.length===0:selCats.includes(c.id);
       const v=c.id==='all'?allVis:this.vis({id:c.id,icon:c.icon});
-      return {...v,name:L(c.name),count:c.id==='all'?String(s.items.length):String(catCount(c.id)),on:String(on),pillBg:on?'#FF4D1C':'#ffffff',pillFg:on?'#ffffff':'#2C1D12',pillBgHover:on?'#E63E00':'#FFEEE3',
+      return {...v,name:L(c.name),count:c.id==='all'?String(s.items.length):String(catCount(c.id)),on:String(on),pillBg:on?'#FF4D1C':'#ffffff',pillFg:on?'#ffffff':'#2C1D12',sel:on?'on':'off',
         toggle:()=>{ this.setState(st=>{ const cur=Array.isArray(st.cat)?st.cat:[]; if(c.id==='all') return {cat:[]}; const has=cur.includes(c.id); return {cat:has?cur.filter(x=>x!==c.id):[...cur,c.id]}; }); window.scrollTo({top:0,behavior:'smooth'}); }
       };
     });
@@ -966,7 +968,7 @@ class Component extends DCLogic {
     const homeChips=[{id:'all',name:{en:'All categories',es:'Todas las categorías',ca:'Totes les categories'}}].concat(s.cats).map(c=>{
       const on=c.id==='all'?selHomeCats.length===0:selHomeCats.includes(c.id);
       const v=c.id==='all'?allVis:this.vis({id:c.id,icon:c.icon});
-      return {...v,name:L(c.name),count:c.id==='all'?String(s.items.length):String(catCount(c.id)),on:String(on),pillBg:on?'#FF4D1C':'#ffffff',pillFg:on?'#ffffff':'#2C1D12',pillBgHover:on?'#E63E00':'#FFEEE3',
+      return {...v,name:L(c.name),count:c.id==='all'?String(s.items.length):String(catCount(c.id)),on:String(on),pillBg:on?'#FF4D1C':'#ffffff',pillFg:on?'#ffffff':'#2C1D12',sel:on?'on':'off',
         toggle:()=>this.setState(st=>{ const cur=Array.isArray(st.homeCat)?st.homeCat:[]; if(c.id==='all') return {homeCat:[]}; const has=cur.includes(c.id); return {homeCat:has?cur.filter(x=>x!==c.id):[...cur,c.id]}; })
       };
     });
