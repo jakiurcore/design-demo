@@ -91,11 +91,11 @@ button[data-chip="off"]:hover{background:#FFDCC0!important;transform:translateY(
 .kf-scene-h-body h3{font-size:13.5px;margin:3px 0 0;line-height:1.25;font-family:'Inter','Segoe UI',system-ui,sans-serif;font-weight:600}
 @keyframes kfJourneyRider{
   0%,10.26%{left:10%;top:51.5%;opacity:1}
-  18.80%{left:23.3%;top:20%}
+  18.80%{left:23.3%;top:23.9%}
   27.35%,37.61%{left:36.7%;top:20%;opacity:1}
-  46.15%{left:50%;top:80%}
+  46.15%{left:50%;top:50%}
   54.70%,64.96%{left:63.3%;top:80%;opacity:1}
-  73.50%{left:76.7%;top:51.5%}
+  73.50%{left:76.7%;top:65.7%}
   82.05%,92.31%{left:90%;top:51.5%;opacity:1}
   94.62%{left:90%;top:51.5%;opacity:0}
   96.15%{left:10%;top:51.5%;opacity:0}
@@ -139,7 +139,11 @@ button[data-chip="off"]:hover{background:#FFDCC0!important;transform:translateY(
 .kf-cat-card:hover .kf-cat-dot{background:#C6FF3D!important}
 .kf-steps-wrap{position:relative}
 .kf-steps-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(20px,3vw,40px)}
-.kf-step-card{background:rgba(255,255,255,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.75);border-radius:20px;padding:clamp(24px,2.6vw,32px);display:flex;flex-direction:column;gap:4px;box-shadow:0 24px 44px -30px rgba(80,40,10,.32)}
+.kf-step-card{position:relative;background:rgba(255,255,255,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.75);border-radius:20px;padding:clamp(24px,2.6vw,32px);display:flex;flex-direction:column;gap:4px;box-shadow:0 24px 44px -30px rgba(80,40,10,.32)}
+.kf-step-border{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:2}
+.kf-step-border rect{fill:none;stroke:#FF4D1C;stroke-width:2;stroke-linecap:round;stroke-dasharray:9 91;opacity:0;filter:drop-shadow(0 0 3px rgba(255,77,28,.7));animation:kfBorderTravel 9s ease-in-out infinite;animation-delay:var(--bd,0s)}
+@keyframes kfBorderTravel{0%{stroke-dashoffset:0;opacity:0}1%{opacity:1}14%{stroke-dashoffset:-100;opacity:1}18%{opacity:0}100%{stroke-dashoffset:-100;opacity:0}}
+@media (prefers-reduced-motion:reduce){.kf-step-border rect{animation:none;opacity:0}}
 .kf-step-icon-wrap{position:relative;width:60px;height:60px;margin-bottom:6px}
 .kf-step-icon{width:60px;height:60px;border-radius:50%;background:#fff;color:#FF4D1C;display:grid;place-items:center;box-shadow:0 8px 20px -8px rgba(80,40,10,.28);animation:kfStepActive 9s ease-in-out infinite;animation-delay:var(--d,0s)}
 .kf-step-badge{position:absolute;top:-6px;right:-6px;width:24px;height:24px;border-radius:50%;background:#2C1D12;color:#FFEEE3;font:700 12px 'Inter',sans-serif;display:grid;place-items:center;animation:kfStepBadge 9s ease-in-out infinite;animation-delay:var(--d,0s)}
@@ -396,8 +400,8 @@ button[data-chip="off"]:hover{background:#FFDCC0!important;transform:translateY(
       <img src="assets/veg/basil.jpg" alt="" style="position:absolute;top:3%;right:5%;width:clamp(58px,5.5vw,80px);height:clamp(58px,5.5vw,80px);object-fit:cover;object-position:60% 45%;border-radius:50%;opacity:.32;box-shadow:0 14px 28px -12px rgba(80,40,10,.3);animation:kfsway 10.5s ease-in-out infinite;animation-delay:.5s">
       <img src="assets/veg/cucumber.jpg" alt="" style="position:absolute;top:40%;left:6%;width:clamp(80px,8vw,120px);height:clamp(80px,8vw,120px);object-fit:cover;border-radius:50%;opacity:.36;box-shadow:0 16px 34px -14px rgba(80,40,10,.32);animation:kfsway 11s ease-in-out infinite;animation-delay:1.2s">
       <img src="assets/veg/chili.jpg" alt="" style="position:absolute;top:36%;right:3%;width:clamp(100px,9vw,150px);height:clamp(54px,5vw,80px);object-fit:cover;border-radius:999px;opacity:.36;box-shadow:0 14px 30px -14px rgba(80,40,10,.3);animation:kfbob 8.8s ease-in-out infinite;animation-delay:1.8s">
-      <img src="assets/veg/lettuce.jpg" alt="" style="position:absolute;top:66%;left:10%;width:clamp(84px,8vw,124px);height:clamp(84px,8vw,124px);object-fit:cover;border-radius:50%;opacity:.34;box-shadow:0 16px 32px -14px rgba(80,40,10,.3);animation:kfbob 10s ease-in-out infinite;animation-delay:.8s">
-      <img src="assets/veg/lemon.jpg" alt="" style="position:absolute;top:70%;right:8%;width:clamp(70px,6.5vw,100px);height:clamp(70px,6.5vw,100px);object-fit:cover;border-radius:50%;opacity:.34;box-shadow:0 14px 30px -12px rgba(80,40,10,.3);animation:kfsway 9.8s ease-in-out infinite;animation-delay:2.1s">
+      <img src="assets/veg/lettuce.jpg" alt="" style="position:absolute;top:48%;left:10%;width:clamp(84px,8vw,124px);height:clamp(84px,8vw,124px);object-fit:cover;border-radius:50%;opacity:.34;box-shadow:0 16px 32px -14px rgba(80,40,10,.3);animation:kfbob 10s ease-in-out infinite;animation-delay:.8s">
+      <img src="assets/veg/lemon.jpg" alt="" style="position:absolute;top:52%;right:8%;width:clamp(70px,6.5vw,100px);height:clamp(70px,6.5vw,100px);object-fit:cover;border-radius:50%;opacity:.34;box-shadow:0 14px 30px -12px rgba(80,40,10,.3);animation:kfsway 9.8s ease-in-out infinite;animation-delay:2.1s">
     </div>
     <section style="position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:clamp(64px,8vw,104px) clamp(18px,4vw,40px) clamp(24px,3vw,40px)">
     <div data-reveal="0" style="margin-bottom:36px">
@@ -440,6 +444,7 @@ button[data-chip="off"]:hover{background:#FFDCC0!important;transform:translateY(
       </div>
       <div class="kf-steps-grid">
         <div data-reveal="1" class="kf-step-card">
+          <svg class="kf-step-border" style="--bd:0s" aria-hidden="true" focusable="false"><rect x="0" y="0" width="100%" height="100%" rx="20" ry="20" pathLength="100"></rect></svg>
           <div class="kf-step-icon-wrap">
             <div class="kf-step-icon" style="--d:0s"><kf-i n="bag" s="26"></kf-i></div>
             <span class="kf-step-badge" style="--d:0s" aria-hidden="true">1</span>
@@ -448,6 +453,7 @@ button[data-chip="off"]:hover{background:#FFDCC0!important;transform:translateY(
           <p>{{ t.step1Desc }}</p>
         </div>
         <div data-reveal="2" class="kf-step-card">
+          <svg class="kf-step-border" style="--bd:3s" aria-hidden="true" focusable="false"><rect x="0" y="0" width="100%" height="100%" rx="20" ry="20" pathLength="100"></rect></svg>
           <div class="kf-step-icon-wrap">
             <div class="kf-step-icon" style="--d:3s"><kf-i n="pin" s="26"></kf-i></div>
             <span class="kf-step-badge" style="--d:3s" aria-hidden="true">2</span>
@@ -456,6 +462,7 @@ button[data-chip="off"]:hover{background:#FFDCC0!important;transform:translateY(
           <p>{{ t.step2Desc }}</p>
         </div>
         <div data-reveal="3" class="kf-step-card">
+          <svg class="kf-step-border" style="--bd:6s" aria-hidden="true" focusable="false"><rect x="0" y="0" width="100%" height="100%" rx="20" ry="20" pathLength="100"></rect></svg>
           <div class="kf-step-icon-wrap">
             <div class="kf-step-icon" style="--d:6s"><kf-i n="bike" s="26"></kf-i></div>
             <span class="kf-step-badge" style="--d:6s" aria-hidden="true">3</span>
